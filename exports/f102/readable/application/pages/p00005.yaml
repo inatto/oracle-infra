@@ -1,0 +1,950 @@
+---
+# ====== Page: Ticket-rapido =================================
+id: 5
+identification: 
+  name: Ticket-rapido
+  alias: TICKET-RAPIDO
+  title: Ticket rápido
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  chained: true
+  resizable: true
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Ticket ======================================
+  id: 7963661925014116
+  identification: 
+    name: Ticket
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TICKET
+    include-rowid-column: false
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+
+- # ====== Region: Buttons =====================================
+  id: 7966804881014135
+  identification: 
+    name: Buttons
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: REGION_POSITION_03
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+page-items: 
+- # ====== Page Item: P5_ACTION ================================
+  id: 399236110646250
+  identification: 
+    name: P5_ACTION
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: Ticket # 7963661925014116
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P5_ID ====================================
+  id: 7878470348520616
+  identification: 
+    name: P5_ID
+    type: Display Only
+
+  label: 
+    label: ID
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 20
+    region: Ticket # 7963661925014116
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Ticket # 7963661925014116
+    column: ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P5_TITLE =================================
+  id: 7878598617520617
+  identification: 
+    name: P5_TITLE
+    type: Text Field
+
+  label: 
+    label: Título
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 60
+    region: Ticket # 7963661925014116
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: true
+    maximum-length: 100
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Ticket # 7963661925014116
+    column: TITLE
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    inline-help-text: 'Dica: no campo Título, escreva um resumo claro e objetivo do problema (ex: "Erro ao atualizar dados do membro", "Sistema não salva ticket", etc). Isso ajuda nossa equipe a priorizar e entender sua demanda rapidamente.'
+    help-text: 'Dica: no campo Título, escreva um resumo claro e objetivo do problema (ex: "Erro ao atualizar dados do membro", "Sistema não salva ticket", etc). Isso ajuda nossa equipe a priorizar e entender sua demanda rapidamente.'
+
+- # ====== Page Item: P5_STATUS ================================
+  id: 7878603491520618
+  identification: 
+    name: P5_STATUS
+    type: Select List
+
+  label: 
+    label: Status
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 30
+    region: Ticket # 7963661925014116
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC:Display1;Return1,Display2;Return2'
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Ticket # 7963661925014116
+    column: STATUS
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+
+- # ====== Page Item: P5_OPEN_DATE =============================
+  id: 7878769805520619
+  identification: 
+    name: P5_OPEN_DATE
+    type: Date Picker
+
+  label: 
+    label: Abertura
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 40
+    region: Ticket # 7963661925014116
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: dd/mm/yyyy
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Ticket # 7963661925014116
+    column: OPEN_DATE
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  default: 
+    type: SQL Query (return single value)
+    sql-query-(return-single-value): select sysdate from dual;
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  read-only: 
+    type: Always
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P5_DONE_DATE =============================
+  id: 7878801516520620
+  identification: 
+    name: P5_DONE_DATE
+    type: Date Picker
+
+  label: 
+    label: Fechamento
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 50
+    region: Ticket # 7963661925014116
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: dd/mm/yyyy
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Ticket # 7963661925014116
+    column: DONE_DATE
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P5_URGENT ================================
+  id: 8491909224776701
+  identification: 
+    name: P5_URGENT
+    type: Checkbox
+
+  label: 
+    label: Urgente
+    alignment: Left
+
+  settings: 
+    use-defaults: false
+    checked-value: 1
+    unchecked-value: 0
+
+  layout: 
+    sequence: 10
+    region: Ticket # 7963661925014116
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Ticket # 7963661925014116
+    column: URGENT
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CANCEL ======================================
+  id: 7967242689014136
+  identification: 
+    button-name: CANCEL
+    label: Cancelar
+
+  layout: 
+    sequence: 10
+    region: Buttons # 7966804881014135
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+- # ====== Button: DELETE ======================================
+  id: 7968603641014142
+  identification: 
+    button-name: DELETE
+    label: Excluir
+
+  layout: 
+    sequence: 20
+    region: Buttons # 7966804881014135
+    slot: DELETE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: false
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL DELETE action
+
+  confirmation: 
+    message: '&APP_TEXT$DELETE_MSG!RAW.'
+    style: Danger
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P5_ID
+
+- # ====== Button: SAVE ========================================
+  id: 7968987913014143
+  identification: 
+    button-name: SAVE
+    label: Salvar
+
+  layout: 
+    sequence: 30
+    region: Buttons # 7966804881014135
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P5_ID
+
+- # ====== Button: CREATE ======================================
+  id: 7969354455014144
+  identification: 
+    button-name: CREATE
+    label: Criar
+
+  layout: 
+    sequence: 40
+    region: Buttons # 7966804881014135
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P5_ID
+
+dynamic-actions: 
+- # ====== Dynamic Action: Cancel Dialog =======================
+  id: 7967376867014136
+  identification: 
+    name: Cancel Dialog
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: CANCEL # 7967242689014136
+
+  actions: 
+  - # ====== Action: Cancel Dialog ===============================
+    id: 7968187465014140
+    identification: 
+      action: Cancel Dialog
+
+    execution: 
+      sequence: 10
+      event: Cancel Dialog # 7967376867014136
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: P5_TITLE ============================
+  id: 8121209826687305
+  identification: 
+    name: P5_TITLE
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Key Down
+    selection-type: Item(s)
+    item(s): 
+    - P5_TITLE
+
+  client-side-condition: 
+    type: JavaScript expression
+    javascript-expression: this.browserEvent.key === 'Enter'
+
+  actions: 
+  - # ====== Action: Set Focus ===================================
+    id: 8121366716687306
+    identification: 
+      action: Set Focus
+
+    affected-elements: 
+      selection-type: Button
+      button: CREATE # 7969354455014144
+
+    execution: 
+      sequence: 10
+      event: P5_TITLE # 8121209826687305
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+    server-side-condition: 
+      type: Item is NULL
+      item: P5_ID
+
+  - # ====== Action: Set Focus ===================================
+    id: 8121781792687310
+    identification: 
+      action: Set Focus
+
+    affected-elements: 
+      selection-type: Button
+      button: SAVE # 7968987913014143
+
+    execution: 
+      sequence: 20
+      event: P5_TITLE # 8121209826687305
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P5_ID
+
+- # ====== Dynamic Action: New_1 ===============================
+  id: 8121470418687307
+  identification: 
+    name: New_1
+
+  execution: 
+    sequence: 30
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: After Refresh
+    selection-type: Region
+    region: Ticket # 7963661925014116
+
+  actions: 
+  - # ====== Action: Set Focus ===================================
+    id: 8121550311687308
+    identification: 
+      action: Set Focus
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P5_TITLE
+
+    execution: 
+      sequence: 10
+      event: New_1 # 8121470418687307
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+validations: 
+- # ====== Validation: P5_DONE_DATE ============================
+  id: 8476443271124701
+  identification: 
+    name: P5_DONE_DATE
+
+  execution: 
+    sequence: 10
+
+  validation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: ':P5_DONE_DATE >= :P5_OPEN_DATE'
+    always-execute: false
+
+  error: 
+    error-message: Data de fechamento deve ser maior ou igual à data de abertura.
+    display-location: Inline with Field and in Notification
+    associated-item: P5_DONE_DATE # 7878801516520620
+
+- # ====== Validation: P5_URGENT ===============================
+  id: 8492034708776702
+  identification: 
+    name: P5_URGENT
+
+  execution: 
+    sequence: 20
+
+  validation: 
+    type: Function Body (returning Boolean)
+    language: PL/SQL
+    pl/sql-function-body: |
+      declare
+        v_count number;
+        v_result boolean;
+      
+      begin
+        select count(*) into v_count from ticket where (id <> :P5_ID or :P5_ID is null) and urgent = 1 and done_date is null;
+      
+        if :P5_URGENT = 1 and v_count >= 3 then
+          v_result := false;
+        else
+          v_result := true;
+        end if;
+      
+        return v_result;
+      
+        
+      end;
+    always-execute: false
+
+  error: 
+    error-message: Não podem existir mais de 3 tickets urgentes.
+    display-location: Inline with Field and in Notification
+    associated-item: P5_URGENT # 8491909224776701
+
+processes: 
+- # ====== Process: prc_http_mail ==============================
+  id: 399166796646249
+  identification: 
+    name: prc_http_mail
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+      
+          title varchar2(200);
+      
+      BEGIN
+      
+          --
+          if (:P5_ACTION = 'New') then
+              title  := 'Novo ticket - ' || :P5_TITLE;
+              prc_http_mail(title  , '', :P5_OPEN_DATE, :P5_DONE_DATE);
+          end if;
+      
+      EXCEPTION
+          WHEN OTHERS THEN
+              null;
+              
+      END;
+      
+      
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: start ======================================
+  id: 399406544646251
+  identification: 
+    name: start
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+          if (:P5_ID is null) then
+              :P5_ACTION := 'New';
+          end if;
+      end;
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: ticket_form_init ===========================
+  id: 7969770589014146
+  identification: 
+    name: ticket_form_init
+    type: Form - Initialization
+    execution-chain: None
+    form-region: Ticket # 7963661925014116
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: dml_ticket =================================
+  id: 7970115572014147
+  identification: 
+    name: dml_ticket
+    type: Form - Automatic Row Processing (DML)
+    execution-chain: None
+    form-region: Ticket # 7963661925014116
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: Yes
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: Close Dialog ===============================
+  id: 7970524868014148
+  identification: 
+    name: Close Dialog
+    type: Close Dialog
+    execution-chain: None
+
+  settings: 
+    show-success-messages: true
+
+  execution: 
+    sequence: 40
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    type: Request is contained in Value
+    value: CREATE,SAVE,DELETE
+

@@ -1,0 +1,1 @@
+Exemplo I - Newsletter Automática gerada pelo novo sistema autônomo

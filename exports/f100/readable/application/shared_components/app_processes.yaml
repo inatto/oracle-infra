@@ -1,0 +1,27 @@
+---
+- # ====== Application Process: internal_login_check ===========
+  id: 11268068246815873
+  identification: 
+    name: internal_login_check
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      BEGIN
+        BEGIN
+          RAISE_APPLICATION_ERROR(-20001, 'Sistema em manutenção. Tente novamente mais tarde.');
+        EXCEPTION
+          WHEN OTHERS THEN
+            NULL; -- ou log opcional
+        END;
+      END;
+
+  execution: 
+    sequence: 1
+    point: Before Header
+
+  subscription: 
+    version-number: 41721039068115
+

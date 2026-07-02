@@ -1,0 +1,16 @@
+---
+- # ====== Template Option Group: Login Header =================
+  id: 8465039239063798
+  identification: 
+    template-type: Region
+    name: Login Header
+    identifier: LOGIN_HEADER
+    sequence: 10
+
+  help: 
+    help-text: Controls the display of the Login region header.
+
+  settings: 
+    null-text: Icon and Title (Default)
+    advanced: false
+

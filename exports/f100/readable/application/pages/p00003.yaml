@@ -1,0 +1,876 @@
+---
+# ====== Page: Funcionários ==================================
+id: 3
+identification: 
+  name: Funcionários
+  alias: FUNCIONÁRIOS
+  title: Funcionários
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 17197498558732502
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 7888069520527872
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Funcionários ================================
+  id: 17198170304732510
+  identification: 
+    name: Funcionários
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select * from vw_member
+      where 1=1
+      and etype_code in ('entity' , 'entity_view')
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    - t-IRR-region--hideHeader js-addHiddenHeadingRoleDesc
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 17198734231732512
+    edit: 
+      enabled: false
+
+    performance: 
+      lazy-loading: true
+
+    appearance: 
+      select-first-row: true
+      fixed-row-height: true
+
+    pagination: 
+      type: Page
+      show-total-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Reset Button
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - PDF
+      - Excel
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 17199100716732514
+      identification: 
+        name: Primary Report
+        alias: 85272
+
+  columns: 
+  - # ====== Column: Editar ======================================
+    id: 9666069031556801
+    identification: 
+      column-name: Editar
+      type: Link
+
+    heading: 
+      heading: Editar
+      alignment: start
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::P8_ID:&ID.'
+        page: 8 # Cadastro
+        values: 
+          p8_id: '&ID.'
+
+      link-text: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+
+    source: 
+      type: None
+
+    enable-users-to: 
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: HOME_UF =====================================
+    id: 10055875879743913
+    identification: 
+      column-name: HOME_UF
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 80
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: HOME_UF
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: BR_MOBILE_PHONE_FORMATTED ===================
+    id: 10056311782743918
+    identification: 
+      column-name: BR_MOBILE_PHONE_FORMATTED
+      type: Textarea
+
+    heading: 
+      heading: Celular
+      alignment: start
+
+    settings: 
+      resizable: true
+      auto-height: false
+      character-counter: false
+      trim-spaces: Leading and Trailing
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 32767
+
+    source: 
+      type: Database Column
+      database-column: BR_MOBILE_PHONE_FORMATTED
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: TENANT_ID ===================================
+    id: 10866269508591304
+    identification: 
+      column-name: TENANT_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 100
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: TENANT_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: TENANT_CODE =================================
+    id: 10866320188591305
+    identification: 
+      column-name: TENANT_CODE
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 110
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: TENANT_CODE
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: ETYPE_CODE ==================================
+    id: 10866462016591406
+    identification: 
+      column-name: ETYPE_CODE
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 120
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ETYPE_CODE
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: ACTIVE ======================================
+    id: 11855065473515508
+    identification: 
+      column-name: ACTIVE
+      type: Checkbox
+
+    heading: 
+      heading: Active
+      alignment: end
+
+    settings: 
+      use-defaults: false
+      checked-value: 1
+      unchecked-value: 0
+
+    layout: 
+      sequence: 20
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+
+    source: 
+      type: Database Column
+      database-column: ACTIVE
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ETYPE_NAME ==================================
+    id: 11855143125515509
+    identification: 
+      column-name: ETYPE_NAME
+      type: Text Field
+
+    heading: 
+      heading: Perfil
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 130
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 50
+
+    source: 
+      type: Database Column
+      database-column: ETYPE_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: NAME ========================================
+    id: 17200427821732527
+    identification: 
+      column-name: NAME
+      type: Text Field
+
+    heading: 
+      heading: Nome
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 100
+
+    source: 
+      type: Database Column
+      database-column: NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: EMAIL =======================================
+    id: 17204372245732540
+    identification: 
+      column-name: EMAIL
+      type: Text Field
+
+    heading: 
+      heading: Email
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 100
+
+    source: 
+      type: Database Column
+      database-column: EMAIL
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: BIRTH_DATE_FORMATTED ========================
+    id: 17211089043193088
+    identification: 
+      column-name: BIRTH_DATE_FORMATTED
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 70
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: BIRTH_DATE_FORMATTED
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: BR_CPF_FORMATTED ============================
+    id: 17228470370185686
+    identification: 
+      column-name: BR_CPF_FORMATTED
+      type: Textarea
+
+    heading: 
+      heading: CPF
+      alignment: start
+
+    settings: 
+      resizable: true
+      auto-height: false
+      character-counter: false
+      trim-spaces: Leading and Trailing
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 32767
+
+    source: 
+      type: Database Column
+      database-column: BR_CPF_FORMATTED
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+      page-header-text: Associados
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+buttons: 
+- # ====== Button: Insert ======================================
+  id: 10058250118743937
+  identification: 
+    button-name: Insert
+    label: Inserir
+
+  layout: 
+    sequence: 10
+    region: Funcionários # 17198170304732510
+    slot: ORDER_BY_ITEM
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::P8_ETYPE_CODE:entity'
+      page: 8 # Cadastro
+      values: 
+        p8_etype_code: entity
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: New =================================
+  id: 10059011419743945
+  identification: 
+    name: New
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: JavaScript Expression
+    javascript-expression: window
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 10059170769743946
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Funcionários # 17198170304732510
+
+    execution: 
+      sequence: 10
+      event: New # 10059011419743945
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+processes: 
+- # ====== Process: Email_1 ====================================
+  id: 10054648207743901
+  identification: 
+    name: Email_1
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      
+      DECLARE
+      
+          req             utl_http.req;
+          resp            utl_http.resp;
+          emailSubject     VARCHAR2(255);
+          emailBody       VARCHAR2(32767);
+          
+      BEGIN
+      
+      
+          --
+          emailSubject := '';
+          emailBody :=    'Por ' || apex_custom_auth.get_username;
+      
+          --    
+          --APEX_DEBUG.INFO(emailSubject);
+          --req := utl_http.begin_request('https://anpnet.anpprev.org.br/email.php?subject=' || emailSubject || '&body=' || emailBody);
+          
+          -- req := utl_http.begin_request('https://asaclub.org.br/app/email.php');
+          req := utl_http.begin_request('https://asaclub.org.br/app/update.php?cpf=123&nome=Joao');
+      
+          utl_http.set_header(req, 'X-Auth', '6d2a7e54f19c4b0d91c1c187b3c14a7a');
+      
+          
+          resp := utl_http.get_response(req);
+      
+          -- MARCA QUE EMAIL FOI ENVIADO
+          -- UPDATE TICKET SET EMAIL_ENVIADO = NVL(EMAIL_ENVIADO, 0) + 1 WHERE ID_TICKET = :P16_ID_TICKET;
+      
+      END;
+      
+      
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+

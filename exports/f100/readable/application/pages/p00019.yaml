@@ -1,0 +1,333 @@
+---
+# ====== Page: Cadastro de membro ============================
+id: 19
+identification: 
+  name: Cadastro de membro
+  alias: CADASTRO-DE-MEMBRO
+  title: Cadastro de membro
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  chained: true
+  resizable: true
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Main ========================================
+  id: 1617168727762666
+  identification: 
+    name: Main
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P19_ETYPE_CODE ===========================
+  id: 1615362854762648
+  identification: 
+    name: P19_ETYPE_CODE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    inline-help-text: P19_ETYPE_CODE
+
+- # ====== Page Item: P19_ENTITY ===============================
+  id: 1615449541762649
+  identification: 
+    name: P19_ENTITY
+    type: Popup LOV
+
+  label: 
+    label: Selecione um cadastro (opcional)
+    alignment: Left
+
+  settings: 
+    display-as: Inline Popup
+    initial-fetch: Automatic
+    manual-entry: false
+    fetch-on-search: false
+
+  search: 
+    match-type: Contains
+    case-sensitive: false
+    minimum-characters: 0
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Main # 1617168727762666
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT e.br_cpf || ' - ' || e.name || ' - ' || e.email AS name_cpf_email, e.id
+      FROM vw_entity e;
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    inline-help-text: |
+      Para usar um cadastro existente, selecione abaixo. Para criar um novo, clique em "Continuar". Lembre-se: uma mesma pessoa (mesmo CPF) não pode ter dois cadastros diferentes — se ela já estiver no sistema, use o cadastro existente.
+      
+
+buttons: 
+- # ====== Button: CONTINUE ====================================
+  id: 1616828506762663
+  identification: 
+    button-name: CONTINUE
+    label: Continuar
+
+  layout: 
+    sequence: 20
+    region: Main # 1617168727762666
+    slot: CREATE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: CANCEL ======================================
+  id: 1617264999762667
+  identification: 
+    button-name: CANCEL
+    label: Cancelar
+
+  layout: 
+    sequence: 30
+    region: Main # 1617168727762666
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+dynamic-actions: 
+- # ====== Dynamic Action: CANCEL ==============================
+  id: 1617390189762668
+  identification: 
+    name: CANCEL
+
+  execution: 
+    sequence: 40
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: CANCEL # 1617264999762667
+
+  actions: 
+  - # ====== Action: Close Dialog ================================
+    id: 1617458713762669
+    identification: 
+      action: Close Dialog
+
+    execution: 
+      sequence: 10
+      event: CANCEL # 1617390189762668
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+validations: 
+- # ====== Validation: verifica se o membro ja existe ==========
+  id: 1762132537836751
+  identification: 
+    name: verifica se o membro ja existe
+
+  execution: 
+    sequence: 10
+
+  validation: 
+    type: Function Body (returning Boolean)
+    language: PL/SQL
+    pl/sql-function-body: |
+      DECLARE
+         v_exists NUMBER;
+      
+      BEGIN
+      
+          -- verifica se o membro ja existe
+          SELECT COUNT(*)
+          INTO v_exists
+          FROM member
+          WHERE entity_id = :P19_ENTITY AND etype_code = :P19_ETYPE_CODE;
+      
+          IF v_exists = 0 THEN
+              RETURN TRUE;
+          ELSE
+              RETURN FALSE;
+          END IF;
+      
+      END;
+    always-execute: false
+
+  error: 
+    error-message: Já existe membro com este cadastro.
+    display-location: Inline with Field and in Notification
+
+branches: 
+- # ====== Branch: To Page 20 ==================================
+  id: 1616722904762662
+  identification: 
+    name: To Page 20
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::P8_ENTITY_ID,P8_MEMBER_ETYPE_CODE:&P19_ENTITY.,&P19_ETYPE_CODE.&success_msg=#SUCCESS_MSG#'
+      page: 8 # Cadastro
+      values: 
+        p8_entity_id: '&P19_ENTITY.'
+        p8_member_etype_code: '&P19_ETYPE_CODE.'
+

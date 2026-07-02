@@ -1,0 +1,267 @@
+---
+# ====== Application: core ===================================
+identification: 
+  name: core
+  alias: CORE
+  version: Release 1.0
+
+row-search: 
+  tokenize: true
+  text-query-function: None
+
+availability: 
+  status: Available with Developer Toolbar
+  build-status: Run and Build Application
+
+error-handling: 
+  default-display-location: Inline with Field and in Notification
+
+report-printing: 
+  type: Native Printing
+
+advanced: 
+  friendly-urls: true
+  allow-feedback: true
+  logging: true
+  debugging: false
+  compatibility-mode: 24.2
+  accessible-read-only-items: true
+  pass-ecid: Y
+
+authentication: 
+  public-user: APEX_PUBLIC_USER
+  authentication-scheme: Oracle APEX Accounts # 7887727960527871
+
+authorization: 
+  source-for-role-or-group-schemes: Access Control User Role Assignments
+
+session-management: 
+  rejoin-sessions: Disabled
+
+session-state-protection: 
+  enabled: true
+
+security: 
+  deep-linking: Disabled
+  browser-cache: Disabled
+  embed-in-frames: Deny
+  referrer-policy: strict-origin
+  html-escaping-mode: Extended
+  runtime-api-usage: 
+  - Modify This Application
+
+database-session: 
+  parsing-schema: WKSP_SINDICATTO
+
+globalization: 
+  primary-language: Portuguese (Brazil) (pt-br)
+  document-direction: Language Default
+  language-derived-from: Application Primary Language
+  automatic-time-zone: true
+  automatic-csv-encoding: true
+
+application-format-masks: 
+  date: DS
+  timestamp: DS
+  timestamp-time-zone: DS
+
+character-value-comparison: 
+  behavior: Database session NLS setting (default)
+
+logo: 
+  type: Custom
+  custom-html: '&TENANT_NAME.'
+
+progressive-web-app: 
+  enable: true
+  installable: true
+  display: Fullscreen
+  screen-orientation: Any
+  ios-status-bar-style: Default
+  enable-push-notifications: false
+
+navigation: 
+  home-url: 
+    url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+    page: 1 # Dashboard
+
+  login-url: 
+    url: 'f?p=&APP_ID.:LOGIN:&APP_SESSION.::&DEBUG.:::'
+    page: LOGIN
+
+navigation-menu: 
+  list-template: Side Navigation Menu
+  template-options: 
+  - '#DEFAULT#'
+  - js-defaultCollapsed
+  - js-navCollapsed--hidden
+  - t-TreeNav--classic
+  list-position: Side
+  list: Navigation Menu # 7888545347527874
+
+navigation-bar: 
+  implementation: List
+  list: Navigation Bar # 7889730659527882
+  list-template: Navigation Bar
+  template-options: 
+  - '#DEFAULT#'
+
+javascript: 
+  file-urls: 
+  - 'https://sindicatto.inattox.workers.dev/js/c0r3.js'
+  - 'https://sindicatto.inattox.workers.dev/js/mask.js'
+  include-jquery-migrate: false
+
+css: 
+  file-urls: 
+  - 'https://sindicatto.inattox.workers.dev/css/core.css'
+
+attributes: 
+  theme: Universal Theme # 42
+  global-page: 0
+  enable-end-users-to-choose-theme-style: false
+  add-"built-with-apex"-to-footer: false
+  auto-dismiss-success-messages: false
+
+subscription: 
+  version-number: 41722017538495
+
+substitutions: 
+- # ====== Substitution: APP_NAME ==============================
+  id: 1
+  identification: 
+    name: APP_NAME
+
+  value: 
+    static-value: core
+
+component-settings: 
+- # ====== Component Setting: NATIVE_DISPLAY_SELECTOR ==========
+  id: 7883272590527856
+  identification: 
+    name: NATIVE_DISPLAY_SELECTOR
+    type: Region
+
+  subscription: 
+    version-number: 41719361145408
+
+- # ====== Component Setting: NATIVE_ADFBC =====================
+  id: 7883516933527857
+  identification: 
+    name: NATIVE_ADFBC
+    type: REST Data Source
+
+  subscription: 
+    version-number: 41719361145408
+
+- # ====== Component Setting: NATIVE_SELECT_MANY ===============
+  id: 7883824062527858
+  identification: 
+    name: NATIVE_SELECT_MANY
+    type: Item
+
+  subscription: 
+    version-number: 41719361145408
+
+- # ====== Component Setting: NATIVE_DATE_PICKER_APEX ==========
+  id: 7884126203527859
+  identification: 
+    name: NATIVE_DATE_PICKER_APEX
+    type: Item
+
+  subscription: 
+    version-number: 41719361145409
+
+- # ====== Component Setting: NATIVE_MAP_REGION ================
+  id: 7884460928527860
+  identification: 
+    name: NATIVE_MAP_REGION
+    type: Region
+
+  subscription: 
+    version-number: 41719361145415
+
+- # ====== Component Setting: NATIVE_GEOCODING =================
+  id: 7884782977527861
+  identification: 
+    name: NATIVE_GEOCODING
+    type: Process
+
+  settings: 
+    attribute-1: RELAX_HOUSE_NUMBER
+
+  subscription: 
+    version-number: 41719361145457
+
+- # ====== Component Setting: NATIVE_SINGLE_CHECKBOX ===========
+  id: 7885077630527862
+  identification: 
+    name: NATIVE_SINGLE_CHECKBOX
+    type: Item
+
+  subscription: 
+    version-number: 41719361145505
+
+- # ====== Component Setting: NATIVE_COLOR_PICKER ==============
+  id: 7885372833527863
+  identification: 
+    name: NATIVE_COLOR_PICKER
+    type: Item
+
+  subscription: 
+    version-number: 41719361145526
+
+- # ====== Component Setting: NATIVE_STAR_RATING ===============
+  id: 7885680806527864
+  identification: 
+    name: NATIVE_STAR_RATING
+    type: Item
+
+  subscription: 
+    version-number: 41719361145526
+
+- # ====== Component Setting: NATIVE_GEOCODED_ADDRESS ==========
+  id: 7885934501527865
+  identification: 
+    name: NATIVE_GEOCODED_ADDRESS
+    type: Item
+
+  subscription: 
+    version-number: 41719361145526
+
+- # ====== Component Setting: NATIVE_IR ========================
+  id: 7886230349527866
+  identification: 
+    name: NATIVE_IR
+    type: Region
+
+  subscription: 
+    version-number: 41719361145526
+
+- # ====== Component Setting: NATIVE_OPEN_AI_ASSISTANT =========
+  id: 7886513074527867
+  identification: 
+    name: NATIVE_OPEN_AI_ASSISTANT
+    type: Dynamic Action
+
+  subscription: 
+    version-number: 41719361145526
+
+- # ====== Component Setting: NATIVE_BOSS ======================
+  id: 7886829141527868
+  identification: 
+    name: NATIVE_BOSS
+    type: REST Data Source
+
+  subscription: 
+    version-number: 41719361145526
+
+- # ====== Component Setting: NATIVE_YES_NO ====================
+  id: 7887100172527869
+  identification: 
+    name: NATIVE_YES_NO
+    type: Item
+
+  subscription: 
+    version-number: 41719361145527
+

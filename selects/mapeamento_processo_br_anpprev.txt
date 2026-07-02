@@ -1,0 +1,44 @@
+NOME                                                NOME
+CPF                                                 CPF
+SITUAÇÃO FUNCIONAL                                  SITUACAO_FUNCIONAL
+NOME PENSIONISTA                                    NOME_PENSIONISTA
+CPF PENSIONISTA                                     CPF_PENSIONISTA
+AUTOR DA AÇÃO (SUBSTITUTO PROCESSUAL)               AUTOR_ACAO
+NOME/OBJETO DA AÇÃO                                 OBJETO_ACAO
+ESCRITÓRIO RESPONSÁVEL                              ESCRITORIO_RESPONSAVEL
+PARTE CONTRÁRIA	                                    PARTE_CONTRARIA
+NÚMERO DO PROCESSO ORIGINÁRIO	                    NR_PROCESSO
+VARA/TRIBUNAL DO PROCESSO ORIGINÁRIO	            VARA_PROCESSO
+NÚMERO DO CUMPRIMENTO DE SENTENÇA / EXECUÇÃO	    NR_CUMPRIMENTO
+SITUAÇÃO - CUMPRIMENTO DE SENTENÇA	                SITUACAO_CUMPRIMENTO_SENTENCA
+NÚMERO DOS EMBARGOS À EXECUÇÃO	                    NR_EMBARGOS
+SITUAÇÃO - EMBARGOS À EXECUÇÃO	                    SITUACAO_EMBARGOS_EXECUCAO
+VARA/TRIBUNAL DO CUMPRIMENTO DE SENTENÇA	        VARA_CUMPRIMENTO
+VALOR EXECUTADO	VALOR DA AÇÃO	                    VALOR_EXECUTADO
+VALOR ACORDO AGU 	                                VALOR_ACORDO_AGU
+NÚMERO DO PRECATÓRIO	                            NR_PRECATORIO
+VALOR PRECATÓRIO	                                VALOR_PRECATORIO
+DATA EXPEDIÇÃO PRECATÓRIO	                        DATA_EXPEDICAO_PRECATORIO
+PRECATÓRIO /RPV SUPLEMENTAR	                        NR_SUPLEMENTAR
+VALOR PRECATÓRIO                                    --
+DATA EXPEDIÇÃO PRECATÓRIO                           DATA_EXPEDICAO_PRECATORIO
+VALOR DEVOLVIDO AO ERÁRIO                           VALOR_DEVOLVIDO
+DATA DA DEVOLUÇÃO                                   DATA_DEVOLUCAO
+SITUAÇÃO - PAGAMENTO                                SITUACAO_PAGAMENTO
+
+
+
+Prezados,
+
+Importação completa: 10029 registros de Cumprição de Sentença e 30 registros de Conhecimento.
+Neste semana podemos fazer revisão remota, pois ainda falta  concluir cruzamento dos novos dados importados com o cadastro atualizado (via CPF).
+
+Notificações push: utilizarei endereços de email com @anpprev.org.br.
+
+Observações:
+- Verifique a duplicidade de informações na coluna "Valor Precatório".
+- Verifique a necessidade da coluna "PRECATÓRIO /RPV SUPLEMENTAR".
+
+Agradeço a atenção.
+Atenciosamente,
+[Seu nome]

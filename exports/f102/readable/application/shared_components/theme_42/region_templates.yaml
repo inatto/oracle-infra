@@ -1,0 +1,93 @@
+---
+- # ====== Region Template: Internal Login =====================
+  id: 8462126542063778
+  identification: 
+    name: Internal Login
+    identifier: LOGIN
+    class: Custom 3
+
+  advanced: 
+    translatable: false
+
+  template-options: 
+    preset: 
+    - t-Login-region--headerHidden js-removeLandmark
+
+  template: 
+    template: |
+      <div class="t-Login-region t-Form--stretchInputs t-Form--labelsAbove #REGION_CSS_CLASSES#" id="#REGION_ID#" #REGION_LANDMARK_ATTRIBUTES# #REGION_ATTRIBUTES#>
+        <div class="t-Login-header">
+          <!-- #REGION_IMAGE# -->
+          <span class="t-Login-logo #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+          <h2 class="t-Login-title" id="#REGION_STATIC_ID#_heading" data-apex-heading>#TITLE#</h2>
+        </div>
+        <div class="t-Login-body">#BODY#</div>
+        <div class="t-Login-buttons">#NEXT#</div>
+        <div class="t-Login-links">#EDIT##CREATE#</div>
+        <div class="t-Login-subRegions">#SUB_REGIONS#</div>
+      </div>
+
+  accessibility: 
+    landmark-type: Region
+    region-title-html-id: '#REGION_STATIC_ID#_heading'
+
+  image: 
+    template: '<img class="" src="#REGION_IMAGE_URL#" alt="" data-app-icon style="max-width: 100px" />'
+
+  template-options: 
+  - # ====== Template Option: Icon ===============================
+    id: 8465463667063799
+    identification: 
+      name: Icon
+      identifier: LOGIN_HEADER_ICON
+      group: Login Header
+      sequence: 10
+
+    settings: 
+      advanced: false
+
+    appearance: 
+      css-classes: 
+      - t-Login-region--headerIcon
+
+    help: 
+      help-text: Displays only the Region Icon in the Login region.
+
+  - # ====== Template Option: Title ==============================
+    id: 8466127417063803
+    identification: 
+      name: Title
+      identifier: LOGIN_HEADER_TITLE
+      group: Login Header
+      sequence: 20
+
+    settings: 
+      advanced: false
+
+    appearance: 
+      css-classes: 
+      - t-Login-region--headerTitle
+      - js-removeLandmark
+
+    help: 
+      help-text: Displays only the Region Title in the Login region.
+
+  - # ====== Template Option: Hidden =============================
+    id: 8466856086063805
+    identification: 
+      name: Hidden
+      identifier: LOGO_HEADER_HIDDEN
+      group: Login Header
+      sequence: 30
+
+    settings: 
+      advanced: false
+
+    appearance: 
+      css-classes: 
+      - t-Login-region--headerHidden
+      - js-removeLandmark
+
+    help: 
+      help-text: Hides both the Region Icon and Title from the Login region.
+

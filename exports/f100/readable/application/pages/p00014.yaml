@@ -1,0 +1,918 @@
+---
+# ====== Page: Campanha de e-mail ============================
+id: 14
+identification: 
+  name: Campanha de e-mail
+  alias: CAMPANHA-DE-E-MAIL
+  title: Campanha de e-mail
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 10366564952579260
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 7888069520527872
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Campanha de e-mail ==========================
+  id: 10367220106579327
+  identification: 
+    name: Campanha de e-mail
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EMAIL_CAMPAIGN
+    include-rowid-column: false
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+
+- # ====== Region: hidden ======================================
+  id: 10396797370592710
+  identification: 
+    name: hidden
+    type: Static Content
+
+  layout: 
+    sequence: 70
+    parent-region: Campanha de e-mail # 10367220106579327
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P14_ID ===================================
+  id: 10367628049579329
+  identification: 
+    name: P14_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Campanha de e-mail # 10367220106579327
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: ID
+    data-type: NUMBER
+    query-only: true
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_SUBJECT ==============================
+  id: 10368085050579335
+  identification: 
+    name: P14_SUBJECT
+    type: Text Field
+
+  label: 
+    label: Assunto
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 30
+    region: Campanha de e-mail # 10367220106579327
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 60
+
+  validation: 
+    value-required: true
+    maximum-length: 500
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: SUBJECT
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_BODY_HTML ============================
+  id: 10368439056579339
+  identification: 
+    name: P14_BODY_HTML
+    type: Rich Text Editor
+
+  label: 
+    label: Conteúdo
+    alignment: Left
+
+  settings: 
+    format: Markdown
+    minimum-height: 180
+    allow-custom-html: false
+
+  layout: 
+    sequence: 50
+    region: Campanha de e-mail # 10367220106579327
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+    initialization-javascript-function: |
+      function(options) {
+        options.editorOptions.extraPlugins = [ CKEditor5.Base64UploadAdapter ];
+        return options;
+      }
+      
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: BODY_HTML
+    data-type: CLOB
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: CLOB
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_BODY_TEXT ============================
+  id: 10368862867579340
+  identification: 
+    name: P14_BODY_TEXT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: hidden # 10396797370592710
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: BODY_TEXT
+    data-type: CLOB
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: CLOB
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_SENDER_NAME ==========================
+  id: 10369216733579342
+  identification: 
+    name: P14_SENDER_NAME
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: hidden # 10396797370592710
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: SENDER_NAME
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  default: 
+    type: SQL Query (return single value)
+    sql-query-(return-single-value): 'select name from tenant where id = :TENANT_ID;'
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_SENDER_EMAIL =========================
+  id: 10369533076579344
+  identification: 
+    name: P14_SENDER_EMAIL
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: hidden # 10396797370592710
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: SENDER_EMAIL
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_SEND_DATE ============================
+  id: 10369985557579345
+  identification: 
+    name: P14_SEND_DATE
+    type: Date Picker
+
+  label: 
+    label: Enviar quando?
+    alignment: Left
+
+  settings: 
+    show-time: true
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 20
+    region: Campanha de e-mail # 10367220106579327
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: 'DD/MM/YYYY HH24:MI'
+    width: 30
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: SEND_DATE
+    data-type: TIMESTAMP
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_STATUS ===============================
+  id: 10370781063579349
+  identification: 
+    name: P14_STATUS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: hidden # 10396797370592710
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: STATUS
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_CREATED_AT ===========================
+  id: 10371126793579351
+  identification: 
+    name: P14_CREATED_AT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: hidden # 10396797370592710
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: CREATED_AT
+    data-type: TIMESTAMP
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_UPDATED_AT ===========================
+  id: 10371906310579353
+  identification: 
+    name: P14_UPDATED_AT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: hidden # 10396797370592710
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: UPDATED_AT
+    data-type: TIMESTAMP
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_UF ===================================
+  id: 10396811095592711
+  identification: 
+    name: P14_UF
+    type: Select List
+
+  label: 
+    label: Para qual UF?
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 40
+    region: Campanha de e-mail # 10367220106579327
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: SELECT code name, code FROM country_uf;
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: RECIPIENT_UF_CODE
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CANCEL ======================================
+  id: 10375798769579368
+  identification: 
+    button-name: CANCEL
+    label: Cancelar
+
+  layout: 
+    sequence: 10
+    region: Campanha de e-mail # 10367220106579327
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:10:&APP_SESSION.::&DEBUG.:::'
+      page: 10 # Campanhas de e-mail
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: DELETE ======================================
+  id: 10376382601579371
+  identification: 
+    button-name: DELETE
+    label: Excluir
+
+  layout: 
+    sequence: 20
+    region: Campanha de e-mail # 10367220106579327
+    slot: DELETE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: false
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL DELETE action
+
+  confirmation: 
+    message: '&APP_TEXT$DELETE_MSG!RAW.'
+    style: Danger
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P14_ID
+
+- # ====== Button: SAVE ========================================
+  id: 10376792249579373
+  identification: 
+    button-name: SAVE
+    label: Salvar
+
+  layout: 
+    sequence: 30
+    region: Campanha de e-mail # 10367220106579327
+    slot: CHANGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P14_ID
+
+- # ====== Button: CREATE ======================================
+  id: 10377173899579374
+  identification: 
+    button-name: CREATE
+    label: Criar
+
+  layout: 
+    sequence: 40
+    region: Campanha de e-mail # 10367220106579327
+    slot: CREATE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P14_ID
+
+validations: 
+- # ====== Validation: P14_SEND_DATE must be timestamp =========
+  id: 10370431972579348
+  identification: 
+    name: P14_SEND_DATE must be timestamp
+
+  execution: 
+    sequence: 60
+
+  validation: 
+    type: Item is a valid timestamp
+    item: P14_SEND_DATE
+    always-execute: false
+
+  error: 
+    error-message: '#LABEL# deve ser um timestamp válido.'
+    display-location: Inline with Field and in Notification
+    associated-item: P14_SEND_DATE # 10369985557579345
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+
+- # ====== Validation: P14_CREATED_AT must be timestamp ========
+  id: 10371698382579352
+  identification: 
+    name: P14_CREATED_AT must be timestamp
+
+  execution: 
+    sequence: 80
+
+  validation: 
+    type: Item is a valid timestamp
+    item: P14_CREATED_AT
+    always-execute: false
+
+  error: 
+    error-message: '#LABEL# deve ser um timestamp válido.'
+    display-location: Inline with Field and in Notification
+    associated-item: P14_CREATED_AT # 10371126793579351
+
+- # ====== Validation: P14_UPDATED_AT must be timestamp ========
+  id: 10372465268579355
+  identification: 
+    name: P14_UPDATED_AT must be timestamp
+
+  execution: 
+    sequence: 90
+
+  validation: 
+    type: Item is a valid timestamp
+    item: P14_UPDATED_AT
+    always-execute: false
+
+  error: 
+    error-message: '#LABEL# deve ser um timestamp válido.'
+    display-location: Inline with Field and in Notification
+    associated-item: P14_UPDATED_AT # 10371906310579353
+
+- # ====== Validation: P14_SEND_DATE must be after/today =======
+  id: 10395906486592702
+  identification: 
+    name: P14_SEND_DATE must be after/today
+
+  execution: 
+    sequence: 100
+
+  validation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: ':P14_SEND_DATE >= SYSDATE'
+    always-execute: false
+
+  error: 
+    error-message: A data de envio não pode ser anterior ao momento atual.
+    display-location: Inline with Field and in Notification
+    associated-item: P14_SEND_DATE # 10369985557579345
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+
+processes: 
+- # ====== Process: Inicializar o form Campanha de e-mail ======
+  id: 10377958767579378
+  identification: 
+    name: Inicializar o form Campanha de e-mail
+    type: Form - Initialization
+    execution-chain: None
+    form-region: Campanha de e-mail # 10367220106579327
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Processar o form Campanha de e-mail ========
+  id: 10378312919579380
+  identification: 
+    name: Processar o form Campanha de e-mail
+    type: Form - Automatic Row Processing (DML)
+    execution-chain: None
+    form-region: Campanha de e-mail # 10367220106579327
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: Yes
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+branches: 
+- # ====== Branch: Go To Page 10 ===============================
+  id: 10377400990579375
+  identification: 
+    name: Go To Page 10
+
+  execution: 
+    sequence: 1
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:10:&APP_SESSION.::&DEBUG.:::&success_msg=#SUCCESS_MSG#'
+      page: 10 # Campanhas de e-mail
+

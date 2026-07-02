@@ -1,0 +1,12 @@
+CREATE OR REPLACE FUNCTION is_asaclub
+    RETURN BOOLEAN IS
+BEGIN
+
+    IF (LOWER(v('G_TENANT_CODE')) = 'asaclub') THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+
+END;
+/

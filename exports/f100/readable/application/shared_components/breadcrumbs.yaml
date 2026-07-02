@@ -1,0 +1,139 @@
+---
+- # ====== Breadcrumb: Breadcrumb ==============================
+  id: 7888069520527872
+  identification: 
+    name: Breadcrumb
+
+  entries: 
+  - # ====== Entry: Todos os membros =============================
+    id: 1038038144773782
+    identification: 
+      name: Todos os membros
+      page-number: 2
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
+        page: 2 # Todos os membros
+
+  - # ====== Entry: Tickets ======================================
+    id: 7958718106972940
+    identification: 
+      name: Tickets
+      page-number: 4
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.:::'
+        page: 4 # Tickets
+
+  - # ====== Entry: Administration ===============================
+    id: 8118996540679805
+    identification: 
+      name: Administration
+      page-number: 10000
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10000:&APP_SESSION.::&DEBUG.:::'
+        page: 10000 # Administration
+
+  - # ====== Entry: Ticket =======================================
+    id: 8507106829874113
+    identification: 
+      name: Ticket
+      page-number: 7
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Tickets # 7958718106972940
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:::'
+        page: 7 # ticket-completo
+
+  - # ====== Entry: Funcionário ==================================
+    id: 9655692886555219
+    identification: 
+      name: Funcionário
+      page-number: 8
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&APP_SESSION.::&DEBUG.:::'
+        page: 8 # Cadastro
+
+  - # ====== Entry: Campanhas de e-mail ==========================
+    id: 10343764378531222
+    identification: 
+      name: Campanhas de e-mail
+      page-number: 10
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10:&APP_SESSION.::&DEBUG.:::'
+        page: 10 # Campanhas de e-mail
+
+  - # ====== Entry: Campanha de e-mail ===========================
+    id: 10367045844579269
+    identification: 
+      name: Campanha de e-mail
+      page-number: 14
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Campanhas de e-mail # 10343764378531222
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:14:&APP_SESSION.::&DEBUG.:::'
+        page: 14 # Campanha de e-mail
+
+  - # ====== Entry: &P6_ETYPE_NAME. ==============================
+    id: 11905932765270267
+    identification: 
+      name: '&P6_ETYPE_NAME.'
+      page-number: 6
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.:::'
+        page: 6 # Membros
+
+  - # ====== Entry: Cancelar voucher =============================
+    id: 13257654359643015
+    identification: 
+      name: Cancelar voucher
+      page-number: 9
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&APP_SESSION.::&DEBUG.:::'
+        page: 9 # Cancelar voucher
+

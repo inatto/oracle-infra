@@ -1,0 +1,98 @@
+---
+- # ====== Application Item: G_CPF_HASH ========================
+  id: 11693907194517
+  identification: 
+    name: G_CPF_HASH
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  comments: 
+    comments: |
+      legado, exemplo
+      
+      SHA1(CONCAT('asaclub', p.cpf))
+
+  subscription: 
+    version-number: 41721581432724
+
+- # ====== Application Item: G_MEMBER_ID =======================
+  id: 199371081580355
+  identification: 
+    name: G_MEMBER_ID
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41721593432157
+
+- # ====== Application Item: G_ENTITY_NAME =====================
+  id: 199523510725842
+  identification: 
+    name: G_ENTITY_NAME
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41721594684845
+
+- # ====== Application Item: TENANT_CODE =======================
+  id: 7904750172594192
+  identification: 
+    name: TENANT_CODE
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41721915881833
+
+- # ====== Application Item: G_TENANT_ID =======================
+  id: 7904963841594956
+  identification: 
+    name: G_TENANT_ID
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41722035453717
+
+- # ====== Application Item: TENANT_LOGO_URL ===================
+  id: 7905144860596269
+  identification: 
+    name: TENANT_LOGO_URL
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41721915882346
+
+- # ====== Application Item: TENANT_NAME =======================
+  id: 7905344471597523
+  identification: 
+    name: TENANT_NAME
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41721915882361
+

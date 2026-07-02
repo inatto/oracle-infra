@@ -1,0 +1,12 @@
+---
+- # ====== Role: Manager =======================================
+  id: 13468095729492674
+  identification: 
+    name: Manager
+
+  advanced: 
+    static-id: MANAGER
+
+  subscription: 
+    version-number: 41721383726842
+

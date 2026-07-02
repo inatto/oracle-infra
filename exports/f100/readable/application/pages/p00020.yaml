@@ -1,0 +1,1248 @@
+---
+# ====== Page: Cadastro de membro II =========================
+id: 20
+identification: 
+  name: Cadastro de membro II
+  alias: CADASTRO-DE-MEMBRO-II
+  title: Cadastro de membro II
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  chained: true
+  resizable: true
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Hidden ======================================
+  id: 32562976152592570
+  identification: 
+    name: Hidden
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: ENTITY # 40997008557926493
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: ENTITY ======================================
+  id: 40997008557926493
+  identification: 
+    name: ENTITY
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: ENTITY
+    include-rowid-column: false
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+
+page-items: 
+- # ====== Page Item: P20_NEW ==================================
+  id: 17303937829711566
+  identification: 
+    name: P20_NEW
+    type: Popup LOV
+
+  label: 
+    label: New
+    alignment: Left
+
+  settings: 
+    display-as: Inline Popup
+    initial-fetch: Automatic
+    manual-entry: false
+    fetch-on-search: false
+
+  search: 
+    match-type: Contains
+    case-sensitive: false
+    minimum-characters: 0
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: ENTITY # 40997008557926493
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT e.br_cpf || ' - ' || e.name || ' - ' || e.email AS name_cpf_email, e.id
+      FROM entity e;
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P20_ETYPE_CODE ===========================
+  id: 17308955086711588
+  identification: 
+    name: P20_ETYPE_CODE
+    type: Display Only
+
+  label: 
+    label: New
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 60
+    region: Hidden # 32562976152592570
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: ID
+    data-type: NUMBER
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    inline-help-text: P19_ETYPE_CODE
+
+- # ====== Page Item: P20_ID_PESSOA_OLD ========================
+  id: 32556610458177180
+  identification: 
+    name: P20_ID_PESSOA_OLD
+    type: Display Only
+
+  label: 
+    label: New
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 20
+    region: Hidden # 32562976152592570
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: ID_PESSOA_OLD
+    data-type: NUMBER
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    inline-help-text: P8_ID_PESSOA_OLD
+
+- # ====== Page Item: P20_ID_ENDERECO_RESIDENCIAL_OLD ==========
+  id: 32577334492592680
+  identification: 
+    name: P20_ID_ENDERECO_RESIDENCIAL_OLD
+    type: Display Only
+
+  label: 
+    label: New
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 30
+    region: Hidden # 32562976152592570
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: ID_ENDERECO_RESIDENCIAL_OLD
+    data-type: NUMBER
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    inline-help-text: P8_ID_ENDERECO_RESIDENCIAL_OLD
+
+- # ====== Page Item: P20_ID_ENDERECO_COMERCIAL_OLD ============
+  id: 32577405652592681
+  identification: 
+    name: P20_ID_ENDERECO_COMERCIAL_OLD
+    type: Display Only
+
+  label: 
+    label: New
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 40
+    region: Hidden # 32562976152592570
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: ID_ENDERECO_COMERCIAL_OLD
+    data-type: NUMBER
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    inline-help-text: P8_ID_ENDERECO_COMERCIAL_OLD
+
+- # ====== Page Item: P20_NAME =================================
+  id: 41002109227926559
+  identification: 
+    name: P20_NAME
+    type: Text Field
+
+  label: 
+    label: Nome
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 60
+    region: ENTITY # 40997008557926493
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 32
+
+  validation: 
+    value-required: true
+    maximum-length: 100
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: NAME
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P20_ID ===================================
+  id: 41011617696926604
+  identification: 
+    name: P20_ID
+    type: Display Only
+
+  label: 
+    label: New
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 10
+    region: Hidden # 32562976152592570
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: ID
+    data-type: NUMBER
+    query-only: true
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    inline-help-text: P19_ID
+
+- # ====== Page Item: P20_CPF ==================================
+  id: 41400466397115184
+  identification: 
+    name: P20_CPF
+    type: Text Field
+
+  label: 
+    label: CPF
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: true
+    send-on-page-submit: false
+
+  layout: 
+    sequence: 20
+    region: ENTITY # 40997008557926493
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: BR_CPF_MASK
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P20_BR_MOBILE_PHONE ======================
+  id: 41400990299115189
+  identification: 
+    name: P20_BR_MOBILE_PHONE
+    type: Text Field
+
+  label: 
+    label: Celular
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 40
+    region: ENTITY # 40997008557926493
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 32
+
+  validation: 
+    value-required: false
+    maximum-length: 20
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: BR_MOBILE
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P20_EMAIL ================================
+  id: 41403352598115213
+  identification: 
+    name: P20_EMAIL
+    type: Text Field
+
+  label: 
+    label: E-mail
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 70
+    region: ENTITY # 40997008557926493
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 32
+
+  validation: 
+    value-required: false
+    maximum-length: 100
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: EMAIL
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P20_UF_RESIDENCIAL =======================
+  id: 41403432042115214
+  identification: 
+    name: P20_UF_RESIDENCIAL
+    type: Select List
+
+  label: 
+    label: UF Residencial
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 50
+    region: ENTITY # 40997008557926493
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: SELECT code name, code FROM country_uf;
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: HOME_UF
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P20_BIRTH_DATE ===========================
+  id: 41403572375115215
+  identification: 
+    name: P20_BIRTH_DATE
+    type: Date Picker
+
+  label: 
+    label: Nascimento
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 30
+    region: ENTITY # 40997008557926493
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: DD/MM/YYYY
+    width: 32
+
+  validation: 
+    value-required: false
+    maximum-length: 10
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY # 40997008557926493
+    column: BIRTH_DATE
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CREATE ======================================
+  id: 1630969364258558
+  identification: 
+    button-name: CREATE
+    label: Criar
+
+  layout: 
+    sequence: 50
+    region: ENTITY # 40997008557926493
+    slot: CREATE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P20_ETYPE_CODE
+
+- # ====== Button: DELETE ======================================
+  id: 1631400479258560
+  identification: 
+    button-name: DELETE
+    label: Excluir
+
+  layout: 
+    sequence: 20
+    region: ENTITY # 40997008557926493
+    slot: DELETE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: false
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL DELETE action
+
+  confirmation: 
+    message: '&APP_TEXT$DELETE_MSG!RAW.'
+    style: Danger
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P20_ETYPE_CODE
+
+- # ====== Button: SAVE ========================================
+  id: 1631762005258561
+  identification: 
+    button-name: SAVE
+    label: Salvar
+
+  layout: 
+    sequence: 30
+    region: ENTITY # 40997008557926493
+    slot: CHANGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P20_ETYPE_CODE
+
+- # ====== Button: CANCEL ======================================
+  id: 1632194191258562
+  identification: 
+    button-name: CANCEL
+    label: Cancelar
+
+  layout: 
+    sequence: 10
+    region: ENTITY # 40997008557926493
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:3:&APP_SESSION.::&DEBUG.:::'
+      page: 3
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: New =================================
+  id: 1643109713258607
+  identification: 
+    name: New
+
+  execution: 
+    sequence: 30
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P20_NEW
+
+  actions: 
+  - # ====== Action: Execute Server-side Code ====================
+    id: 1643698218258609
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: |
+        begin
+        
+            --
+            :P20_ID := :P20_NEW;
+        
+            --
+            select name into :P20_NAME 
+            from entity where id = :P20_NEW;
+        
+        
+        
+        end;
+      items-to-submit: 
+      - P20_NEW
+      items-to-return: 
+      - P20_ID
+      - P20_NAME
+      suppress-change-event: false
+
+    execution: 
+      sequence: 10
+      event: New # 1643109713258607
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+- # ====== Dynamic Action: page_load ===========================
+  id: 1644097296258610
+  identification: 
+    name: page_load
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 1644526830258612
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: applyMasks();
+
+    execution: 
+      sequence: 10
+      event: page_load # 1644097296258610
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+validations: 
+- # ====== Validation: P20_EMAIL ===============================
+  id: 1640813191258601
+  identification: 
+    name: P20_EMAIL
+
+  execution: 
+    sequence: 20
+
+  validation: 
+    type: Function Body (returning Boolean)
+    language: PL/SQL
+    pl/sql-function-body: "RETURN REGEXP_LIKE(:P20_EMAIL, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');"
+    always-execute: false
+
+  error: 
+    error-message: E-mail inválido.
+    display-location: Inline with Field and in Notification
+    associated-item: P20_EMAIL # 41403352598115213
+
+- # ====== Validation: P20_BIRTH_DATE ==========================
+  id: 1641254516258602
+  identification: 
+    name: P20_BIRTH_DATE
+
+  execution: 
+    sequence: 10
+
+  validation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: ':P20_BIRTH_DATE <= TRUNC(SYSDATE)'
+    always-execute: false
+
+  error: 
+    error-message: |
+      Data de nascimento não pode ser no futuro.
+      
+    display-location: Inline with Field and in Notification
+    associated-item: P20_BIRTH_DATE # 41403572375115215
+
+processes: 
+- # ====== Process: Initialize Cadastro ========================
+  id: 1636581584258583
+  identification: 
+    name: Initialize Cadastro
+    type: Form - Initialization
+    execution-chain: None
+    form-region: ENTITY # 40997008557926493
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Process Cadastro ===========================
+  id: 1636973128258584
+  identification: 
+    name: Process Cadastro
+    type: Form - Automatic Row Processing (DML)
+    execution-chain: None
+    form-region: ENTITY # 40997008557926493
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: Yes
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: mascara manual trocada por coluna virtual ==
+  id: 1641572789258603
+  identification: 
+    name: mascara manual trocada por coluna virtual
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      
+      BEGIN
+      
+        :P20_CPF := REGEXP_REPLACE(:P20_CPF, '(\d{3})(\d{3})(\d{3})(\d{2})', '\1.\2.\3-\4');
+      
+      END;
+      
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+
+- # ====== Process: prc_http_member ============================
+  id: 1641992594258604
+  identification: 
+    name: prc_http_member
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      BEGIN
+      
+          --
+          prc_http_member(
+              JSON_OBJECT(
+              'id_pessoa' VALUE :P20_ID_PESSOA_OLD,
+              'st_cpf' VALUE :P20_CPF,
+              'st_nome' VALUE :P20_NAME,
+              'st_email' VALUE :P20_EMAIL,
+              'dt_nascimento' VALUE :P20_BIRTH_DATE,
+              'st_celular' VALUE :P20_BR_MOBILE_PHONE,
+              'id_endereco__residencial' VALUE :P20_ID_ENDERECO_RESIDENCIAL_OLD,
+              'st_tag_uf__residencial' VALUE :P20_UF_RESIDENCIAL
+              )
+          );
+          
+      END;
+      
+      
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: Close ======================================
+  id: 1642343740258605
+  identification: 
+    name: Close
+    type: Close Dialog
+    execution-chain: None
+
+  settings: 
+    show-success-messages: true
+
+  execution: 
+    sequence: 40
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: clear - trocado por clear na trigger =======
+  id: 1642721128258606
+  identification: 
+    name: clear - trocado por clear na trigger
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      BEGIN
+          :P20_CPF := remove_non_digits(:P20_CPF);
+          :P20_BR_MOBILE_PHONE := remove_non_digits(:P20_BR_MOBILE_PHONE);
+      END;
+      
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+

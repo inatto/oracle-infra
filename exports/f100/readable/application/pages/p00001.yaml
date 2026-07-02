@@ -1,0 +1,405 @@
+---
+# ====== Page: Dashboard =====================================
+id: 1
+identification: 
+  name: Dashboard
+  alias: DASHBOARD
+  title: Dashboard
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Welcome =====================================
+  id: 1827939074856792
+  identification: 
+    name: Welcome
+    title: Bem-vindo(a) à nova plataforma da ADPF (ASAclub)!
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: img =========================================
+  id: 1828176484856794
+  identification: 
+    name: img
+    type: Static Content
+
+  source: 
+    html-code: |2
+        <img src="https://sindicatto.inattox.workers.dev/brand/&P1_TENANT_CODE_LOWER.-400w.png" alt="Logo &TENANT_CODE." style="width:100%;display:block;margin-bottom:10px; max-width: 400px;">
+      
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 1
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: txt =========================================
+  id: 1828203282856795
+  identification: 
+    name: txt
+    type: Static Content
+
+  source: 
+    html-code: |
+      <h2 style="margin:0 0 10px;color:#007acc;font-size:18px;">&TENANT_NAME.</h2>
+      <h2 style="margin:0 0 10px;color:#007acc;font-size:16px;">Bem-vindo(a)</h2>
+      <p style="margin:10px 0;">Estamos migrando para uma nova plataforma moderna e integrada. Durante esse processo, algumas funcionalidades e dados ainda estão sendo atualizados.</p>
+      <p style="margin:10px 0;">Agradecemos sua paciência e colaboração.</p>
+      
+
+  layout: 
+    sequence: 20
+    parent-region: Welcome # 1827939074856792
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 4
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Dashboard ===================================
+  id: 2008111816775548
+  identification: 
+    name: Dashboard
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'see', 'charts')"
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Chart Entidades =============================
+  id: 2008250646775549
+  identification: 
+    name: Chart Entidades
+    title: Membros &TENANT_CODE.
+    type: Chart
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 10
+    parent-region: Dashboard # 2008111816775548
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 6
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--scrollBody
+    - margin-top-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  security: 
+    escape-special-characters: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 2008394691775550
+    chart: 
+      type: Pie
+
+    title: 
+      title: Membros Associados &TENANT_CODE.
+
+    layout: 
+      height: 400
+
+    data-cursor: 
+      cursor: Automatic
+      behavior: Automatic
+      dim-on-hover: true
+
+    settings: 
+      pie-selection-effect: Highlight
+
+    value: 
+      pie-chart-other-threshold: 0
+      format: Decimal
+      decimal-places: 0
+      format-scaling: None
+
+    animation: 
+      on-display: Automatic
+      on-data-change: Automatic
+
+    tooltip: 
+      show: true
+      show-series-name: true
+      show-value: true
+
+    legend: 
+      show: true
+      position: Automatic
+      hide-and-show-behavior: Rescale
+
+    series: 
+    - # ====== Series: New =========================================
+      id: 2008473071775551
+      identification: 
+        name: New
+
+      execution: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          -- membros por entidade
+          SELECT t.code, count(*)
+          FROM member m
+          LEFT JOIN entity e ON m.entity_id = e.id
+          left join tenant t on t.code = m.tenant_code
+          where 1=1
+          -- and m.active = 1
+          -- and e.active = 1
+          and m.etype_code = 'associate'
+          group by t.code
+          ORDER BY count(*) desc
+          ;
+          
+          
+
+      order-by: 
+        type: None
+
+      column-mapping: 
+        label: CODE
+        value: COUNT(*)
+
+      label: 
+        show: true
+        position: Automatic
+        display-as: Label - Value
+
+- # ====== Region: Hidden ======================================
+  id: 2008767824775554
+  identification: 
+    name: Hidden
+    type: Static Content
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P1_TENANT_CODE_LOWER =====================
+  id: 2629842038016396
+  identification: 
+    name: P1_TENANT_CODE_LOWER
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Hidden # 2008767824775554
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: 'return lower(:TENANT_CODE);'
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+

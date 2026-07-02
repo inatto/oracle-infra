@@ -1,0 +1,6 @@
+CREATE OR REPLACE FUNCTION mask_br_phone(p_val VARCHAR2)
+    RETURN VARCHAR2 DETERMINISTIC IS
+BEGIN
+    RETURN REGEXP_REPLACE(REGEXP_REPLACE(p_val, '[^0-9]', ''), '^(\d{2})(\d{4,5})(\d{4})$', '(\1) \2-\3');
+END;
+/

@@ -1,0 +1,645 @@
+---
+# ====== Page: Tickets =======================================
+id: 4
+identification: 
+  name: Tickets
+  alias: TICKETS
+  title: Tickets
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: New =========================================
+  id: 2069365536934651
+  identification: 
+    name: New
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'edit', 'tickets')"
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 7958269507972938
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 7888069520527872
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Tickets Abertos =============================
+  id: 7958916804972941
+  identification: 
+    name: Tickets Abertos
+    title: Abertos
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select to_char(open_date, 'dd/mm/yyyy') open_date_str
+           , to_char(done_date, 'dd/mm/yyyy') done_date_str
+           , ticket.*
+      
+      from
+          ticket
+      where 1=1
+          AND tenant_code = v('TENANT_CODE')
+          and done_date is  null
+      ;
+      
+
+  order-by: 
+    type: Item
+    item: 
+      item-name: P4_ORDER_BY
+      order-bys: 
+      - key: URGENT
+        clause: '"URGENT" desc'
+
+      - key: OPEN_DATE1
+        clause: '"ID" desc'
+
+      - key: OPEN_DATE
+        clause: '"ID" asc'
+
+      - key: TITLE
+        clause: '"TITLE" asc'
+
+  layout: 
+    sequence: 10
+    parent-region: New # 2069365536934651
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-CardsRegion--hideHeader js-addHiddenHeadingRoleDesc
+    - margin-top-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  header-and-footer: 
+    header-text: <h2>Abertos</h2>
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 7959391781972944
+    appearance: 
+      layout: Float
+
+    card: 
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: true
+      html-expression: |
+        {if URGENT/}
+            <div style="max-width: 200px; color: red;">&TITLE.</div>
+        {else/}
+            <div style="max-width: 200px;">&TITLE.</div>
+        {endif/}
+        
+        
+        
+
+    subtitle: 
+      advanced-formatting: false
+      column: OPEN_DATE_STR
+
+    body: 
+      advanced-formatting: true
+      html-expression: |
+        <div style="float: left; padding-right: 10px;">
+            {if OPEN_DATE_STR/}
+            <div style="font-size: x-small; color: #2f2f2f;">Abertura</div>
+            <div style="font-size: smaller; color: #2f2f2f;">&OPEN_DATE_STR.</div>
+            {endif/}
+        </div>
+        <div style="float: left;">
+            {if DONE_DATE_STR/}
+            <div style="font-size: x-small; color: #2f2f2f;">Fechamento</div>
+            <div style="font-size: smaller; background-color: #ff3737; color: white; padding: 2px;">&DONE_DATE_STR.</div>
+            {endif/}
+        </div>
+        <div style="clear: both;"></div>
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: Initials
+      icon-column: ID
+      icon-css-classes: back-blue-violet
+      icon-position: Start
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    actions: 
+    - # ====== Action: Full Card ===================================
+      id: 7877976697520611
+      identification: 
+        type: Full Card
+
+      layout: 
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.::P7_ID:&ID.'
+          page: 7 # ticket-completo
+          values: 
+            p7_id: '&ID.'
+
+- # ====== Region: Tickets Fechados ============================
+  id: 8122218236687315
+  identification: 
+    name: Tickets Fechados
+    title: Fechados
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select to_char(open_date, 'dd/mm/yyyy') open_date_str
+           , to_char(done_date, 'dd/mm/yyyy') done_date_str
+           , ticket.*
+      from
+          ticket
+      where 1=1
+          AND tenant_code = v('TENANT_CODE')
+          and done_date is not null
+      ;
+
+  order-by: 
+    type: Item
+    item: 
+      item-name: P4_ORDER_BY
+      order-bys: 
+      - key: URGENT
+        clause: '"URGENT" desc'
+
+      - key: OPEN_DATE1
+        clause: '"ID" desc'
+
+      - key: OPEN_DATE
+        clause: '"ID" asc'
+
+      - key: TITLE
+        clause: '"TITLE" asc'
+
+  layout: 
+    sequence: 10
+    parent-region: New # 2069365536934651
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-CardsRegion--hideHeader js-addHiddenHeadingRoleDesc
+    - margin-top-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  header-and-footer: 
+    header-text: <h2>Fechados</h2>
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 8122335657687316
+    appearance: 
+      layout: Float
+
+    card: 
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: true
+      html-expression: |2
+            {if URGENT/}
+                <div style="max-width: 200px; color: red;">&TITLE.</div>
+            {else/}
+                <div style="max-width: 200px;">&TITLE.</div>
+            {endif/}
+        
+        
+        
+
+    subtitle: 
+      advanced-formatting: false
+      column: OPEN_DATE_STR
+
+    body: 
+      advanced-formatting: true
+      html-expression: |
+        <div style="float: left; padding-right: 10px;">
+            {if OPEN_DATE_STR/}
+            <div style="font-size: x-small; color: #2f2f2f;">Abertura</div>
+            <div style="font-size: smaller; color: #2f2f2f;">&OPEN_DATE_STR.</div>
+            {endif/}
+        </div>
+        <div style="float: left;">
+            {if DONE_DATE_STR/}
+            <div style="font-size: x-small; color: #2f2f2f;">Fechamento</div>
+            <div style="font-size: smaller; background-color: gray; color: white; padding: 2px;">&DONE_DATE_STR.</div>
+            {endif/}
+        </div>
+        <div style="clear: both;"></div>
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: Initials
+      icon-column: ID
+      icon-css-classes: back-gray
+      icon-position: Start
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    actions: 
+    - # ====== Action: Full Card ===================================
+      id: 8122490740687317
+      identification: 
+        type: Full Card
+
+      layout: 
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::P5_ID:&ID.'
+          page: 5 # Ticket-rapido
+          values: 
+            p5_id: '&ID.'
+
+page-items: 
+- # ====== Page Item: P4_ORDER_BY ==============================
+  id: 7959888957972948
+  identification: 
+    name: P4_ORDER_BY
+    type: Select List
+
+  label: 
+    label: Ordem
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Tickets Abertos # 7958916804972941
+    slot: ORDER_BY_ITEM
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC2:Urgentes;URGENT,Mais recentes;OPEN_DATE1,Mais antigos;OPEN_DATE,Título;TITLE'
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: URGENT
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: ticket-rapido ===============================
+  id: 7877618682520608
+  identification: 
+    button-name: ticket-rapido
+    label: Ticket rápido
+
+  layout: 
+    sequence: 10
+    region: New # 2069365536934651
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 2
+    alignment: Left center
+
+  appearance: 
+    button-template: Text with Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--simple
+    - t-Button--iconLeft
+    - t-Button--stretch
+    icon: fa-clipboard-new
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.:::'
+      page: 5 # Ticket-rapido
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: novo-ticket-completo ========================
+  id: 8121166761687304
+  identification: 
+    button-name: novo-ticket-completo
+    label: Ticket completo
+
+  layout: 
+    sequence: 10
+    region: New # 2069365536934651
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    alignment: Left center
+
+  appearance: 
+    button-template: Text with Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--iconLeft
+    - t-Button--stretch
+    icon: fa-file-new
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:::'
+      page: 7 # ticket-completo
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: New =================================
+  id: 7877711544520609
+  identification: 
+    name: New
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: JavaScript Expression
+    javascript-expression: window
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 7877894140520610
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Tickets Abertos # 7958916804972941
+
+    execution: 
+      sequence: 10
+      event: New # 7877711544520609
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Refresh =====================================
+    id: 8122568658687318
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Tickets Fechados # 8122218236687315
+
+    execution: 
+      sequence: 20
+      event: New # 7877711544520609
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: New_2 ===============================
+  id: 8122005064687313
+  identification: 
+    name: New_2
+
+  execution: 
+    sequence: 30
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+
+  actions: 
+  - # ====== Action: Set Focus ===================================
+    id: 8122160718687314
+    identification: 
+      action: Set Focus
+
+    affected-elements: 
+      selection-type: Button
+      button: ticket-rapido # 7877618682520608
+
+    execution: 
+      sequence: 10
+      event: New_2 # 8122005064687313
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+

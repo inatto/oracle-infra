@@ -1,0 +1,51 @@
+---
+# ====== Page: Global Page ===================================
+id: 0
+identification: 
+  name: Global Page
+
+dynamic-actions: 
+- # ====== Dynamic Action: allow_full_menu_click ===============
+  id: 11855505459515513
+  identification: 
+    name: allow_full_menu_click
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 11855605822515514
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        // expande sub menu clicando no label
+        // noinspection JSUnresolvedReference
+        
+        $("#t_TreeNav").on("treeviewactivatenode", function (e, ui) {
+        
+        	let n$ = $(e.originalEvent.target).closest(".a-TreeView-content");
+        	if (ui.nodes.length > 0 && ui.nodes[0].link === "") {
+        		if (n$.parent().hasClass("is-expandable")) {
+        			$(this).treeView("expand", n$)
+        		} else if (n$.parent().hasClass("is-collapsible")) {
+        			$(this).treeView("collapse", n$)
+        		}
+        	}
+        
+        });
+        
+        
+
+    execution: 
+      sequence: 10
+      event: allow_full_menu_click # 11855505459515513
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

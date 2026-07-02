@@ -1,0 +1,6 @@
+CREATE OR REPLACE FUNCTION mask_br_date(p_date DATE)
+    RETURN VARCHAR2 DETERMINISTIC IS
+BEGIN
+    RETURN TO_CHAR(p_date, 'dd/mm/yyyy');
+END;
+/

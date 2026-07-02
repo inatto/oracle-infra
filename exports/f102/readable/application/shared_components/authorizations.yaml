@@ -1,0 +1,81 @@
+---
+- # ====== Authorization: Not ETYPE read only ==================
+  id: 1864139113886815
+  identification: 
+    name: Not ETYPE read only
+
+  subscription: 
+    version-number: 41721918815088
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: 'return NOT etype_is_read_only(:G_MEMBER_ID);'
+
+  server-cache: 
+    evaluation-point: Once per Page View
+
+  error: 
+    error-message: Acesso negado.
+
+- # ====== Authorization: ETYPE is admin =======================
+  id: 1894328362682315
+  identification: 
+    name: ETYPE is admin
+
+  subscription: 
+    version-number: 41721923461018
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: 'return etype_is_admin(:G_MEMBER_ID);'
+
+  server-cache: 
+    evaluation-point: Once per Page View
+
+  error: 
+    error-message: Acesso negado.
+
+- # ====== Authorization: Administration Rights ================
+  id: 7893375059527895
+  identification: 
+    name: Administration Rights
+
+  subscription: 
+    version-number: 41721384393105
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: return is_admin();
+
+  server-cache: 
+    evaluation-point: Once per Page View
+
+  error: 
+    error-message: Insufficient privileges, user is not an Administrator
+
+- # ====== Authorization: ASAclub Rights =======================
+  id: 13854437018182785
+  identification: 
+    name: ASAclub Rights
+
+  subscription: 
+    version-number: 41721918141727
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: return is_asaclub();
+
+  server-cache: 
+    evaluation-point: Once per Page View
+
+  error: 
+    error-message: Acesso negado. (ASAclub)
+
