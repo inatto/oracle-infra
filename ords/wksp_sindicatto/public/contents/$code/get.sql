@@ -21,7 +21,3 @@ LEFT JOIN ctype ct ON lower(ct.tenant_code) = lower(c.tenant_code) AND lower(ct.
 WHERE 1=1
     and ctype_code = :code
 ORDER BY c.published_at DESC
-
-
-
-
