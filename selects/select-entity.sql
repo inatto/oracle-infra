@@ -25,5 +25,7 @@ ORDER BY id DESC
 ;
 
 
--- 19250
-
+-- popup lov
+SELECT '[' || id || '] ' || name || ' (' || br_cpf || ') - ' || email AS info, id
+FROM entity
+WHERE 1 = 1
