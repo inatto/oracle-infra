@@ -16,6 +16,6 @@ SELECT c.id
 
 FROM content c
 left join ctype ct on lower(ct.tenant_code) = lower(c.tenant_code) and lower(ct.code) = lower(c.ctype_code)
--- WHERE c.id = :id
+WHERE c.id = :id
 
 ORDER BY c.published_at DESC
