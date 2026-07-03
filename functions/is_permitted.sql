@@ -1,11 +1,11 @@
 CREATE OR REPLACE FUNCTION is_permitted (
-    p_page_alias IN VARCHAR2,
-    p_etype_code IN VARCHAR2,
-    p_member_id IN NUMBER DEFAULT NULL,
-    p_what IN VARCHAR2 DEFAULT NULL,
-    p_value IN VARCHAR2 DEFAULT NULL,
-    p_tenant_code IN VARCHAR2 DEFAULT NULL
-) RETURN BOOLEAN IS
+    p_page_alias IN varchar2
+, p_etype_code IN varchar2
+, p_member_id IN number DEFAULT NULL
+, p_what IN varchar2 DEFAULT NULL
+, p_value IN varchar2 DEFAULT NULL
+, p_tenant_code IN varchar2 DEFAULT NULL
+) RETURN boolean IS
 
 
 BEGIN
@@ -18,11 +18,11 @@ BEGIN
     --
     RETURN 1 = 1
         -- tenant pode acessar a pagina?
-            AND tenant_has_permission(p_page_alias, p_tenant_code)
+        AND tenant_has_permission(p_page_alias, p_tenant_code)
         -- tentant tem o etype do usuario?
-            AND tenant_has_etype(p_etype_code, p_tenant_code)
+        AND tenant_has_etype(p_etype_code, p_tenant_code)
         -- membro pode realizar a acao?
-            AND member_has_permission(p_member_id, p_what, p_value);
+        AND member_has_permission(p_member_id, p_what, p_value);
 
 END;
 /
@@ -33,3 +33,4 @@ END;
 -- 6921 andre anpprev
 SELECT is_permitted('processos', 'admin', 6921, 'is', 'admin', 'anpprev') FROM dual;
 SELECT is_permitted('relatorio-de-envios', 'admin', 10369, 'is', 'admin', 'asaclub') FROM dual;
+SELECT is_permitted('contents', null, :G_MEMBER_ID, 'is', 'admin') FROM dual;

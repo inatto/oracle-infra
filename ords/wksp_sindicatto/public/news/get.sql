@@ -15,11 +15,8 @@ SELECT c.id
     , ct.name AS ctype_name
 
 FROM content c
-LEFT JOIN ctype ct ON ct.tenant_code = c.tenant_code AND ct.code = c.ctype_code
+left join ctype ct on lower(ct.tenant_code) = lower(c.tenant_code) and lower(ct.code) = lower(c.ctype_code)
 WHERE ctype_code = 'news'
+-- WHERE c.id = :id
 
 ORDER BY c.published_at DESC
-
-
-
-
