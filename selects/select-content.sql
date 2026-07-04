@@ -1,6 +1,5 @@
 -- noinspection SqlConstantExpressionForFile
 
-TRUNCATE TABLE content;
 SELECT *
 FROM content
 WHERE 1 = 1
