@@ -3,7 +3,7 @@
 id: 14
 identification: 
   name: Campanha de e-mail
-  alias: CAMPANHA-DE-E-MAIL
+  alias: EMAIL-CAMPAIGNS
   title: Campanha de e-mail
 
 appearance: 
@@ -138,7 +138,7 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 70
+    sequence: 90
     parent-region: Campanha de e-mail # 10367220106579327
     slot: BODY
     start-new-layout: false
@@ -279,7 +279,7 @@ page-items:
     allow-custom-html: false
 
   layout: 
-    sequence: 50
+    sequence: 80
     region: Campanha de e-mail # 10367220106579327
     slot: BODY
     alignment: Left
@@ -603,7 +603,7 @@ page-items:
     type: No
 
   layout: 
-    sequence: 40
+    sequence: 60
     region: Campanha de e-mail # 10367220106579327
     slot: BODY
     alignment: Left
@@ -644,6 +644,135 @@ page-items:
 
   quick-picks: 
     show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_ENTIDADE =============================
+  id: 43803904180580548
+  identification: 
+    name: P14_ENTIDADE
+    type: Select List
+
+  label: 
+    label: Para qual Entidade?
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 50
+    region: Campanha de e-mail # 10367220106579327
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: SELECT code name, id FROM tenant where id_master=14 order by name;
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: TENANT_ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P14_SUBJECT_AI ===========================
+  id: 43803934442580549
+  identification: 
+    name: P14_SUBJECT_AI
+    type: Text Field
+
+  label: 
+    label: Assunto (Gerado por IA)
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 70
+    region: Campanha de e-mail # 10367220106579327
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 60
+
+  validation: 
+    value-required: false
+    maximum-length: 500
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Campanha de e-mail # 10367220106579327
+    column: SUBJECT_AI
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  read-only: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: return not is_dev();
 
   security: 
     session-state-protection: Unrestricted

@@ -1,10 +1,10 @@
 ---
-# ====== Page: Entidades parceiras ===========================
-id: 2
+# ====== Page: Membros (Admin) ===============================
+id: 22
 identification: 
-  name: Entidades parceiras
-  alias: PARTNER-MEMBERS
-  title: Entidades parceiras
+  name: Membros (Admin)
+  alias: MEMBROS-ADMIN
+  title: Membros (Admin)
 
 appearance: 
   page-mode: Normal
@@ -20,6 +20,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
+  authorization-scheme: Is Sindicatto # 67716688941492265
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -38,7 +39,7 @@ server-cache:
 
 regions: 
 - # ====== Region: New =========================================
-  id: 2069723679934655
+  id: 83827072237096378
   identification: 
     name: New
     type: Static Content
@@ -67,11 +68,6 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'see', 'all_members')"
-
   customization: 
     customizable: Not Customizable By End Users
 
@@ -80,51 +76,8 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Breadcrumb ==================================
-  id: 35509349854033345
-  identification: 
-    name: Breadcrumb
-    type: Breadcrumb
-
-  source: 
-    breadcrumb: Breadcrumb # 7888069520527872
-
-  layout: 
-    sequence: 10
-    parent-region: No Parent
-    slot: REGION_POSITION_01
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Title Bar
-    template-options: 
-    - '#DEFAULT#'
-    - t-BreadcrumbRegion--useBreadcrumbTitle
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    appearance: 
-      breadcrumb-template: Breadcrumb
-      template-options: 
-      - '#DEFAULT#'
-
 - # ====== Region: Membros =====================================
-  id: 35510021600033353
+  id: 102182339366731025
   identification: 
     name: Membros
     type: Interactive Grid
@@ -132,13 +85,18 @@ regions:
   source: 
     location: Local Database
     type: SQL Query
-    sql-query: select * from vw_member_partner
+    sql-query: |
+      select * from vw_raw_member
+      where 1=1
+      
+      
+      
     page-items-to-submit: 
-    - P2ETH
+    - P22ETH
 
   layout: 
     sequence: 10
-    parent-region: New # 2069723679934655
+    parent-region: New # 83827072237096378
     slot: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -161,16 +119,11 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'see', 'all_members')"
-
   customization: 
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 35510585527033355
+    id: 102182903293731027
     edit: 
       enabled: false
 
@@ -219,23 +172,111 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 35510952012033357
+      id: 102183269778731029
       identification: 
         name: Primary Report
         alias: 85272
 
   columns: 
-  - # ====== Column: BR_CPF_HASH =================================
-    id: 1010126773471352
+  - # ====== Column: Entity ID ===================================
+    id: 43805306664580562
     identification: 
-      column-name: BR_CPF_HASH
+      column-name: Entity ID
+      type: Display Only
+
+    heading: 
+      heading: Entity ID
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 80
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ENTITY_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: Acessar =====================================
+    id: 83826732101096374
+    identification: 
+      column-name: Acessar
+      type: Link
+
+    heading: 
+      alignment: center
+
+    layout: 
+      sequence: 10
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9999:&SESSION.::&DEBUG.::TNTCD,ENTHS:&TENANT_CODE.,&"..BR_CPF_HASH".'
+        page: 9999 # Login Page
+        values: 
+          tntcd: '&TENANT_CODE.'
+          enths: '&"..BR_CPF_HASH".'
+
+      link-text: Acessar
+
+    source: 
+      type: None
+
+    enable-users-to: 
+      hide: true
+
+    server-side-condition: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'is', 'dev')"
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ..BR_CPF_HASH ===============================
+    id: 83826817284096375
+    identification: 
+      column-name: ..BR_CPF_HASH
       type: Hidden
 
     settings: 
       value-protected: true
 
     layout: 
-      sequence: 110
+      sequence: 200
 
     accessibility: 
       value-identifies-row: false
@@ -259,18 +300,19 @@ regions:
     enable-users-to: 
       sort: false
 
-  - # ====== Column: Link ========================================
-    id: 2069106280934648
+  - # ====== Column: Link Processos ==============================
+    id: 84863279934550873
     identification: 
-      column-name: Link
+      column-name: Link Processos
       type: Link
 
     heading: 
-      alignment: start
+      heading: Processos
+      alignment: center
 
     layout: 
-      sequence: 10
-      column-alignment: start
+      sequence: 40
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -278,13 +320,13 @@ regions:
 
     link: 
       target: 
-        url: 'f?p=&APP_ID.:9999:&SESSION.::&DEBUG.::TNTCD,ENTHS:&TENANT_CODE.,&BR_CPF_HASH.'
-        page: 9999 # Login Page
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.::P8_CPF_BR__,P8_NOME:&"..BR_CPF".,&NAME.'
+        page: 15 # Processos Individuais
         values: 
-          tntcd: '&TENANT_CODE.'
-          enths: '&BR_CPF_HASH.'
+          p8_cpf_br__: '&"..BR_CPF".'
+          p8_nome: '&NAME.'
 
-      link-text: Acessar
+      link-text: <span class="fa fa-gavel sto-fa-link-processos" aria-hidden="true"></span>
 
     source: 
       type: None
@@ -292,39 +334,24 @@ regions:
     enable-users-to: 
       hide: true
 
-    server-side-condition: 
-      type: Expression
-      language: PL/SQL
-      pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'is', 'dev')"
-
     security: 
+      authorization-scheme: Can see processos # 2706378458135617
       escape-special-characters: true
 
-  - # ====== Column: BR_CPF ======================================
-    id: 2459203831665948
+  - # ====== Column: ..BR_CPF ====================================
+    id: 84866946139550909
     identification: 
-      column-name: BR_CPF
-      type: Text Field
-
-    heading: 
-      heading: Br Cpf
-      alignment: start
+      column-name: ..BR_CPF
+      type: Hidden
 
     settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
+      value-protected: true
 
     layout: 
-      sequence: 190
-      column-alignment: start
-      stretch: Use Report Setting
+      sequence: 210
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 20
 
     source: 
       type: Database Column
@@ -336,27 +363,53 @@ regions:
     default: 
       duplicate-copies-existing-value: true
 
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+    session-state: 
+      data-type: VARCHAR2
 
     export-/-printing: 
-      include-in-export-/-print: true
+      include-in-export-/-print: false
 
     enable-users-to: 
-      sort: true
-      control-break/aggregate: true
+      sort: false
+
+  - # ====== Column: Senha =======================================
+    id: 85214179486806915
+    identification: 
+      column-name: Senha
+      type: Link
+
+    heading: 
+      heading: Senha
+      alignment: center
+
+    layout: 
+      sequence: 30
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::P17_MEMBER_ID_HIDDEN:&ID.'
+        page: 17 # Trocar senha
+        values: 
+          p17_member_id_hidden: '&ID.'
+
+      link-text: <span class="fa fa-key sto-fa-link-processos" aria-hidden="true"></span>
+
+    source: 
+      type: None
+
+    enable-users-to: 
       hide: true
 
+    security: 
+      escape-special-characters: true
+
   - # ====== Column: ETYPE_HASH ==================================
-    id: 26940961006979568
+    id: 93613278773677240
     identification: 
       column-name: ETYPE_HASH
       type: Hidden
@@ -365,7 +418,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 160
+      sequence: 190
 
     accessibility: 
       value-identifies-row: false
@@ -390,26 +443,29 @@ regions:
       sort: false
 
   - # ====== Column: ID ==========================================
-    id: 27941057914247854
+    id: 94613375680945526
     identification: 
       column-name: ID
-      type: Display Only
+      type: Number Field
 
     heading: 
       heading: ID
-      alignment: start
+      alignment: end
 
     settings: 
-      format: Plain Text
-      based-on: Item Value
+      number-alignment: Start
+      virtual-keyboard: Decimal
 
     layout: 
-      sequence: 20
-      column-alignment: start
+      sequence: 70
+      column-alignment: end
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
+
+    validation: 
+      value-required: true
 
     source: 
       type: Database Column
@@ -421,22 +477,20 @@ regions:
     default: 
       duplicate-copies-existing-value: true
 
-    session-state: 
-      data-type: VARCHAR2
-
     column-filter: 
       enabled: true
-      lov-type: Distinct Column
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: false
 
     enable-users-to: 
-      sort: false
+      sort: true
+      control-break/aggregate: true
       hide: true
 
   - # ====== Column: ENTITY_ID ===================================
-    id: 27941225563247855
+    id: 94613543329945527
     identification: 
       column-name: ENTITY_ID
       type: Hidden
@@ -445,7 +499,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 180
+      sequence: 160
 
     accessibility: 
       value-identifies-row: false
@@ -469,8 +523,76 @@ regions:
     enable-users-to: 
       sort: false
 
+  - # ====== Column: ID_MEMBRO_OLD ===============================
+    id: 97561933536534173
+    identification: 
+      column-name: ID_MEMBRO_OLD
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 220
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ID_MEMBRO_OLD
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: TAG_PERFIL_OLD ==============================
+    id: 97562009203534174
+    identification: 
+      column-name: TAG_PERFIL_OLD
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 230
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: TAG_PERFIL_OLD
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
   - # ====== Column: NAME ========================================
-    id: 35512279117033370
+    id: 102184596883731042
     identification: 
       column-name: NAME
       type: Text Field
@@ -484,7 +606,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 80
+      sequence: 90
       column-alignment: start
       stretch: Use Report Setting
 
@@ -492,7 +614,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
       maximum-length: 100
 
     source: 
@@ -524,26 +646,23 @@ regions:
       control-break/aggregate: true
       hide: true
 
-    configuration: 
-      build-option: Commented Out # 7887430499527870
-
-  - # ====== Column: --Edit deixar so a tenant alterar ===========
-    id: 37040968648478149
+  - # ====== Column: Edit ========================================
+    id: 103713286415175821
     identification: 
-      column-name: '--Edit deixar so a tenant alterar'
+      column-name: Edit
       type: Display Only
 
     heading: 
-      heading: Nome
-      alignment: start
+      heading: Editar
+      alignment: center
 
     settings: 
       format: Plain Text
       based-on: Item Value
 
     layout: 
-      sequence: 30
-      column-alignment: start
+      sequence: 20
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -551,12 +670,12 @@ regions:
 
     link: 
       target: 
-        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::P8_MEMBER_ID:&ID.'
-        page: 8 # Cadastro
+        url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.::P26_MEMBER_ID:&ID.'
+        page: 26 # Cadastro de Membro (Admin)
         values: 
-          p8_member_id: '&ID.'
+          p26_member_id: '&ID.'
 
-      link-text: '&NAME.'
+      link-text: <span aria-hidden="true" class="fa fa-edit sto-fa-link-processos"></span>
 
     source: 
       type: None
@@ -567,8 +686,13 @@ regions:
     enable-users-to: 
       hide: true
 
+    server-side-condition: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'edit', 'members')"
+
   - # ====== Column: TENANT_ID ===================================
-    id: 37849806494325524
+    id: 104522124261023196
     identification: 
       column-name: TENANT_ID
       type: Hidden
@@ -577,7 +701,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 50
+      sequence: 170
 
     accessibility: 
       value-identifies-row: false
@@ -602,13 +726,13 @@ regions:
       sort: false
 
   - # ====== Column: TENANT_CODE =================================
-    id: 37849882919325525
+    id: 104522200686023197
     identification: 
       column-name: TENANT_CODE
       type: Text Field
 
     heading: 
-      heading: Empresa
+      heading: Org
       alignment: start
 
     settings: 
@@ -616,7 +740,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 60
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -648,15 +772,14 @@ regions:
       exact-match: true
 
     export-/-printing: 
-      include-in-export-/-print: true
+      include-in-export-/-print: false
 
     enable-users-to: 
-      sort: true
-      control-break/aggregate: true
+      sort: false
       hide: true
 
   - # ====== Column: ETYPE_CODE ==================================
-    id: 37849961759325526
+    id: 104522279526023198
     identification: 
       column-name: ETYPE_CODE
       type: Hidden
@@ -665,7 +788,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 70
+      sequence: 180
 
     accessibility: 
       value-identifies-row: false
@@ -690,14 +813,14 @@ regions:
       sort: false
 
   - # ====== Column: ACTIVE ======================================
-    id: 38838207298249724
+    id: 105510525064947396
     identification: 
       column-name: ACTIVE
       type: Checkbox
 
     heading: 
       heading: Ativo
-      alignment: end
+      alignment: center
 
     settings: 
       use-defaults: false
@@ -705,8 +828,8 @@ regions:
       unchecked-value: 0
 
     layout: 
-      sequence: 40
-      column-alignment: end
+      sequence: 60
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -738,7 +861,7 @@ regions:
       hide: true
 
   - # ====== Column: ETYPE_NAME ==================================
-    id: 38838283118249725
+    id: 105510600884947397
     identification: 
       column-name: ETYPE_NAME
       type: Text Field
@@ -752,7 +875,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 90
+      sequence: 100
       column-alignment: start
       stretch: Use Report Setting
 
@@ -793,7 +916,7 @@ regions:
       hide: true
 
   - # ====== Column: BR_CPF_MASK =================================
-    id: 38838406446249726
+    id: 105510724212947398
     identification: 
       column-name: BR_CPF_MASK
       type: Textarea
@@ -809,7 +932,7 @@ regions:
       trim-spaces: Leading and Trailing
 
     layout: 
-      sequence: 100
+      sequence: 110
       column-alignment: start
       stretch: Use Report Setting
 
@@ -851,7 +974,7 @@ regions:
       hide: true
 
   - # ====== Column: EMAIL =======================================
-    id: 38838425768249727
+    id: 105510743534947399
     identification: 
       column-name: EMAIL
       type: Text Field
@@ -906,7 +1029,7 @@ regions:
       hide: true
 
   - # ====== Column: BR_MOBILE_MASK ==============================
-    id: 38838562686249728
+    id: 105510880452947400
     identification: 
       column-name: BR_MOBILE_MASK
       type: Textarea
@@ -964,7 +1087,7 @@ regions:
       hide: true
 
   - # ====== Column: BIRTH_DATE_MASK =============================
-    id: 38838681940249729
+    id: 105510999706947401
     identification: 
       column-name: BIRTH_DATE_MASK
       type: Text Field
@@ -1019,7 +1142,7 @@ regions:
       hide: true
 
   - # ====== Column: HOME_UF =====================================
-    id: 38838767546249730
+    id: 105511085312947402
     identification: 
       column-name: HOME_UF
       type: Text Field
@@ -1112,11 +1235,122 @@ regions:
       font-color: '#000000'
       alignment: center
 
-page-items: 
-- # ====== Page Item: P2ETH ====================================
-  id: 26949371993979646
+- # ====== Region: manutencao ==================================
+  id: 113173688252956273
   identification: 
-    name: P2ETH
+    name: manutencao
+    type: Static Content
+
+  source: 
+    html-code: |
+      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #2c3e50; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; margin: 0;">
+          <div style="background: #34495e; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); padding: 60px 40px; text-align: center; max-width: 600px; width: 100%;">
+              <div style="font-size: 80px; margin-bottom: 20px;">🔧</div>
+              <h1 style="color: #ecf0f1; font-size: 32px; margin-bottom: 20px; font-weight: 600;">Em Manutenção</h1>
+              <div style="width: 80px; height: 4px; background: #3498db; margin: 0 auto 30px; border-radius: 2px;"></div>
+              <p style="color: #bdc3c7; font-size: 18px; margin-bottom: 40px; line-height: 1.6;">
+                  Estamos trabalhando para melhorar nossos serviços. 
+                  Em breve estaremos de volta com novidades!
+              </p>
+              
+              <div style="background: #3498db; color: white; padding: 25px; border-radius: 15px; margin-top: 30px;">
+                  <p style="font-size: 16px; margin-bottom: 15px;">Em caso de dúvidas, entre em contato:</p>
+                  <a href="https://wa.me/5561981814000" style="display: inline-flex; align-items: center; gap: 10px; background: white; color: #25D366; text-decoration: none; padding: 15px 30px; border-radius: 50px; font-weight: 600; font-size: 18px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);" target="_blank">
+                      <span style="font-size: 24px;">📱</span>
+                      (61) 98181-4000
+                  </a>
+              </div>
+          </div>
+      </div>
+
+  layout: 
+    sequence: 20
+    parent-region: New # 83827072237096378
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item = Value
+    item: P22ETH
+    value: 2219228742
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 148697390486051586
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 7888069520527872
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+page-items: 
+- # ====== Page Item: P22_ETYPE_CODE ===========================
+  id: 83377909530924452
+  identification: 
+    name: P22_ETYPE_CODE
     type: Hidden
 
   settings: 
@@ -1124,7 +1358,37 @@ page-items:
 
   layout: 
     sequence: 10
-    region: New # 2069723679934655
+    region: New # 83827072237096378
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P22ETH ===================================
+  id: 93613779061677274
+  identification: 
+    name: P22ETH
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: New # 83827072237096378
     slot: BODY
 
   advanced: 
@@ -1146,10 +1410,10 @@ page-items:
   comments: 
     comments: etype hash
 
-- # ====== Page Item: P2_ETYPE_NAME ============================
-  id: 26949447099979647
+- # ====== Page Item: P22_ETYPE_NAME ===========================
+  id: 93613854167677275
   identification: 
-    name: P2_ETYPE_NAME
+    name: P22_ETYPE_NAME
     type: Hidden
 
   settings: 
@@ -1157,7 +1421,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: New # 2069723679934655
+    region: New # 83827072237096378
     slot: BODY
 
   advanced: 
@@ -1178,14 +1442,14 @@ page-items:
 
 buttons: 
 - # ====== Button: Insert ======================================
-  id: 1037423859773777
+  id: 67713876766471456
   identification: 
     button-name: Insert
     label: Inserir
 
   layout: 
     sequence: 10
-    region: Membros # 35510021600033353
+    region: Membros # 102182339366731025
     slot: ORDER_BY_ITEM
     start-new-layout: false
     start-new-row: true
@@ -1202,21 +1466,21 @@ buttons:
   behavior: 
     action: Redirect to Page in this Application
     target: 
-      url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::P8_MEMBER_ETYPE_CODE:associate'
-      page: 8 # Cadastro
+      url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.::P19_ETYPE_CODE:&P22_ETYPE_CODE.'
+      page: 26 # Cadastro de Membro (Admin)
       values: 
-        p8_member_etype_code: associate
+        p19_etype_code: '&P22_ETYPE_CODE.'
 
     warn-on-unsaved-changes: Do Not Check
 
   security: 
-    authorization-scheme: Administration Rights # 7893375059527895
+    authorization-scheme: Not ETYPE read only # 1864139113886815
 
 dynamic-actions: 
-- # ====== Dynamic Action: New =================================
-  id: 1039260832773792
+- # ====== Dynamic Action: dialog closed =======================
+  id: 67715554644471482
   identification: 
-    name: New
+    name: dialog closed
 
   execution: 
     sequence: 10
@@ -1232,7 +1496,7 @@ dynamic-actions:
 
   actions: 
   - # ====== Action: Refresh =====================================
-    id: 1039747051773796
+    id: 67715932336471486
     identification: 
       action: Refresh
 
@@ -1241,40 +1505,11 @@ dynamic-actions:
 
     affected-elements: 
       selection-type: Region
-      region: Membros # 35510021600033353
+      region: Membros # 102182339366731025
 
     execution: 
       sequence: 10
-      event: New # 1039260832773792
+      event: dialog closed # 67715554644471482
       fire-when-event-result-is: True
       fire-on-initialization: false
-
-processes: 
-- # ====== Process: New ========================================
-  id: 1038921203773790
-  identification: 
-    name: New
-    type: Execute Code
-    execution-chain: None
-
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: |
-      BEGIN
-        IF :P2ETH IS NOT NULL THEN
-          SELECT plural_name
-          INTO :P2_ETYPE_NAME
-          FROM vw_etype
-          WHERE hash = :P2ETH;
-        ELSE
-          :P2_ETYPE_NAME := 'Membros';
-        END IF;
-      END;
-      
-
-  execution: 
-    sequence: 10
-    point: Before Header
-    run-process: Once Per Page Visit (default)
 

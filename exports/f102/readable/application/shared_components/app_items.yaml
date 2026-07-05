@@ -44,10 +44,10 @@
   subscription: 
     version-number: 41721594684845
 
-- # ====== Application Item: TENANT_CODE =======================
-  id: 7904750172594192
+- # ====== Application Item: G_TENANT_CODE_LOWER ===============
+  id: 2656509418732635
   identification: 
-    name: TENANT_CODE
+    name: G_TENANT_CODE_LOWER
     scope: Application
 
   security: 
@@ -55,7 +55,72 @@
     escape-special-characters: true
 
   subscription: 
-    version-number: 41721915881833
+    version-number: 41722245210858
+
+- # ====== Application Item: G_ETYPE_NAME ======================
+  id: 2684315571059464
+  identification: 
+    name: G_ETYPE_NAME
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41722254474396
+
+- # ====== Application Item: G_ENTITY_ID =======================
+  id: 3481569507974272
+  identification: 
+    name: G_ENTITY_ID
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41722950976718
+
+- # ====== Application Item: G_USERNAME ========================
+  id: 3491916273127334
+  identification: 
+    name: G_USERNAME
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41722951993950
+
+- # ====== Application Item: G_PASSWORD ========================
+  id: 3492140502127948
+  identification: 
+    name: G_PASSWORD
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41722951997426
+
+- # ====== Application Item: G_TENANT_CODE =====================
+  id: 7904750172594192
+  identification: 
+    name: G_TENANT_CODE
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41722096563183
 
 - # ====== Application Item: G_TENANT_ID =======================
   id: 7904963841594956
@@ -70,10 +135,10 @@
   subscription: 
     version-number: 41722035453717
 
-- # ====== Application Item: TENANT_LOGO_URL ===================
+- # ====== Application Item: G_TENANT_LOGO_URL =================
   id: 7905144860596269
   identification: 
-    name: TENANT_LOGO_URL
+    name: G_TENANT_LOGO_URL
     scope: Application
 
   security: 
@@ -81,12 +146,12 @@
     escape-special-characters: true
 
   subscription: 
-    version-number: 41721915882346
+    version-number: 41722096566602
 
-- # ====== Application Item: TENANT_NAME =======================
+- # ====== Application Item: G_TENANT_NAME =====================
   id: 7905344471597523
   identification: 
-    name: TENANT_NAME
+    name: G_TENANT_NAME
     scope: Application
 
   security: 
@@ -94,5 +159,5 @@
     escape-special-characters: true
 
   subscription: 
-    version-number: 41721915882361
+    version-number: 41722096570751
 

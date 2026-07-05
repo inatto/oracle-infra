@@ -5,19 +5,19 @@
     name: Navigation Menu
 
   subscription: 
-    version-number: 41722026486900
+    version-number: 47035050903915
 
   source: 
     type: Static Values
 
   entries: 
-  - # ====== Entry: Todos os membros =============================
+  - # ====== Entry: Cadastros parceiros ==========================
     id: 1029649119773714
     label: 
-      label: Todos os membros
+      label: Cadastros parceiros
 
     layout: 
-      sequence: 170
+      sequence: 51
 
     is-current: 
       type: Pages
@@ -27,7 +27,7 @@
     link: 
       target: 
         url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
-        page: 2 # Todos os membros
+        page: 2 # Entidades parceiras
 
     click-counting: 
       count-clicks: false
@@ -35,10 +35,8 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'all_members');"
+    security: 
+      authorization-scheme: Can see partner-members # 2705404865117541
 
   - # ====== Entry: Financeiro ===================================
     id: 2138383978607391
@@ -47,7 +45,7 @@
 
     layout: 
       sequence: 180
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -65,10 +63,8 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see financial members # 2703462988075505
 
   - # ====== Entry: Diretores ====================================
     id: 2139228584618499
@@ -77,7 +73,7 @@
 
     layout: 
       sequence: 190
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -95,31 +91,27 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see director members # 2703961167080160
 
-  - # ====== Entry: Tickets (Suporte) ============================
-    id: 7957814938972936
+  - # ====== Entry: Autores do processo ==========================
+    id: 2240154843141535
     label: 
-      label: Tickets (Suporte)
-
-    icon: 
-      image/icon-css-classes: fa-cards
+      label: Autores do processo
 
     layout: 
-      sequence: 10
+      sequence: 230
+      parent-entry: Processos # 2298142446255171
 
     is-current: 
       type: Pages
       pages: 
-      - 4
+      - 3
 
     link: 
       target: 
-        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.::::'
-        page: 4 # Tickets
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::::'
+        page: 3 # Processos - Servidores
 
     click-counting: 
       count-clicks: false
@@ -127,10 +119,56 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'tickets');"
+    security: 
+      authorization-scheme: Can see processos # 2706378458135617
+
+  - # ====== Entry: Processos ====================================
+    id: 2298142446255171
+    label: 
+      label: Processos
+
+    icon: 
+      image/icon-css-classes: fa-solid fa-gavel
+
+    layout: 
+      sequence: 210
+
+    is-current: 
+      type: Target Page
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Can see processos # 2706378458135617
+
+  - # ====== Entry: Processos ====================================
+    id: 2299872579459884
+    label: 
+      label: Processos
+
+    layout: 
+      sequence: 220
+      parent-entry: Processos # 2298142446255171
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 12
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.::::'
+        page: 12 # Processos
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Can see processos # 2706378458135617
 
   - # ====== Entry: Administration ===============================
     id: 8118017641679801
@@ -168,7 +206,7 @@
       label: Campanhas de e-mail
 
     icon: 
-      image/icon-css-classes: fa-table-pointer
+      image/icon-css-classes: fa-solid fa-at
 
     layout: 
       sequence: 40
@@ -189,15 +227,52 @@
     user-defined-attributes: 
       translatable: false
 
+    security: 
+      authorization-scheme: Can see email campaigns # 2695692892735719
+
+  - # ====== Entry: Clientes =====================================
+    id: 11005475274020042
+    label: 
+      label: Clientes
+
+    layout: 
+      sequence: 122
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::P6ETH:3599908120:'
+        page: 6 # Membros
+        values: 
+          p6eth: 3599908120
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
     server-side-condition: 
       type: Function Body
       language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'email_campaigns');"
+      pl/sql-function-body: |
+        begin
+        return is_permitted('members', 'client', :G_MEMBER_ID, 'see', 'clients');
+        end;
 
-  - # ====== Entry: Membros &TENANT_CODE. ========================
+    security: 
+      authorization-scheme: Can see associate members # 2700354053043917
+
+  - # ====== Entry: Cadastros &G_TENANT_CODE. ====================
     id: 11898823060270196
     label: 
-      label: Membros &TENANT_CODE.
+      label: Cadastros &G_TENANT_CODE.
+
+    icon: 
+      image/icon-css-classes: fa-solid fa-users
 
     layout: 
       sequence: 50
@@ -210,10 +285,8 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see members # 2696930766766566
 
   - # ====== Entry: Associados ===================================
     id: 11944535000042252
@@ -222,7 +295,7 @@
 
     layout: 
       sequence: 90
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -240,10 +313,8 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see associate members # 2700354053043917
 
   - # ====== Entry: Administradores ==============================
     id: 11954430897112880
@@ -252,7 +323,7 @@
 
     layout: 
       sequence: 70
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -270,19 +341,17 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'is', 'admin');"
+    security: 
+      authorization-scheme: Can see admin members # 2697717523981530
 
-  - # ====== Entry: Analistas ====================================
+  - # ====== Entry: Analistas de convênios =======================
     id: 11954744086116241
     label: 
-      label: Analistas
+      label: Analistas de convênios
 
     layout: 
       sequence: 80
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -300,10 +369,8 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see agreement_analyst members # 2699649092022767
 
   - # ====== Entry: Atendentes ===================================
     id: 11955083070125190
@@ -312,7 +379,7 @@
 
     layout: 
       sequence: 100
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -330,10 +397,8 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see customer_support members # 2700909217050968
 
   - # ====== Entry: Funcionários =================================
     id: 11955365311127502
@@ -342,7 +407,7 @@
 
     layout: 
       sequence: 120
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -360,10 +425,8 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see staff members # 2701946728062477
 
   - # ====== Entry: Funcionários (só leitura) ====================
     id: 11955616165129404
@@ -372,7 +435,7 @@
 
     layout: 
       sequence: 140
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -390,10 +453,8 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see staff_view members # 2702409797067678
 
   - # ====== Entry: Marketing ====================================
     id: 11955907261131764
@@ -402,7 +463,7 @@
 
     layout: 
       sequence: 150
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -420,10 +481,8 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see marketing members # 2702990905071516
 
   - # ====== Entry: Atendimento VIP ==============================
     id: 11956257060134620
@@ -432,7 +491,7 @@
 
     layout: 
       sequence: 110
-      parent-entry: Membros &TENANT_CODE. # 11898823060270196
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Target Page
@@ -450,10 +509,41 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'see', 'members');"
+    security: 
+      authorization-scheme: Can see vip_lounge_service members # 2701483931057571
+
+  - # ====== Entry: Relatório de envios ==========================
+    id: 12809978929519145
+    label: 
+      label: Relatório de envios
+
+    icon: 
+      image/icon-css-classes: fa-table
+
+    layout: 
+      sequence: 240
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 16
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:16:&SESSION.::&DEBUG.::::'
+        page: 16 # Relatório de envios
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Can see email campaigns # 2695692892735719
+
+    configuration: 
+      build-option: Commented Out # 7887430499527870
 
   - # ====== Entry: Cancelar voucher =============================
     id: 13256711512642987
@@ -482,10 +572,113 @@
     user-defined-attributes: 
       translatable: false
 
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: "return member_has_permission(:G_MEMBER_ID, 'cancel', 'vouchers');"
+    security: 
+      authorization-scheme: Can cancel any voucher # 2705838794126891
+
+  - # ====== Entry: E-mails ======================================
+    id: 53018262583034266
+    label: 
+      label: E-mails
+
+    icon: 
+      image/icon-css-classes: fa-table-pointer
+
+    layout: 
+      sequence: 260
+      parent-entry: Admin # 67718865060521241
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 24
+      - 25
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.::::'
+        page: 24 # Mail Table
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Administration Rights # 7893375059527895
+
+  - # ====== Entry: Conteúdo =====================================
+    id: 66911599616851518
+    label: 
+      label: Conteúdo
+
+    icon: 
+      image/icon-css-classes: fa-table-pointer
+
+    layout: 
+      sequence: 270
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 27
+      - 28
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&APP_SESSION.::&DEBUG.:::'
+        page: 27 # Conteúdo
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Membros Admin ================================
+    id: 67701986833471392
+    label: 
+      label: Membros Admin
+
+    layout: 
+      sequence: 280
+      parent-entry: Admin # 67718865060521241
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 22
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.::::'
+        page: 22 # Membros (Admin)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Is Sindicatto # 67716688941492265
+
+  - # ====== Entry: Admin ========================================
+    id: 67718865060521241
+    label: 
+      label: Admin
+
+    layout: 
+      sequence: 1
+
+    is-current: 
+      type: Target Page
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Is Sindicatto # 67716688941492265
 
 - # ====== List: Navigation Bar ================================
   id: 7889730659527882
@@ -493,12 +686,35 @@
     name: Navigation Bar
 
   subscription: 
-    version-number: 41721915816267
+    version-number: 41722960723206
 
   source: 
     type: Static Values
 
   entries: 
+  - # ====== Entry: &G_ETYPE_NAME. ===============================
+    id: 2685139291095829
+    label: 
+      label: '&G_ETYPE_NAME.'
+
+    layout: 
+      sequence: 4
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9998:&SESSION.::&DEBUG.::::'
+        page: 9998 # Escolher perfil
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: nav-bar-etype-name
+
   - # ====== Entry: &G_ENTITY_NAME. ==============================
     id: 7901889200527932
     label: 
@@ -607,7 +823,7 @@
     link: 
       target: 
         url: 'f?p=&APP_ID.:10010:&APP_SESSION.::&DEBUG.:10010::'
-        page: 10010 # Theme Style Selection
+        page: 10010 # Escolher tema
         clear-cache: 10010
 
     click-counting: 

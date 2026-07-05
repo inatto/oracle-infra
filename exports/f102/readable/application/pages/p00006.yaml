@@ -20,6 +20,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
+  authorization-scheme: Can see members # 2696930766766566
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -66,11 +67,6 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
-
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'see', 'members')"
 
   customization: 
     customizable: Not Customizable By End Users
@@ -232,11 +228,11 @@ regions:
       type: Link
 
     heading: 
-      alignment: start
+      alignment: center
 
     layout: 
       sequence: 10
-      column-alignment: start
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -244,11 +240,10 @@ regions:
 
     link: 
       target: 
-        url: 'f?p=&APP_ID.:9999:&SESSION.::&DEBUG.::TNTCD,AUTLG,ENTHS:&TENANT_CODE.,&ACTIVE.,&"..BR_CPF_HASH".'
+        url: 'f?p=&APP_ID.:9999:&SESSION.::&DEBUG.::TNTCD,ENTHS:&TENANT_CODE.,&"..BR_CPF_HASH".'
         page: 9999 # Login Page
         values: 
           tntcd: '&TENANT_CODE.'
-          autlg: '&ACTIVE.'
           enths: '&"..BR_CPF_HASH".'
 
       link-text: Acessar
@@ -277,7 +272,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 180
+      sequence: 200
 
     accessibility: 
       value-identifies-row: false
@@ -301,6 +296,114 @@ regions:
     enable-users-to: 
       sort: false
 
+  - # ====== Column: Link Processos ==============================
+    id: 3105729436389148
+    identification: 
+      column-name: Link Processos
+      type: Link
+
+    heading: 
+      heading: Processos
+      alignment: center
+
+    layout: 
+      sequence: 40
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.::P8_CPF_BR__,P8_NOME:&"..BR_CPF".,&NAME.'
+        page: 15 # Processos Individuais
+        values: 
+          p8_cpf_br__: '&"..BR_CPF".'
+          p8_nome: '&NAME.'
+
+      link-text: <span class="fa fa-gavel sto-fa-link-processos" aria-hidden="true"></span>
+
+    source: 
+      type: None
+
+    enable-users-to: 
+      hide: true
+
+    security: 
+      authorization-scheme: Can see processos # 2706378458135617
+      escape-special-characters: true
+
+  - # ====== Column: ..BR_CPF ====================================
+    id: 3109395641389184
+    identification: 
+      column-name: ..BR_CPF
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 210
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: BR_CPF
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: Senha =======================================
+    id: 3456628988645190
+    identification: 
+      column-name: Senha
+      type: Link
+
+    heading: 
+      heading: Senha
+      alignment: center
+
+    layout: 
+      sequence: 30
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::P17_MEMBER_ID_HIDDEN:&ID.'
+        page: 17 # Trocar senha
+        values: 
+          p17_member_id_hidden: '&ID.'
+
+      link-text: <span class="fa fa-key sto-fa-link-processos" aria-hidden="true"></span>
+
+    source: 
+      type: None
+
+    enable-users-to: 
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
   - # ====== Column: ETYPE_HASH ==================================
     id: 11855728275515515
     identification: 
@@ -311,7 +414,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 170
+      sequence: 190
 
     accessibility: 
       value-identifies-row: false
@@ -350,7 +453,7 @@ regions:
       virtual-keyboard: Decimal
 
     layout: 
-      sequence: 40
+      sequence: 70
       column-alignment: end
       stretch: Use Report Setting
 
@@ -358,7 +461,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     source: 
       type: Database Column
@@ -378,7 +481,8 @@ regions:
       include-in-export-/-print: false
 
     enable-users-to: 
-      sort: false
+      sort: true
+      control-break/aggregate: true
       hide: true
 
   - # ====== Column: ENTITY_ID ===================================
@@ -391,7 +495,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 130
+      sequence: 150
 
     accessibility: 
       value-identifies-row: false
@@ -415,6 +519,108 @@ regions:
     enable-users-to: 
       sort: false
 
+  - # ====== Column: ID_MEMBRO_OLD ===============================
+    id: 15804383038372448
+    identification: 
+      column-name: ID_MEMBRO_OLD
+      type: Number Field
+
+    heading: 
+      heading: Id Membro Old
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 220
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ID_MEMBRO_OLD
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TAG_PERFIL_OLD ==============================
+    id: 15804458705372449
+    identification: 
+      column-name: TAG_PERFIL_OLD
+      type: Text Field
+
+    heading: 
+      heading: Tag Perfil Old
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 230
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 30
+
+    source: 
+      type: Database Column
+      database-column: TAG_PERFIL_OLD
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: NAME ========================================
     id: 20427046385569317
     identification: 
@@ -430,7 +636,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 80
       column-alignment: start
       stretch: Use Report Setting
 
@@ -478,7 +684,7 @@ regions:
 
     heading: 
       heading: Editar
-      alignment: start
+      alignment: center
 
     settings: 
       format: Plain Text
@@ -486,7 +692,7 @@ regions:
 
     layout: 
       sequence: 20
-      column-alignment: start
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -500,7 +706,7 @@ regions:
           p8_member_id: '&ID.'
           p8_entity_id: '&ENTITY_ID.'
 
-      link-text: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
+      link-text: <span aria-hidden="true" class="fa fa-edit sto-fa-link-processos"></span>
 
     source: 
       type: None
@@ -526,7 +732,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 140
+      sequence: 160
 
     accessibility: 
       value-identifies-row: false
@@ -554,16 +760,25 @@ regions:
     id: 22764650187861472
     identification: 
       column-name: TENANT_CODE
-      type: Hidden
+      type: Text Field
+
+    heading: 
+      alignment: start
 
     settings: 
-      value-protected: true
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
 
     layout: 
-      sequence: 150
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
+
+    validation: 
+      value-required: true
 
     source: 
       type: Database Column
@@ -575,14 +790,23 @@ regions:
     default: 
       duplicate-copies-existing-value: true
 
-    session-state: 
-      data-type: VARCHAR2
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
 
     export-/-printing: 
       include-in-export-/-print: false
 
     enable-users-to: 
       sort: false
+      hide: true
 
   - # ====== Column: ETYPE_CODE ==================================
     id: 22764729027861473
@@ -594,7 +818,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 160
+      sequence: 180
 
     accessibility: 
       value-identifies-row: false
@@ -626,7 +850,7 @@ regions:
 
     heading: 
       heading: Ativo
-      alignment: end
+      alignment: center
 
     settings: 
       use-defaults: false
@@ -634,8 +858,8 @@ regions:
       unchecked-value: 0
 
     layout: 
-      sequence: 30
-      column-alignment: end
+      sequence: 60
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -681,7 +905,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 60
+      sequence: 90
       column-alignment: start
       stretch: Use Report Setting
 
@@ -738,7 +962,7 @@ regions:
       trim-spaces: Leading and Trailing
 
     layout: 
-      sequence: 70
+      sequence: 100
       column-alignment: start
       stretch: Use Report Setting
 
@@ -794,7 +1018,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 80
+      sequence: 110
       column-alignment: start
       stretch: Use Report Setting
 
@@ -851,7 +1075,7 @@ regions:
       trim-spaces: Leading and Trailing
 
     layout: 
-      sequence: 90
+      sequence: 120
       column-alignment: start
       stretch: Use Report Setting
 
@@ -907,7 +1131,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 100
+      sequence: 130
       column-alignment: start
       stretch: Use Report Setting
 
@@ -962,7 +1186,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 110
+      sequence: 140
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1040,6 +1264,74 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
+
+- # ====== Region: manutencao ==================================
+  id: 31416137754794548
+  identification: 
+    name: manutencao
+    type: Static Content
+
+  source: 
+    html-code: |
+      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #2c3e50; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; margin: 0;">
+          <div style="background: #34495e; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); padding: 60px 40px; text-align: center; max-width: 600px; width: 100%;">
+              <div style="font-size: 80px; margin-bottom: 20px;">🔧</div>
+              <h1 style="color: #ecf0f1; font-size: 32px; margin-bottom: 20px; font-weight: 600;">Em Manutenção</h1>
+              <div style="width: 80px; height: 4px; background: #3498db; margin: 0 auto 30px; border-radius: 2px;"></div>
+              <p style="color: #bdc3c7; font-size: 18px; margin-bottom: 40px; line-height: 1.6;">
+                  Estamos trabalhando para melhorar nossos serviços. 
+                  Em breve estaremos de volta com novidades!
+              </p>
+              
+              <div style="background: #3498db; color: white; padding: 25px; border-radius: 15px; margin-top: 30px;">
+                  <p style="font-size: 16px; margin-bottom: 15px;">Em caso de dúvidas, entre em contato:</p>
+                  <a href="https://wa.me/5561981814000" style="display: inline-flex; align-items: center; gap: 10px; background: white; color: #25D366; text-decoration: none; padding: 15px 30px; border-radius: 50px; font-weight: 600; font-size: 18px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);" target="_blank">
+                      <span style="font-size: 24px;">📱</span>
+                      (61) 98181-4000
+                  </a>
+              </div>
+          </div>
+      </div>
+
+  layout: 
+    sequence: 20
+    parent-region: New # 2069521738934653
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item = Value
+    item: P6ETH
+    value: 2219228742
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
 
 page-items: 
 - # ====== Page Item: P6_ETYPE_CODE ============================
@@ -1209,10 +1501,10 @@ dynamic-actions:
       fire-on-initialization: false
 
 processes: 
-- # ====== Process: New ========================================
+- # ====== Process: Start ======================================
   id: 11855457059515512
   identification: 
-    name: New
+    name: Start
     type: Execute Code
     execution-chain: None
 
@@ -1221,14 +1513,48 @@ processes:
     language: PL/SQL
     pl/sql-code: |
       BEGIN
-        IF :P6ETH IS NOT NULL THEN
-          SELECT plural_name, code INTO :P6_ETYPE_NAME, :P6_ETYPE_CODE
-          FROM etype
-          WHERE hash = :P6ETH;
-        ELSE
-          :P6_ETYPE_NAME := 'Membros';
-        END IF;
+      
+          -- se passou tipo de membro, recupera o nome plural e o code
+          IF :P6ETH IS NOT NULL THEN
+              SELECT plural_name, code
+              INTO :P6_ETYPE_NAME, :P6_ETYPE_CODE
+              FROM vw_etype
+              WHERE hash = :P6ETH;
+          ELSE
+              RAISE_APPLICATION_ERROR(-20001, 'Invalid etype [87652543].');
+          END IF;
+      
+          -- permissoes
+          IF (:P6_ETYPE_CODE = 'admin') AND NOT is_permitted('members', 'admin', :G_MEMBER_ID, 'is', 'admin') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735460].');
+          ELSIF (:P6_ETYPE_CODE = 'agreement_analyst') AND NOT is_permitted('members', 'agreement_analyst', :G_MEMBER_ID, 'see', 'members') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735461].');
+          ELSIF (:P6_ETYPE_CODE = 'associate') AND NOT is_permitted('members', 'associate', :G_MEMBER_ID, 'see', 'members') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735462].');
+          ELSIF (:P6_ETYPE_CODE = 'customer_support') AND NOT is_permitted('members', 'customer_support', :G_MEMBER_ID, 'see', 'members') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735463].');
+          ELSIF (:P6_ETYPE_CODE = 'vip_lounge_service') AND NOT is_permitted('members', 'vip_lounge_service', :G_MEMBER_ID, 'see', 'members') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735464].');
+          ELSIF (:P6_ETYPE_CODE = 'staff') AND NOT is_permitted('members', 'staff', :G_MEMBER_ID, 'see', 'members') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735465].');
+          ELSIF (:P6_ETYPE_CODE = 'staff_view') AND NOT is_permitted('members', 'staff_view', :G_MEMBER_ID, 'see', 'members') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735466].');
+          ELSIF (:P6_ETYPE_CODE = 'marketing') AND NOT is_permitted('members', 'marketing', :G_MEMBER_ID, 'see', 'members') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735467].');
+          ELSIF (:P6_ETYPE_CODE = 'financial') AND NOT is_permitted('members', 'financial', :G_MEMBER_ID, 'see', 'members') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735468].');
+          ELSIF (:P6_ETYPE_CODE = 'director') AND NOT is_permitted('members', 'director', :G_MEMBER_ID, 'see', 'members') THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Access denied [82735469].');
+          END IF;
+      
+      -- TODO 20250722
+      EXCEPTION
+          WHEN no_data_found THEN
+              NULL;
+      
+      
       END;
+      
       
 
   execution: 

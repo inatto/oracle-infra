@@ -67,11 +67,6 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'edit', 'tickets')"
-
   customization: 
     customizable: Not Customizable By End Users
 
@@ -134,14 +129,8 @@ regions:
     location: Local Database
     type: SQL Query
     sql-query: |
-      select to_char(open_date, 'dd/mm/yyyy') open_date_str
-           , to_char(done_date, 'dd/mm/yyyy') done_date_str
-           , ticket.*
-      
-      from
-          ticket
+      select * from vw_ticket
       where 1=1
-          AND tenant_code = v('TENANT_CODE')
           and done_date is  null
       ;
       
@@ -284,13 +273,8 @@ regions:
     location: Local Database
     type: SQL Query
     sql-query: |
-      select to_char(open_date, 'dd/mm/yyyy') open_date_str
-           , to_char(done_date, 'dd/mm/yyyy') done_date_str
-           , ticket.*
-      from
-          ticket
+      select * from vw_ticket
       where 1=1
-          AND tenant_code = v('TENANT_CODE')
           and done_date is not null
       ;
 

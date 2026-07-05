@@ -4,6 +4,52 @@ id: 0
 identification: 
   name: Global Page
 
+regions: 
+- # ====== Region: New =========================================
+  id: 2628861484656156
+  identification: 
+    name: New
+    type: Static Content
+
+  source: 
+    html-code: |
+      <div style="margin: auto; justify-items: center;">
+          <img src="https://sindicatto.sindicattox.workers.dev/brand/&G_TENANT_CODE_LOWER.-400w.png" alt="Logo &G_TENANT_CODE." 
+          style="max-width:200px;display:block;margin-bottom:10px; max-height: 60px; opacity: 80%; background-color: #ddd; padding: 10px;">
+      </div>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_05
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
 dynamic-actions: 
 - # ====== Dynamic Action: allow_full_menu_click ===============
   id: 11855505459515513

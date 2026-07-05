@@ -1,0 +1,365 @@
+---
+# ====== Page: Escolher perfil ===============================
+id: 9998
+identification: 
+  name: Escolher perfil
+  alias: ESCOLHER-PERFIL
+  title: Escolher perfil
+
+appearance: 
+  page-mode: Normal
+  page-template: Login
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: false
+
+security: 
+  authentication: Page Is Public
+  deep-linking: Application Default
+  page-access-protection: Unrestricted
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-meta-tags: false
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Login =======================================
+  id: 25409493597022813
+  identification: 
+    name: Login
+    title: Escolha o Perfil
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Login
+    template-options: 
+    - '#DEFAULT#'
+    - t-Login-region--headerTitle js-removeLandmark
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  image: 
+    file-url: 'https://sindicatto.sindicattox.workers.dev/brand/&P9998_TNTCD_LOWER_HIDDEN.-400w.png'
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P9998_ETYPE ==============================
+  id: 3452983981645153
+  identification: 
+    name: P9998_ETYPE
+    type: Select List
+
+  label: 
+    label: Perfil
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Login # 25409493597022813
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT distinct etype_name, etype_code
+      FROM vw_member
+      WHERE 1 = 1
+          AND active = 1
+          AND LOWER(tenant_code) = LOWER(:G_TENANT_CODE)
+          AND entity_id = :G_ENTITY_ID
+      ;
+      
+      
+      
+    display-extra-values: true
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Always, replacing any existing value in session state
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P9998_TNTCD_LOWER_HIDDEN =================
+  id: 3522836221682284
+  identification: 
+    name: P9998_TNTCD_LOWER_HIDDEN
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: 'LOWER(:G_TENANT_CODE)'
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: Cancelar ====================================
+  id: 3453176974645155
+  identification: 
+    button-name: Cancelar
+    label: Cancelar
+
+  layout: 
+    sequence: 50
+    region: Login # 25409493597022813
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to URL
+    target: '&LOGOUT_URL.'
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: Continuar ===================================
+  id: 3459985915804583
+  identification: 
+    button-name: Continuar
+    label: Continuar
+
+  layout: 
+    sequence: 40
+    region: Login # 25409493597022813
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: New =================================
+  id: 3456216476645186
+  identification: 
+    name: New
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P9998_ETYPE
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 3456349940645187
+    identification: 
+      action: Submit Page
+
+    settings: 
+      request-/-button-name: Continuar
+      show-processing: true
+
+    execution: 
+      sequence: 10
+      event: New # 3456216476645186
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+processes: 
+- # ====== Process: Tenta login completo e redireciona =========
+  id: 3454633294645170
+  identification: 
+    name: Tenta login completo e redireciona
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+      
+          --
+          prc_internal_login(:G_TENANT_CODE, :G_USERNAME, :G_PASSWORD, :P9998_ETYPE, :G_ENTITY_ID);
+      
+          -- redireciona manualmente e garante sessão setada
+          apex_util.redirect_url('f?p=' || v('APP_ID') || ':1:' || v('APP_SESSION'));
+      
+      
+      end;
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+branches: 
+- # ====== Branch: Go To Page 9999 - If G_ENTITY_ID is null ====
+  id: 3453766887645161
+  identification: 
+    name: Go To Page 9999 - If G_ENTITY_ID is null
+
+  execution: 
+    sequence: 10
+    point: Before Header
+
+  behavior: 
+    type: URL Identified by Item (Redirect)
+    item: '&LOGOUT_URL.'
+
+  server-side-condition: 
+    type: Item is NULL
+    item: G_ENTITY_ID
+
+- # ====== Branch: Go To Page 1 - If only one type =============
+  id: 3456189078645185
+  identification: 
+    name: Go To Page 1 - If only one type
+
+  execution: 
+    sequence: 20
+    point: Before Header
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:::&success_msg=#SUCCESS_MSG#'
+      page: 1 # Dashboard
+
+  server-side-condition: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: |
+      DECLARE
+      
+          v_etype_code VARCHAR2(100);
+      
+      BEGIN
+      
+          -- se tem apenas um, retorna o type
+          v_etype_code := members_etypes_count(:G_TENANT_CODE, :G_USERNAME, :G_PASSWORD);
+      
+          -- e se tiver, ja loga
+          IF v_etype_code IS NOT NULL THEN
+              prc_internal_login(:G_TENANT_CODE, :G_USERNAME, :G_PASSWORD, v_etype_code, :G_ENTITY_ID);
+              return true;
+          END IF;
+      
+      END;
+

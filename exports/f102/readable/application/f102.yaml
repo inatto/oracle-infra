@@ -55,7 +55,7 @@ database-session:
   parsing-schema: WKSP_SINDICATTO
 
 globalization: 
-  primary-language: Portuguese (Brazil) (pt-br)
+  primary-language: English (United States) (en-us)
   document-direction: Language Default
   language-derived-from: Application Primary Language
   automatic-time-zone: true
@@ -71,7 +71,7 @@ character-value-comparison:
 
 logo: 
   type: Custom
-  custom-html: '&TENANT_CODE.'
+  custom-html: '&G_TENANT_NAME.'
 
 progressive-web-app: 
   enable: true
@@ -109,18 +109,18 @@ navigation-bar:
 
 javascript: 
   file-urls: 
-  - 'https://sindicatto.inattox.workers.dev/js/c0r3.js'
-  - 'https://sindicatto.inattox.workers.dev/js/mask.js'
+  - 'https://sindicatto.sindicattox.workers.dev/js/core.js'
+  - 'https://sindicatto.sindicattox.workers.dev/js/mask.js'
   include-jquery-migrate: false
 
 css: 
   file-urls: 
-  - 'https://sindicatto.inattox.workers.dev/css/core.css'
+  - 'https://sindicatto.sindicattox.workers.dev/css/core.css'
 
 attributes: 
   theme: Universal Theme # 42
   global-page: 0
-  enable-end-users-to-choose-theme-style: false
+  enable-end-users-to-choose-theme-style: true
   add-"built-with-apex"-to-footer: false
   auto-dismiss-success-messages: false
 
@@ -130,7 +130,7 @@ working-copy:
   name: Core WC
 
 subscription: 
-  version-number: 41722035453717
+  version-number: 47035945664930
 
 substitutions: 
 - # ====== Substitution: APP_NAME ==============================

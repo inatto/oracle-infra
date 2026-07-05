@@ -30,6 +30,7 @@ javascript:
     
 
 security: 
+  authorization-scheme: Can see email campaigns # 2695692892735719
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -76,11 +77,6 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
-
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'edit', 'email_campaigns')"
 
   customization: 
     customizable: Not Customizable By End Users
@@ -143,9 +139,7 @@ regions:
     location: Local Database
     type: SQL Query
     sql-query: |
-      select * from EMAIL_CAMPAIGN
-      WHERE 1 = 1
-          AND tenant_code = v('TENANT_CODE')
+      select * from vw_email_campaign
       
 
   layout: 
@@ -444,6 +438,9 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    configuration: 
+      build-option: Commented Out # 7887430499527870
+
   - # ====== Column: TOTAL_EMAILS_DELIVERED ======================
     id: 10350182316531252
     identification: 
@@ -490,6 +487,9 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
+
+    configuration: 
+      build-option: Commented Out # 7887430499527870
 
   - # ====== Column: OPENED_PERCENT ==============================
     id: 10351184843531256
@@ -538,6 +538,9 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    configuration: 
+      build-option: Commented Out # 7887430499527870
+
   - # ====== Column: OPENED_COUNT ================================
     id: 10352137088531259
     identification: 
@@ -584,6 +587,9 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
+
+    configuration: 
+      build-option: Commented Out # 7887430499527870
 
   - # ====== Column: ID ==========================================
     id: 10396002853592703
@@ -678,16 +684,26 @@ regions:
     id: 10396450078592707
     identification: 
       column-name: STATUS
-      type: Hidden
+      type: Text Field
+
+    heading: 
+      heading: Status
+      alignment: start
 
     settings: 
-      value-protected: true
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
 
     layout: 
       sequence: 110
+      column-alignment: start
+      stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
+
+    validation: 
+      value-required: false
 
     source: 
       type: Database Column
@@ -699,14 +715,23 @@ regions:
     default: 
       duplicate-copies-existing-value: true
 
-    session-state: 
-      data-type: VARCHAR2
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
 
     export-/-printing: 
       include-in-export-/-print: false
 
     enable-users-to: 
       sort: false
+      hide: true
 
   - # ====== Column: CREATED_AT ==================================
     id: 10396579102592708
@@ -811,9 +836,6 @@ regions:
     security: 
       escape-special-characters: true
 
-    configuration: 
-      build-option: Commented Out # 7887430499527870
-
   - # ====== Column: TENANT_ID ===================================
     id: 10866722719591409
     identification: 
@@ -879,6 +901,9 @@ regions:
     export-/-printing: 
       include-in-export-/-print: false
 
+    configuration: 
+      build-option: Commented Out # 7887430499527870
+
   - # ====== Column: BODY_TEXT ===================================
     id: 10866951202591411
     identification: 
@@ -909,6 +934,9 @@ regions:
 
     export-/-printing: 
       include-in-export-/-print: false
+
+    configuration: 
+      build-option: Commented Out # 7887430499527870
 
   - # ====== Column: RECIPIENT_COUNTRY_CODE ======================
     id: 10867050555591412
@@ -1031,6 +1059,67 @@ regions:
     enable-users-to: 
       sort: true
       control-break/aggregate: true
+      hide: true
+
+    configuration: 
+      build-option: Commented Out # 7887430499527870
+
+  - # ====== Column: SUBJECT_AI ==================================
+    id: 43804044047580550
+    identification: 
+      column-name: SUBJECT_AI
+      type: Textarea
+
+    heading: 
+      heading: Assunto (Gerado por IA)
+      alignment: start
+
+    settings: 
+      resizable: true
+      auto-height: false
+      character-counter: false
+      trim-spaces: Leading and Trailing
+
+    layout: 
+      sequence: 200
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 500
+
+    source: 
+      type: Database Column
+      database-column: SUBJECT_AI
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
       hide: true
 
   printing: 

@@ -1,10 +1,10 @@
 ---
-# ====== Page: Theme Style Selection =========================
+# ====== Page: Escolher tema =================================
 id: 10010
 identification: 
-  name: Theme Style Selection
+  name: Escolher tema
   alias: THEME-STYLE-SELECTION
-  title: Theme Style Selection
+  title: Escolher tema
   page-group: Administration # 7893666302527897
 
 appearance: 
@@ -134,7 +134,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Desktop Theme Style
+    label: Estilo para desktop
     alignment: Left
 
   settings: 
@@ -216,7 +216,7 @@ page-items:
     type: Checkbox Group
 
   label: 
-    label: End User Theme Preference
+    label: Permitir troca de tema
     alignment: Left
 
   settings: 
@@ -272,14 +272,14 @@ page-items:
     restricted-characters: All characters can be saved.
 
   help: 
-    inline-help-text: If checked, end users may choose their own Theme Style using the Customize link.
+    help-text: Se marcada, os usuários finais podem escolher seu próprio Estilo de Tema usando o link Personalizar.
 
 buttons: 
 - # ====== Button: CANCEL ======================================
   id: 8113045555679783
   identification: 
     button-name: CANCEL
-    label: Cancel
+    label: Cancelar
 
   layout: 
     sequence: 10
@@ -305,7 +305,7 @@ buttons:
   id: 8114462312679788
   identification: 
     button-name: SAVE
-    label: Apply Changes
+    label: Ok
 
   layout: 
     sequence: 20

@@ -21,7 +21,7 @@ css:
   - '#THEME_FILES#css/Core#MIN#.css?v=#APEX_VERSION#'
 
 component-defaults: 
-  current-theme-style: Vita
+  current-theme-style: Vita - Slate
   page: Standard
   navigation-bar-list: Navigation Bar
   navigation-menu-list-position: Side

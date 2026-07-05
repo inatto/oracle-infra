@@ -5,10 +5,10 @@
     name: Breadcrumb
 
   entries: 
-  - # ====== Entry: Todos os membros =============================
+  - # ====== Entry: Cadastros parceiros ==========================
     id: 1038038144773782
     identification: 
-      name: Todos os membros
+      name: Cadastros parceiros
       page-number: 2
 
     execution: 
@@ -16,8 +16,64 @@
 
     link: 
       target: 
-        url: 'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
-        page: 2 # Todos os membros
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:::'
+        page: 2 # Entidades parceiras
+
+  - # ====== Entry: Autores do processo ==========================
+    id: 2241032754141546
+    identification: 
+      name: Autores do processo
+      page-number: 3
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:::'
+        page: 3 # Processos - Servidores
+
+  - # ====== Entry: Processos ====================================
+    id: 2314179326459964
+    identification: 
+      name: Processos
+      page-number: 12
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&APP_SESSION.::&DEBUG.:::'
+        page: 12 # Processos
+
+  - # ====== Entry: Editar processo ==============================
+    id: 2854805110322486
+    identification: 
+      name: Editar processo
+      page-number: 11
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&APP_SESSION.::&DEBUG.:::'
+        page: 11 # Editar processo
+
+  - # ====== Entry: Processos da Pessoa ==========================
+    id: 3105526666387738
+    identification: 
+      name: Processos da Pessoa
+      page-number: 15
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&APP_SESSION.::&DEBUG.:::'
+        page: 15 # Processos Individuais
 
   - # ====== Entry: Tickets ======================================
     id: 7958718106972940
@@ -136,4 +192,63 @@
       target: 
         url: 'f?p=&APP_ID.:9:&APP_SESSION.::&DEBUG.:::'
         page: 9 # Cancelar voucher
+
+  - # ====== Entry: E-mails ======================================
+    id: 53027359802034226
+    identification: 
+      name: E-mails
+      page-number: 24
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.:::'
+        page: 24 # Mail Table
+
+  - # ====== Entry: Conteúdo =====================================
+    id: 66923766594851555
+    identification: 
+      name: Conteúdo
+      page-number: 27
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&APP_SESSION.::&DEBUG.:::'
+        page: 27 # Conteúdo
+
+  - # ====== Entry: Membros Admin ================================
+    id: 67717952442516160
+    identification: 
+      name: Membros Admin
+      page-number: 22
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      long-name: Membros Admin
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.:::'
+        page: 22 # Membros (Admin)
+
+  - # ====== Entry: Cadastro de Membro (Admin) ===================
+    id: 67745356601810136
+    identification: 
+      name: Cadastro de Membro (Admin)
+      page-number: 26
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:26:&APP_SESSION.::&DEBUG.:::'
+        page: 26 # Cadastro de Membro (Admin)
 

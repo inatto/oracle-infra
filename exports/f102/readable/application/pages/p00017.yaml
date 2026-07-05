@@ -1,0 +1,285 @@
+---
+# ====== Page: Trocar senha ==================================
+id: 17
+identification: 
+  name: Trocar senha
+  alias: TROCAR-SENHA
+  title: Trocar senha
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  chained: true
+  resizable: true
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+page-items: 
+- # ====== Page Item: P17_NEW_PASSWORD =========================
+  id: 3456586884645189
+  identification: 
+    name: P17_NEW_PASSWORD
+    type: Password
+
+  label: 
+    label: Informe a nova senha
+    alignment: Left
+
+  settings: 
+    submit-when-enter-pressed: true
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_MEMBER_ID_HIDDEN =====================
+  id: 3456973224645193
+  identification: 
+    name: P17_MEMBER_ID_HIDDEN
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_PASSWORD_CONFIRM =====================
+  id: 3599948967568848
+  identification: 
+    name: P17_PASSWORD_CONFIRM
+    type: Password
+
+  label: 
+    label: Confirme a senha
+    alignment: Left
+
+  settings: 
+    submit-when-enter-pressed: true
+
+  layout: 
+    sequence: 30
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: Trocar ======================================
+  id: 3456738646645191
+  identification: 
+    button-name: Trocar
+    label: Trocar
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: true
+    warn-on-unsaved-changes: Do Not Check
+
+processes: 
+- # ====== Process: Atualiza senha  ============================
+  id: 3456896438645192
+  identification: 
+    name: 'Atualiza senha '
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      BEGIN
+      
+          IF :P17_MEMBER_ID_HIDDEN IS NULL THEN
+              RAISE_APPLICATION_ERROR(-20000, 'Membro não informado.');
+          END IF;
+      
+          IF :P17_NEW_PASSWORD IS NULL THEN
+              RAISE_APPLICATION_ERROR(-20005, 'Informe a nova senha.');
+          END IF;
+      
+          IF :P17_PASSWORD_CONFIRM IS NULL THEN
+              RAISE_APPLICATION_ERROR(-20006, 'Confirme a nova senha.');
+          END IF;
+      
+          IF :P17_NEW_PASSWORD <> :P17_PASSWORD_CONFIRM THEN
+              RAISE_APPLICATION_ERROR(-20001, 'Senha e confirmação não conferem.');
+          END IF;
+      
+          IF LENGTH(:P17_NEW_PASSWORD) < 4 THEN
+              RAISE_APPLICATION_ERROR(-20002, 'A senha deve ter no mínimo 4 caracteres.');
+          ELSIF NOT REGEXP_LIKE(:P17_NEW_PASSWORD, '[A-Za-z]') THEN
+              RAISE_APPLICATION_ERROR(-20003, 'A senha deve conter pelo menos uma letra.');
+          ELSIF NOT REGEXP_LIKE(:P17_NEW_PASSWORD, '[0-9]') THEN
+              RAISE_APPLICATION_ERROR(-20004, 'A senha deve conter pelo menos um número.');
+          END IF;
+      
+          --
+          UPDATE entity e
+          SET e.md5_password = LOWER(standard_hash(:P17_NEW_PASSWORD, 'MD5'))
+          WHERE e.id = (SELECT m.entity_id
+          FROM member m
+          WHERE m.id = :P17_MEMBER_ID_HIDDEN);
+      
+          IF SQL%ROWCOUNT = 0 THEN
+              RAISE_APPLICATION_ERROR(-20007, 'Nenhuma pessoa/entity encontrada para esse membro.');
+          END IF;
+      
+      EXCEPTION
+          WHEN OTHERS THEN
+              IF SQLCODE BETWEEN -20999 AND -20000 THEN
+                  RAISE;
+              ELSE
+                  RAISE_APPLICATION_ERROR(-20008, 'Erro ao atualizar senha: ' || SQLERRM);
+              END IF;
+      END;
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: Close ======================================
+  id: 3457350446645197
+  identification: 
+    name: Close
+    type: Close Dialog
+    execution-chain: None
+
+  settings: 
+    show-success-messages: true
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+

@@ -25,3 +25,27 @@
   subscription: 
     version-number: 41721039068115
 
+- # ====== Application Process: Date Brazil ====================
+  id: 68187976312506122
+  identification: 
+    name: Date Brazil
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+          execute immediate q'[alter session set time_zone = 'America/Sao_Paulo']';
+      end;
+
+  execution: 
+    sequence: 1
+    point: Before Header
+
+  server-side-condition: 
+    type: Always
+
+  subscription: 
+    version-number: 47035056717596
+

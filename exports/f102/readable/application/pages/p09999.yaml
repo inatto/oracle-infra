@@ -38,11 +38,11 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: core ========================================
+- # ====== Region: Login =======================================
   id: 7894257955527902
   identification: 
-    name: core
-    title: '&TENANT_NAME.'
+    name: Login
+    title: ' '
     type: Static Content
 
   layout: 
@@ -59,6 +59,7 @@ regions:
     template: Login
     template-options: 
     - '#DEFAULT#'
+    - t-Login-region--headerIcon
     render-components: Above Content
 
   accessibility: 
@@ -66,7 +67,7 @@ regions:
     landmark-type: Template Default
 
   image: 
-    file-url: '&TENANT_LOGO_URL.'
+    file-url: 'https://sindicatto.sindicattox.workers.dev/brand/&P9999_TNTCD_LOWER_HIDDEN.-400w.png'
 
   advanced: 
     region-display-selector: false
@@ -85,34 +86,15 @@ page-items:
   id: 4861064032350
   identification: 
     name: ENTHS
-    type: Display Only
-
-  label: 
-    label: ENTHS
-    alignment: Left
+    type: Hidden
 
   settings: 
-    format: Plain Text
-    based-on: Item Value
-    show-line-breaks: true
-    send-on-page-submit: true
+    value-protected: true
 
   layout: 
-    sequence: 60
-    region: core # 7894257955527902
+    sequence: 80
+    region: Login # 7894257955527902
     slot: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating
-    template-options: 
-    - '#DEFAULT#'
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -130,38 +112,54 @@ page-items:
     store-value-encrypted-in-session-state: true
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P9999_TNTCD_LOWER_HIDDEN =================
+  id: 3455965511645183
+  identification: 
+    name: P9999_TNTCD_LOWER_HIDDEN
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: Login # 7894257955527902
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: 'LOWER(:G_TENANT_CODE)'
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: TNTCD ====================================
   id: 7877020898520602
   identification: 
     name: TNTCD
-    type: Display Only
-
-  label: 
-    label: TNTCD
-    alignment: Left
+    type: Hidden
 
   settings: 
-    format: Plain Text
-    based-on: Item Value
-    show-line-breaks: true
-    send-on-page-submit: true
+    value-protected: true
 
   layout: 
-    sequence: 50
-    region: core # 7894257955527902
+    sequence: 60
+    region: Login # 7894257955527902
     slot: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating
-    template-options: 
-    - '#DEFAULT#'
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -197,8 +195,8 @@ page-items:
     disabled: false
 
   layout: 
-    sequence: 10
-    region: core # 7894257955527902
+    sequence: 20
+    region: Login # 7894257955527902
     slot: BODY
     alignment: Left
     start-new-layout: false
@@ -235,6 +233,10 @@ page-items:
   quick-picks: 
     show-quick-picks: false
 
+  server-side-condition: 
+    type: Item is NULL
+    item: ENTHS
+
   security: 
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: true
@@ -254,8 +256,8 @@ page-items:
     submit-when-enter-pressed: true
 
   layout: 
-    sequence: 20
-    region: core # 7894257955527902
+    sequence: 30
+    region: Login # 7894257955527902
     slot: BODY
     alignment: Left
     start-new-layout: false
@@ -293,6 +295,10 @@ page-items:
   session-state: 
     storage: Per Request (Memory Only)
 
+  server-side-condition: 
+    type: Item is NULL
+    item: ENTHS
+
   security: 
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: true
@@ -312,8 +318,8 @@ page-items:
     use-defaults: true
 
   layout: 
-    sequence: 30
-    region: core # 7894257955527902
+    sequence: 40
+    region: Login # 7894257955527902
     slot: BODY
     alignment: Left
     start-new-layout: false
@@ -342,58 +348,8 @@ page-items:
     storage: Per Session (Persistent)
 
   server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: apex_authentication.persistent_cookies_enabled
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: AUTLG ====================================
-  id: 10866598706591407
-  identification: 
-    name: AUTLG
-    type: Display Only
-
-  label: 
-    label: AUTLG
-    alignment: Left
-
-  settings: 
-    format: Plain Text
-    based-on: Item Value
-    show-line-breaks: true
-    send-on-page-submit: true
-
-  layout: 
-    sequence: 40
-    region: core # 7894257955527902
-    slot: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating
-    template-options: 
-    - '#DEFAULT#'
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Request (Memory Only)
+    type: Item is NULL
+    item: ENTHS
 
   security: 
     session-state-protection: Unrestricted
@@ -409,7 +365,7 @@ buttons:
 
   layout: 
     sequence: 40
-    region: core # 7894257955527902
+    region: Login # 7894257955527902
     slot: NEXT
     start-new-layout: false
     start-new-row: true
@@ -430,6 +386,60 @@ buttons:
     warn-on-unsaved-changes: Do Not Check
 
 processes: 
+- # ====== Process: Login membro usuario senha =================
+  id: 3452532955645149
+  identification: 
+    name: Login membro usuario senha
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+      
+          --
+          prc_internal_login(:G_TENANT_CODE, :P9999_USERNAME, :P9999_PASSWORD, null, :G_ENTITY_ID);
+      
+          -- passa para sessao, para usar na selecao do perfil
+          :G_USERNAME := :P9999_USERNAME;
+          :G_PASSWORD := :P9999_PASSWORD;
+      
+      end;
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: Clear Session ==============================
+  id: 3453238583645156
+  identification: 
+    name: Clear Session
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+          :G_MEMBER_ID := NULL;
+          :G_ENTITY_ID := NULL;
+          :G_ENTITY_NAME := NULL;
+          :G_ETYPE_NAME := NULL;
+      end;
+      
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
 - # ====== Process: Login ======================================
   id: 7896201846527910
   identification: 
@@ -444,7 +454,7 @@ processes:
     procedure-or-function: LOGIN
 
   execution: 
-    sequence: 20
+    sequence: 30
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -463,8 +473,8 @@ processes:
       has-default: false
 
     value: 
-      type: Item
-      item: P9999_USERNAME
+      type: Static Value
+      static-value: SINDICATTO
 
     advanced: 
       display-sequence: 1
@@ -480,8 +490,8 @@ processes:
       has-default: false
 
     value: 
-      type: Item
-      item: P9999_PASSWORD
+      type: Static Value
+      static-value: 20bqns_AX
 
     advanced: 
       display-sequence: 2
@@ -559,10 +569,10 @@ processes:
     advanced: 
       display-sequence: 2
 
-- # ====== Process: --Get Username Cookie ======================
+- # ====== Process: Get Username Cookie ========================
   id: 7899672164527920
   identification: 
-    name: '--Get Username Cookie'
+    name: Get Username Cookie
     type: Execute Code
     execution-chain: None
 
@@ -574,12 +584,9 @@ processes:
       :P9999_REMEMBER := case when :P9999_USERNAME is not null then 'Y' end;
 
   execution: 
-    sequence: 40
+    sequence: 60
     point: Before Header
     run-process: Once Per Page Visit (default)
-
-  configuration: 
-    build-option: Commented Out # 7887430499527870
 
 - # ====== Process: Clear Page(s) Cache ========================
   id: 7900031598527921
@@ -592,17 +599,17 @@ processes:
     type: Clear all Items on the Current Page
 
   execution: 
-    sequence: 40
+    sequence: 50
     point: Processing
     run-process: Once Per Page Visit (default)
 
   error: 
     display-location: Inline in Notification
 
-- # ====== Process: Login_auto =================================
+- # ====== Process: Login auto if Entity Hash ==================
   id: 8538576253759702
   identification: 
-    name: Login_auto
+    name: Login auto if Entity Hash
     type: Invoke API
     execution-chain: None
 
@@ -618,9 +625,8 @@ processes:
     run-process: Once Per Page Visit (default)
 
   server-side-condition: 
-    type: Item = Value
-    item: AUTLG
-    value: 1
+    type: Item is NOT NULL
+    item: ENTHS
 
   parameters: 
   - # ====== Parameter: p_username ===============================
@@ -652,7 +658,7 @@ processes:
 
     value: 
       type: Static Value
-      static-value: Seixas!
+      static-value: 20bqns_AX
 
     advanced: 
       display-sequence: 20
@@ -673,10 +679,10 @@ processes:
     advanced: 
       display-sequence: 30
 
-- # ====== Process: prc ========================================
+- # ====== Process: Tenant Set =================================
   id: 10397291148592715
   identification: 
-    name: prc
+    name: Tenant Set
     type: Execute Code
     execution-chain: None
 
@@ -686,13 +692,13 @@ processes:
     pl/sql-code: |
       BEGIN
       
-          prc_set_config(:TNTCD, :ENTHS);
+          prc_set_tenant(:TNTCD, :ENTHS);
       
       END;
       
 
   execution: 
-    sequence: 20
+    sequence: 30
     point: Before Header
     run-process: Once Per Page Visit (default)
 
