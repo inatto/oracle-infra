@@ -33,6 +33,7 @@ BEGIN
         apex_util.set_session_state('G_MEMBER_ID', v_member_id);
         apex_util.set_session_state('G_ENTITY_NAME', v_entity_name);
         apex_util.set_session_state('G_ETYPE_NAME', v_etype_name);
+        apex_util.set_session_state('G_ETYPE_CODE', p_etype_code);
 
         -- sucesso com tipo
         prc_log_login(p_user, p_tenant_code, p_entity_id, p_etype_code, v_member_id, 1, '', NULL);
@@ -68,7 +69,7 @@ BEGIN
     WKSP_SINDICATTO.prc_internal_login(
         p_tenant_code => 'ASACLUB',
         p_user        => 'dev@inatto.com',
-        p_pass        => 'Aviao?!',
+        p_pass        => 'Aviao?!1',
         p_etype_code  => NULL,
         p_entity_id   => v_entity_id
     );

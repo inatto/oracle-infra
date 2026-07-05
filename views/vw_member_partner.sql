@@ -7,10 +7,9 @@ JOIN partnership p ON p.tenant_code = m.tenant_code
 -- TODO 20250723 rever
 -- JOIN role_etype r ON r.etype_code = m.etype_code AND r.role_code = 'partner'
 WHERE 1 = 1
-/
+;
 
 SELECT *
 FROM vw_member_partner
 ORDER BY id DESC
-/
-
+;

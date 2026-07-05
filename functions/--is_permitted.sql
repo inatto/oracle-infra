@@ -1,3 +1,6 @@
+DROP FUNCTION is_permitted;
+
+/*
 CREATE OR REPLACE FUNCTION is_permitted (
     p_page_alias IN varchar2
 , p_etype_code IN varchar2
@@ -34,3 +37,4 @@ END;
 SELECT is_permitted('processos', 'admin', 6921, 'is', 'admin', 'anpprev') FROM dual;
 SELECT is_permitted('relatorio-de-envios', 'admin', 10369, 'is', 'admin', 'asaclub') FROM dual;
 SELECT is_permitted('contents', null, :G_MEMBER_ID, 'is', 'admin') FROM dual;
+*/

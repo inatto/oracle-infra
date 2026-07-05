@@ -1,3 +1,5 @@
+DROP FUNCTION tenant_has_permission;
+/*
 CREATE OR REPLACE FUNCTION tenant_has_permission(p_page_alias IN VARCHAR2, p_tenant_code IN VARCHAR2 DEFAULT NULL) RETURN BOOLEAN IS
 
     v_dummy NUMBER;
@@ -33,4 +35,4 @@ BEGIN
     dbms_output.put_line(TO_CHAR(tenant_has_permission('cancelar-voucher', 'anpprev')));
 
 END;
-/
+/*/

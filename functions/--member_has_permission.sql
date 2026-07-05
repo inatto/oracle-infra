@@ -1,15 +1,15 @@
-CREATE OR REPLACE FUNCTION member_has_permission (
-    p_member_id IN NUMBER DEFAULT NULL,
-    p_what IN VARCHAR2 DEFAULT NULL,
-    p_value IN VARCHAR2 DEFAULT NULL
-) RETURN BOOLEAN IS
-    v_what VARCHAR2(50);
-    v_value VARCHAR2(50);
+DROP FUNCTION member_has_permission;
+
+CREATE OR REPLACE FUNCTION member_has_permission_TEMP (
+    p_member_id IN number DEFAULT NULL, p_what IN varchar2 DEFAULT NULL, p_value IN varchar2 DEFAULT NULL
+) RETURN boolean IS
+    v_what varchar2(50);
+    v_value varchar2(50);
     --
-    v_tenant_code VARCHAR2(50);
-    v_etype_code VARCHAR2(20);
-    v_name VARCHAR2(50);
-    v_is_dev SMALLINT;
+    v_tenant_code varchar2(50);
+    v_etype_code varchar2(20);
+    v_name varchar2(50);
+    v_is_dev smallint;
 
 BEGIN
 
@@ -19,22 +19,22 @@ BEGIN
     END IF;
 
     -- pega tenant e etype do member
-    SELECT LOWER(m.tenant_code), LOWER(m.etype_code), LOWER(e.name), is_dev
+    SELECT lower(m.tenant_code), lower(m.etype_code), lower(e.name), is_dev
     INTO v_tenant_code, v_etype_code, v_name, v_is_dev
     FROM member m
     LEFT JOIN entity e ON e.id = m.entity_id
-    WHERE m.id = NVL(p_member_id, -9999);
+    WHERE m.id = nvl(p_member_id, -9999);
 
     --
-    v_what := LOWER(p_what);
-    v_value := LOWER(p_value);
+    v_what := lower(p_what);
+    v_value := lower(p_value);
 
     --
     IF v_what = 'is' AND v_value = 'admin' THEN RETURN v_etype_code IN ('admin');
-    ELSIF v_what = 'is' AND v_value = 'dev' THEN RETURN v_etype_code IN ('admin') AND v_is_dev = 1;
+--     ELSIF v_what = 'is' AND v_value = 'dev' THEN RETURN v_etype_code IN ('admin') AND v_is_dev = 1;
         --
     ELSIF v_what = 'see' AND v_value = 'all_members' THEN RETURN v_etype_code IN ('admin');
-    ELSIF v_what = 'see' AND v_value = 'charts' THEN RETURN v_etype_code IN ('admin');
+        -- ELSIF v_what = 'see' AND v_value = 'charts' THEN RETURN v_etype_code IN ('admin');
     ELSIF v_what = 'see' AND v_value = 'clients' THEN RETURN v_etype_code IN ('admin');
     ELSIF v_what = 'see' AND v_value = 'members' THEN RETURN v_etype_code IN ('admin', 'staff', 'staff_view');
     ELSIF v_what = 'see' AND v_value = 'associates' THEN RETURN v_etype_code IN ('admin', 'staff', 'staff_view');
