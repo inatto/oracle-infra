@@ -1,5 +1,7 @@
 -- noinspection SqlConstantExpressionForFile
 
+
+
 SELECT *
 FROM content
 WHERE 1 = 1
@@ -50,3 +52,9 @@ SELECT dbtimezone
 FROM dual;
 
 ALTER SESSION SET TIME_ZONE = 'America/Sao_Paulo';
+
+alter table WKSP_SINDICATTO.CONTENT add (
+    SLUG varchar2(150),
+    SORT_ORDER number,
+    STATUS varchar2(30) default 'published'
+);

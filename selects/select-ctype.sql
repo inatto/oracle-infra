@@ -5,6 +5,7 @@ WHERE 1 = 1
 --      AND tenant_code = 'ASACLUB'
 --     AND active = 1
 -- and code = 'client'
+ORDER BY id
 ;
 
 
@@ -12,5 +13,5 @@ WHERE 1 = 1
 SELECT name, code
 FROM ctype
 WHERE 1 = 1
-        AND (LOWER(tenant_code) = LOWER(v('G_TENANT_CODE')))
+    AND (lower(tenant_code) = lower(v('G_TENANT_CODE')))
 ;

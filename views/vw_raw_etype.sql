@@ -12,6 +12,7 @@ FROM etype t
 WHERE 1 = 1
 ;
 
-SELECT * FROM vw_raw_etype
-order by tenant_code
+SELECT *
+FROM vw_raw_etype
+ORDER BY tenant_code
 ;
