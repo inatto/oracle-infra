@@ -7,7 +7,7 @@ CREATE OR REPLACE FUNCTION has_permission (
 ) RETURN boolean IS
 
     l_tenant_code varchar2(50);
-    l_etype_code varchar2(50);
+    l_etype_code varchar2(100);
     l_page_alias varchar2(100);
     l_action_code varchar2(50);
     l_is_dev number;
@@ -40,11 +40,12 @@ BEGIN
     SELECT count(*)
     INTO l_count
     FROM tenant_permission tp
-    JOIN etype_permission ep ON lower(ep.tenant_code) = lower(tp.tenant_code) AND lower(ep.page_alias) = lower(tp.page_alias)
+    JOIN etype e ON lower(e.tenant_code) = lower(tp.tenant_code) AND lower(e.code) = l_etype_code
+    JOIN etype_permission ep ON lower(ep.tenant_code) = lower(tp.tenant_code) AND lower(ep.page_alias) = lower(tp.page_alias) AND lower(ep.etype_code) = lower(e.code)
     WHERE lower(tp.tenant_code) = l_tenant_code
         AND lower(tp.page_alias) = l_page_alias
-        AND lower(ep.etype_code) = l_etype_code
         AND lower(ep.action_code) = l_action_code
+        AND (nvl(e.active, 0) = 1)
         AND (nvl(ep.requires_dev, 0) = 0 OR l_is_dev = 1)
         AND (nvl(ep.active, 0) = 1);
 
