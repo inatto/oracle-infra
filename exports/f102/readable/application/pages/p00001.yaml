@@ -37,10 +37,11 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Dashboard ===================================
+- # ====== Region: dashboard-static-content ====================
   id: 2008111816775548
   identification: 
-    name: Dashboard
+    name: dashboard-static-content
+    title: Dashboard
     type: Static Content
 
   layout: 
@@ -70,7 +71,7 @@ regions:
   server-side-condition: 
     type: Expression
     language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'see', 'charts')"
+    pl/sql-expression: has_permission('dashboard-static-content')
 
   customization: 
     customizable: Not Customizable By End Users
@@ -527,7 +528,7 @@ regions:
 
   layout: 
     sequence: 40
-    parent-region: Dashboard # 2008111816775548
+    parent-region: dashboard-static-content # 2008111816775548
     slot: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -679,7 +680,7 @@ regions:
 
   layout: 
     sequence: 10
-    parent-region: Dashboard # 2008111816775548
+    parent-region: dashboard-static-content # 2008111816775548
     slot: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -703,9 +704,6 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
-
-  security: 
-    authorization-scheme: Can see admin members # 2697717523981530
 
   customization: 
     customizable: Not Customizable By End Users

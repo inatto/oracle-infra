@@ -3,7 +3,7 @@
 id: 2
 identification: 
   name: Entidades parceiras
-  alias: PARTNER-MEMBERS
+  alias: PARTNER-MEMBERS-PAGE
   title: Entidades parceiras
 
 appearance: 
@@ -20,6 +20,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
+  authorization-scheme: Has Page Access Permission 20260704-2341 # 68741316634876544
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -66,11 +67,6 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
-
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'see', 'all_members')"
 
   customization: 
     customizable: Not Customizable By End Users
@@ -160,11 +156,6 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
-
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'see', 'all_members')"
 
   customization: 
     customizable: Not Customizable By End Users
@@ -258,47 +249,6 @@ regions:
 
     enable-users-to: 
       sort: false
-
-  - # ====== Column: Link ========================================
-    id: 2069106280934648
-    identification: 
-      column-name: Link
-      type: Link
-
-    heading: 
-      alignment: start
-
-    layout: 
-      sequence: 10
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    link: 
-      target: 
-        url: 'f?p=&APP_ID.:9999:&SESSION.::&DEBUG.::TNTCD,ENTHS:&TENANT_CODE.,&BR_CPF_HASH.'
-        page: 9999 # Login Page
-        values: 
-          tntcd: '&TENANT_CODE.'
-          enths: '&BR_CPF_HASH.'
-
-      link-text: Acessar
-
-    source: 
-      type: None
-
-    enable-users-to: 
-      hide: true
-
-    server-side-condition: 
-      type: Expression
-      language: PL/SQL
-      pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'is', 'dev')"
-
-    security: 
-      escape-special-characters: true
 
   - # ====== Column: BR_CPF ======================================
     id: 2459203831665948
@@ -1208,9 +1158,6 @@ buttons:
         p8_member_etype_code: associate
 
     warn-on-unsaved-changes: Do Not Check
-
-  security: 
-    authorization-scheme: Administration Rights # 7893375059527895
 
 dynamic-actions: 
 - # ====== Dynamic Action: New =================================

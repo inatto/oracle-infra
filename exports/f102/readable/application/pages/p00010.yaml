@@ -3,7 +3,7 @@
 id: 10
 identification: 
   name: Campanhas de e-mail
-  alias: CAMPANHAS-DE-E-MAIL
+  alias: EMAIL-CAMPAIGN-PAGE
   title: Campanhas de e-mail
 
 appearance: 
@@ -30,7 +30,7 @@ javascript:
     
 
 security: 
-  authorization-scheme: Can see email campaigns # 2695692892735719
+  authorization-scheme: Has Page Access Permission 20260704-2341 # 68741316634876544
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum

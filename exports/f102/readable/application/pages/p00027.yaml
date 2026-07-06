@@ -1,10 +1,10 @@
 ---
-# ====== Page: Conteúdo ======================================
+# ====== Page: Conteúdos =====================================
 id: 27
 identification: 
-  name: Conteúdo
-  alias: CONTENTS
-  title: Conteúdo
+  name: Conteúdos
+  alias: CONTENTS-PAGE
+  title: Conteúdos
 
 appearance: 
   page-mode: Normal
@@ -20,6 +20,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
+  authorization-scheme: Has Page Access Permission 20260704-2341 # 68741316634876544
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum

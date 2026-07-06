@@ -1,10 +1,10 @@
 ---
-# ====== Page: Membros (Admin) ===============================
+# ====== Page: All Members ===================================
 id: 22
 identification: 
-  name: Membros (Admin)
-  alias: MEMBROS-ADMIN
-  title: Membros (Admin)
+  name: All Members
+  alias: ALL-MEMBERS-PAGE
+  title: All Members
 
 appearance: 
   page-mode: Normal
@@ -20,7 +20,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
-  authorization-scheme: Is Sindicatto # 67716688941492265
+  authorization-scheme: Has Page Access Permission 20260704-2341 # 68741316634876544
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -225,10 +225,10 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: Acessar =====================================
+  - # ====== Column: open-login-direto ===========================
     id: 83826732101096374
     identification: 
-      column-name: Acessar
+      column-name: open-login-direto
       type: Link
 
     heading: 
@@ -261,7 +261,7 @@ regions:
     server-side-condition: 
       type: Expression
       language: PL/SQL
-      pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'is', 'dev')"
+      pl/sql-expression: has_permission('open-login-direto', 'all-members-page')
 
     security: 
       escape-special-characters: true
@@ -300,10 +300,10 @@ regions:
     enable-users-to: 
       sort: false
 
-  - # ====== Column: Link Processos ==============================
+  - # ====== Column: open-processos-br-individuais ===============
     id: 84863279934550873
     identification: 
-      column-name: Link Processos
+      column-name: open-processos-br-individuais
       type: Link
 
     heading: 
@@ -334,8 +334,12 @@ regions:
     enable-users-to: 
       hide: true
 
+    server-side-condition: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: has_permission('open-processos-br-individuais', 'all-members-page')
+
     security: 
-      authorization-scheme: Can see processos # 2706378458135617
       escape-special-characters: true
 
   - # ====== Column: ..BR_CPF ====================================
@@ -646,10 +650,10 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: Edit ========================================
+  - # ====== Column: open-editar-membro ==========================
     id: 103713286415175821
     identification: 
-      column-name: Edit
+      column-name: open-editar-membro
       type: Display Only
 
     heading: 
@@ -689,7 +693,7 @@ regions:
     server-side-condition: 
       type: Expression
       language: PL/SQL
-      pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'edit', 'members')"
+      pl/sql-expression: has_permission('open-editar-membro', 'all-members-page')
 
   - # ====== Column: TENANT_ID ===================================
     id: 104522124261023196
@@ -1472,9 +1476,6 @@ buttons:
         p19_etype_code: '&P22_ETYPE_CODE.'
 
     warn-on-unsaved-changes: Do Not Check
-
-  security: 
-    authorization-scheme: Not ETYPE read only # 1864139113886815
 
 dynamic-actions: 
 - # ====== Dynamic Action: dialog closed =======================

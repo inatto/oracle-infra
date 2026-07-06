@@ -246,10 +246,10 @@ buttons:
     warn-on-unsaved-changes: Do Not Check
 
 dynamic-actions: 
-- # ====== Dynamic Action: New =================================
+- # ====== Dynamic Action: P9998_ETYPE =========================
   id: 3456216476645186
   identification: 
-    name: New
+    name: P9998_ETYPE
 
   execution: 
     sequence: 10
@@ -274,7 +274,7 @@ dynamic-actions:
 
     execution: 
       sequence: 10
-      event: New # 3456216476645186
+      event: P9998_ETYPE # 3456216476645186
       fire-when-event-result-is: True
       fire-on-initialization: false
 

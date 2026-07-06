@@ -219,24 +219,24 @@
     link: 
       target: 
         url: 'f?p=&APP_ID.:27:&APP_SESSION.::&DEBUG.:::'
-        page: 27 # Conteúdo
+        page: 27 # Conteúdos
 
-  - # ====== Entry: Membros Admin ================================
+  - # ====== Entry: Todos os membros =============================
     id: 67717952442516160
     identification: 
-      name: Membros Admin
+      name: Todos os membros
       page-number: 22
 
     execution: 
       sequence: 10
 
     appearance: 
-      long-name: Membros Admin
+      long-name: Todos os membros
 
     link: 
       target: 
         url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.:::'
-        page: 22 # Membros (Admin)
+        page: 22 # All Members
 
   - # ====== Entry: Cadastro de Membro (Admin) ===================
     id: 67745356601810136

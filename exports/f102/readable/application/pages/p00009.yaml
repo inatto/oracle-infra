@@ -3,7 +3,7 @@
 id: 9
 identification: 
   name: Cancelar voucher
-  alias: CANCELAR-VOUCHER
+  alias: CANCEL-VOUCHER-PAGE
   title: Cancelar voucher
 
 appearance: 
@@ -20,6 +20,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
+  authorization-scheme: Has Page Access Permission 20260704-2341 # 68741316634876544
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -66,11 +67,6 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
-
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'cancel', 'vouchers')"
 
   customization: 
     customizable: Not Customizable By End Users
@@ -176,11 +172,6 @@ page-items:
   quick-picks: 
     show-quick-picks: false
 
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'cancel', 'vouchers')"
-
   security: 
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: true
@@ -231,11 +222,6 @@ page-items:
   session-state: 
     storage: Per Session (Persistent)
 
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'cancel', 'vouchers')"
-
   security: 
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: true
@@ -277,11 +263,6 @@ buttons:
   confirmation: 
     message: Confirma cancelamento do voucher?
     style: Default
-
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "member_has_permission(:G_MEMBER_ID, 'cancel', 'vouchers')"
 
 processes: 
 - # ====== Process: prc_http_voucher_cancel ====================

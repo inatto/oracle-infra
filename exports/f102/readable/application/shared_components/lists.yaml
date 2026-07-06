@@ -5,7 +5,7 @@
     name: Navigation Menu
 
   subscription: 
-    version-number: 47035050903915
+    version-number: 47036033920644
 
   source: 
     type: Static Values
@@ -17,7 +17,7 @@
       label: Cadastros parceiros
 
     layout: 
-      sequence: 51
+      sequence: 30
 
     is-current: 
       type: Pages
@@ -35,8 +35,15 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see partner-members # 2705404865117541
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+            p_action_code => 'access_page'
+            ,p_page_alias => 'partner-members-page'
+        );
+        
 
   - # ====== Entry: Financeiro ===================================
     id: 2138383978607391
@@ -44,7 +51,7 @@
       label: Financeiro
 
     layout: 
-      sequence: 180
+      sequence: 210
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -63,8 +70,16 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see financial members # 2703462988075505
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'financial'
+        );
+        
 
   - # ====== Entry: Diretores ====================================
     id: 2139228584618499
@@ -72,7 +87,7 @@
       label: Diretores
 
     layout: 
-      sequence: 190
+      sequence: 220
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -91,8 +106,16 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see director members # 2703961167080160
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'director'
+        );
+        
 
   - # ====== Entry: Autores do processo ==========================
     id: 2240154843141535
@@ -100,7 +123,7 @@
       label: Autores do processo
 
     layout: 
-      sequence: 230
+      sequence: 110
       parent-entry: Processos # 2298142446255171
 
     is-current: 
@@ -119,9 +142,6 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see processos # 2706378458135617
-
   - # ====== Entry: Processos ====================================
     id: 2298142446255171
     label: 
@@ -131,7 +151,7 @@
       image/icon-css-classes: fa-solid fa-gavel
 
     layout: 
-      sequence: 210
+      sequence: 70
 
     is-current: 
       type: Target Page
@@ -139,8 +159,10 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see processos # 2706378458135617
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: RETURN has_permission('access_menu', 'list-entry-processos');
 
   - # ====== Entry: Processos ====================================
     id: 2299872579459884
@@ -148,7 +170,7 @@
       label: Processos
 
     layout: 
-      sequence: 220
+      sequence: 100
       parent-entry: Processos # 2298142446255171
 
     is-current: 
@@ -167,19 +189,21 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see processos # 2706378458135617
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: RETURN has_permission('access_page', 'processos-page');
 
-  - # ====== Entry: Administration ===============================
+  - # ====== Entry: --Administration =============================
     id: 8118017641679801
     label: 
-      label: Administration
+      label: '--Administration'
 
     icon: 
       image/icon-css-classes: fa-user-wrench
 
     layout: 
-      sequence: 60
+      sequence: 40
 
     is-current: 
       type: Pages
@@ -200,6 +224,9 @@
     server-side-condition: 
       type: Never
 
+    configuration: 
+      build-option: Commented Out # 7887430499527870
+
   - # ====== Entry: Campanhas de e-mail ==========================
     id: 10342816750531198
     label: 
@@ -209,7 +236,7 @@
       image/icon-css-classes: fa-solid fa-at
 
     layout: 
-      sequence: 40
+      sequence: 20
 
     is-current: 
       type: Pages
@@ -227,8 +254,15 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see email campaigns # 2695692892735719
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+            p_action_code => 'access_page'
+            ,p_page_alias => 'email-campaign-page'
+        );
+        
 
   - # ====== Entry: Clientes =====================================
     id: 11005475274020042
@@ -236,7 +270,7 @@
       label: Clientes
 
     layout: 
-      sequence: 122
+      sequence: 180
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -259,12 +293,12 @@
       type: Function Body
       language: PL/SQL
       pl/sql-function-body: |
-        begin
-        return is_permitted('members', 'client', :G_MEMBER_ID, 'see', 'clients');
-        end;
-
-    security: 
-      authorization-scheme: Can see associate members # 2700354053043917
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'client'
+        );
+        
 
   - # ====== Entry: Cadastros &G_TENANT_CODE. ====================
     id: 11898823060270196
@@ -285,8 +319,10 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see members # 2696930766766566
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: RETURN has_permission('access_menu', 'list-entry-cadastros');
 
   - # ====== Entry: Associados ===================================
     id: 11944535000042252
@@ -294,7 +330,7 @@
       label: Associados
 
     layout: 
-      sequence: 90
+      sequence: 140
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -313,8 +349,16 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see associate members # 2700354053043917
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'associate'
+        );
+        
 
   - # ====== Entry: Administradores ==============================
     id: 11954430897112880
@@ -322,7 +366,7 @@
       label: Administradores
 
     layout: 
-      sequence: 70
+      sequence: 120
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -341,8 +385,15 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see admin members # 2697717523981530
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission
+            (p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'admin');
+        
 
   - # ====== Entry: Analistas de convênios =======================
     id: 11954744086116241
@@ -350,7 +401,7 @@
       label: Analistas de convênios
 
     layout: 
-      sequence: 80
+      sequence: 130
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -369,8 +420,15 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see agreement_analyst members # 2699649092022767
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission
+            (p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'agreement_analyst');
+        
 
   - # ====== Entry: Atendentes ===================================
     id: 11955083070125190
@@ -378,7 +436,7 @@
       label: Atendentes
 
     layout: 
-      sequence: 100
+      sequence: 150
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -397,8 +455,16 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see customer_support members # 2700909217050968
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'customer_support'
+        );
+        
 
   - # ====== Entry: Funcionários =================================
     id: 11955365311127502
@@ -406,7 +472,7 @@
       label: Funcionários
 
     layout: 
-      sequence: 120
+      sequence: 170
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -425,8 +491,16 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see staff members # 2701946728062477
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'staff'
+        );
+        
 
   - # ====== Entry: Funcionários (só leitura) ====================
     id: 11955616165129404
@@ -434,7 +508,7 @@
       label: Funcionários (só leitura)
 
     layout: 
-      sequence: 140
+      sequence: 190
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -453,8 +527,16 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see staff_view members # 2702409797067678
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'staff_view'
+        );
+        
 
   - # ====== Entry: Marketing ====================================
     id: 11955907261131764
@@ -462,7 +544,7 @@
       label: Marketing
 
     layout: 
-      sequence: 150
+      sequence: 200
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -481,8 +563,16 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see marketing members # 2702990905071516
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'marketing'
+        );
+        
 
   - # ====== Entry: Atendimento VIP ==============================
     id: 11956257060134620
@@ -490,7 +580,7 @@
       label: Atendimento VIP
 
     layout: 
-      sequence: 110
+      sequence: 160
       parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
@@ -509,8 +599,16 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see vip_lounge_service members # 2701483931057571
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'vip_lounge_service'
+        );
+        
 
   - # ====== Entry: Relatório de envios ==========================
     id: 12809978929519145
@@ -521,7 +619,7 @@
       image/icon-css-classes: fa-table
 
     layout: 
-      sequence: 240
+      sequence: 80
 
     is-current: 
       type: Pages
@@ -539,11 +637,15 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can see email campaigns # 2695692892735719
-
-    configuration: 
-      build-option: Commented Out # 7887430499527870
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+            p_action_code => 'access_page'
+            ,p_page_alias => 'email-delivery-report-page'
+        );
+        
 
   - # ====== Entry: Cancelar voucher =============================
     id: 13256711512642987
@@ -554,7 +656,7 @@
       image/icon-css-classes: fa-file-o
 
     layout: 
-      sequence: 160
+      sequence: 60
 
     is-current: 
       type: Pages
@@ -572,8 +674,15 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Can cancel any voucher # 2705838794126891
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'cancel-voucher-page'
+        );
+        
 
   - # ====== Entry: E-mails ======================================
     id: 53018262583034266
@@ -584,7 +693,7 @@
       image/icon-css-classes: fa-table-pointer
 
     layout: 
-      sequence: 260
+      sequence: 230
       parent-entry: Admin # 67718865060521241
 
     is-current: 
@@ -604,19 +713,26 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Administration Rights # 7893375059527895
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+            p_action_code => 'access_page'
+            ,p_page_alias => 'email-table-page'
+        );
+        
 
-  - # ====== Entry: Conteúdo =====================================
+  - # ====== Entry: Conteúdos ====================================
     id: 66911599616851518
     label: 
-      label: Conteúdo
+      label: Conteúdos
 
     icon: 
       image/icon-css-classes: fa-table-pointer
 
     layout: 
-      sequence: 270
+      sequence: 90
 
     is-current: 
       type: Pages
@@ -626,8 +742,8 @@
 
     link: 
       target: 
-        url: 'f?p=&APP_ID.:27:&APP_SESSION.::&DEBUG.:::'
-        page: 27 # Conteúdo
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::::'
+        page: 27 # Conteúdos
 
     click-counting: 
       count-clicks: false
@@ -635,13 +751,23 @@
     user-defined-attributes: 
       translatable: false
 
-  - # ====== Entry: Membros Admin ================================
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission
+            (p_action_code => 'access_page'
+            ,p_page_alias => 'contents-page'
+        );
+        
+
+  - # ====== Entry: Todos os membros =============================
     id: 67701986833471392
     label: 
-      label: Membros Admin
+      label: Todos os membros
 
     layout: 
-      sequence: 280
+      sequence: 240
       parent-entry: Admin # 67718865060521241
 
     is-current: 
@@ -652,7 +778,7 @@
     link: 
       target: 
         url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.::::'
-        page: 22 # Membros (Admin)
+        page: 22 # All Members
 
     click-counting: 
       count-clicks: false
@@ -660,8 +786,15 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Is Sindicatto # 67716688941492265
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+            p_action_code => 'access_page'
+            ,p_page_alias => 'all-members-page'
+        );
+        
 
   - # ====== Entry: Admin ========================================
     id: 67718865060521241
@@ -669,7 +802,7 @@
       label: Admin
 
     layout: 
-      sequence: 1
+      sequence: 10
 
     is-current: 
       type: Target Page
@@ -677,8 +810,10 @@
     user-defined-attributes: 
       translatable: false
 
-    security: 
-      authorization-scheme: Is Sindicatto # 67716688941492265
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: return has_permission('access_menu', 'list-entry-admin');
 
 - # ====== List: Navigation Bar ================================
   id: 7889730659527882

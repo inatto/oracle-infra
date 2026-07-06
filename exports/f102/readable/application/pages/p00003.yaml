@@ -20,7 +20,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
-  authorization-scheme: is_teste_processos # 2689867272178755
+  authorization-scheme: Has Page Access Permission 20260704-2341 # 68741316634876544
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum

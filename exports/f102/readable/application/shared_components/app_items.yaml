@@ -161,3 +161,16 @@
   subscription: 
     version-number: 41722096570751
 
+- # ====== Application Item: G_ETYPE_CODE ======================
+  id: 68737362789736135
+  identification: 
+    name: G_ETYPE_CODE
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 47035952413904
+

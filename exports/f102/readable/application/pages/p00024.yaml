@@ -3,7 +3,7 @@
 id: 24
 identification: 
   name: Mail Table
-  alias: MAIL-TABLE
+  alias: EMAIL-TABLE-PAGE
   title: E-mails
 
 appearance: 
@@ -20,6 +20,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
+  authorization-scheme: Has Page Access Permission 20260704-2341 # 68741316634876544
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -116,6 +117,9 @@ regions:
 
   customization: 
     customizable: Not Customizable By End Users
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
 
   attributes: 
     id: 53019139747034252

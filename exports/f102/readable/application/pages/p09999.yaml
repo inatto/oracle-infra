@@ -428,10 +428,15 @@ processes:
     language: PL/SQL
     pl/sql-code: |
       begin
+      
+          :G_USERNAME := NULL;
+          :G_PASSWORD := NULL;
           :G_MEMBER_ID := NULL;
           :G_ENTITY_ID := NULL;
           :G_ENTITY_NAME := NULL;
           :G_ETYPE_NAME := NULL;
+          :G_ETYPE_CODE := NULL;
+          
       end;
       
 
@@ -679,10 +684,10 @@ processes:
     advanced: 
       display-sequence: 30
 
-- # ====== Process: Tenant Set =================================
+- # ====== Process: Login auto - Tenant Set ====================
   id: 10397291148592715
   identification: 
-    name: Tenant Set
+    name: Login auto - Tenant Set
     type: Execute Code
     execution-chain: None
 
@@ -701,4 +706,8 @@ processes:
     sequence: 30
     point: Before Header
     run-process: Once Per Page Visit (default)
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: ENTHS
 
