@@ -130,7 +130,7 @@ working-copy:
   name: Core WC
 
 subscription: 
-  version-number: 47036035110668
+  version-number: 47036113037628
 
 substitutions: 
 - # ====== Substitution: APP_NAME ==============================

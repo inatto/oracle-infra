@@ -3,7 +3,7 @@
 id: 12
 identification: 
   name: Processos
-  alias: PROCESSOS
+  alias: PROCESSOS-PAGE
   title: Processos
 
 appearance: 
@@ -20,6 +20,7 @@ navigation:
   warn-on-unsaved-changes: false
 
 security: 
+  authorization-scheme: Has Page Access Permission 20260704-2341 # 68741316634876544
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum

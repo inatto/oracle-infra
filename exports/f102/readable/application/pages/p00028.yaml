@@ -572,13 +572,13 @@ page-items:
     label-column-span: Page Template Default
 
   appearance: 
-    template: Optional - Floating
+    template: Required - Floating
     template-options: 
     - '#DEFAULT#'
     height: 1
 
   validation: 
-    value-required: false
+    value-required: true
 
   list-of-values: 
     type: SQL Query
@@ -587,6 +587,7 @@ page-items:
       FROM ctype
       WHERE 1 = 1
               AND (LOWER(tenant_code) = LOWER(v('G_TENANT_CODE')))
+              and code = 'news'
       ;
     display-extra-values: true
     display-null-value: true
@@ -600,6 +601,10 @@ page-items:
     data-type: VARCHAR2
     query-only: false
     primary-key: false
+
+  default: 
+    type: Static
+    static-value: news
 
   session-state: 
     storage: Per Request (Memory Only)
@@ -642,12 +647,12 @@ page-items:
     label-column-span: Page Template Default
 
   appearance: 
-    template: Optional - Floating
+    template: Required - Floating
     template-options: 
     - '#DEFAULT#'
 
   validation: 
-    value-required: false
+    value-required: true
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -698,13 +703,13 @@ page-items:
     label-column-span: Page Template Default
 
   appearance: 
-    template: Optional - Floating
+    template: Required - Floating
     template-options: 
     - '#DEFAULT#'
     width: 60
 
   validation: 
-    value-required: false
+    value-required: true
     maximum-length: 1000
 
   advanced: 

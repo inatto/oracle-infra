@@ -684,10 +684,10 @@ processes:
     advanced: 
       display-sequence: 30
 
-- # ====== Process: Login auto - Tenant Set ====================
+- # ====== Process: Tenant Set =================================
   id: 10397291148592715
   identification: 
-    name: Login auto - Tenant Set
+    name: Tenant Set
     type: Execute Code
     execution-chain: None
 
@@ -697,6 +697,7 @@ processes:
     pl/sql-code: |
       BEGIN
       
+          -- TODO 20260705-2144 - Separar tenant de loginauto hash (e login auto com id membro??)
           prc_set_tenant(:TNTCD, :ENTHS);
       
       END;
@@ -706,8 +707,4 @@ processes:
     sequence: 30
     point: Before Header
     run-process: Once Per Page Visit (default)
-
-  server-side-condition: 
-    type: Item is NOT NULL
-    item: ENTHS
 

@@ -178,10 +178,10 @@ regions:
         alias: 85272
 
   columns: 
-  - # ====== Column: Entity ID ===================================
+  - # ====== Column: ID Entity ===================================
     id: 43805306664580562
     identification: 
-      column-name: Entity ID
+      column-name: ID Entity
       type: Display Only
 
     heading: 
@@ -736,7 +736,7 @@ regions:
       type: Text Field
 
     heading: 
-      heading: Org
+      heading: Org Code
       alignment: start
 
     settings: 

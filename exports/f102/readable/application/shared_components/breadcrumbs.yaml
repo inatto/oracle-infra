@@ -207,10 +207,10 @@
         url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.:::'
         page: 24 # Mail Table
 
-  - # ====== Entry: Conteúdo =====================================
+  - # ====== Entry: Conteúdos ====================================
     id: 66923766594851555
     identification: 
-      name: Conteúdo
+      name: Conteúdos
       page-number: 27
 
     execution: 
@@ -218,7 +218,7 @@
 
     link: 
       target: 
-        url: 'f?p=&APP_ID.:27:&APP_SESSION.::&DEBUG.:::'
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.:::'
         page: 27 # Conteúdos
 
   - # ====== Entry: Todos os membros =============================

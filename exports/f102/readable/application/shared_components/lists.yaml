@@ -5,19 +5,20 @@
     name: Navigation Menu
 
   subscription: 
-    version-number: 47036033920644
+    version-number: 47036051273049
 
   source: 
     type: Static Values
 
   entries: 
-  - # ====== Entry: Cadastros parceiros ==========================
+  - # ====== Entry: --Cadastros parceiros ========================
     id: 1029649119773714
     label: 
-      label: Cadastros parceiros
+      label: '--Cadastros parceiros'
 
     layout: 
       sequence: 30
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
 
     is-current: 
       type: Pages
@@ -44,6 +45,9 @@
             ,p_page_alias => 'partner-members-page'
         );
         
+
+    configuration: 
+      build-option: Commented Out # 7887430499527870
 
   - # ====== Entry: Financeiro ===================================
     id: 2138383978607391
@@ -124,7 +128,7 @@
 
     layout: 
       sequence: 110
-      parent-entry: Processos # 2298142446255171
+      parent-entry: Jurídico # 2298142446255171
 
     is-current: 
       type: Pages
@@ -142,10 +146,10 @@
     user-defined-attributes: 
       translatable: false
 
-  - # ====== Entry: Processos ====================================
+  - # ====== Entry: Jurídico =====================================
     id: 2298142446255171
     label: 
-      label: Processos
+      label: Jurídico
 
     icon: 
       image/icon-css-classes: fa-solid fa-gavel
@@ -162,7 +166,7 @@
     server-side-condition: 
       type: Function Body
       language: PL/SQL
-      pl/sql-function-body: RETURN has_permission('access_menu', 'list-entry-processos');
+      pl/sql-function-body: RETURN has_permission('view_menu', 'list-entry-juridico');
 
   - # ====== Entry: Processos ====================================
     id: 2299872579459884
@@ -171,7 +175,7 @@
 
     layout: 
       sequence: 100
-      parent-entry: Processos # 2298142446255171
+      parent-entry: Jurídico # 2298142446255171
 
     is-current: 
       type: Pages
@@ -188,11 +192,6 @@
 
     user-defined-attributes: 
       translatable: false
-
-    server-side-condition: 
-      type: Function Body
-      language: PL/SQL
-      pl/sql-function-body: RETURN has_permission('access_page', 'processos-page');
 
   - # ====== Entry: --Administration =============================
     id: 8118017641679801
@@ -232,11 +231,9 @@
     label: 
       label: Campanhas de e-mail
 
-    icon: 
-      image/icon-css-classes: fa-solid fa-at
-
     layout: 
       sequence: 20
+      parent-entry: Marketing # 68818056301212906
 
     is-current: 
       type: Pages
@@ -574,10 +571,10 @@
         );
         
 
-  - # ====== Entry: Atendimento VIP ==============================
+  - # ====== Entry: Atendentes Sala VIP ==========================
     id: 11956257060134620
     label: 
-      label: Atendimento VIP
+      label: Atendentes Sala VIP
 
     layout: 
       sequence: 160
@@ -615,11 +612,9 @@
     label: 
       label: Relatório de envios
 
-    icon: 
-      image/icon-css-classes: fa-table
-
     layout: 
       sequence: 80
+      parent-entry: Marketing # 68818056301212906
 
     is-current: 
       type: Pages
@@ -652,11 +647,9 @@
     label: 
       label: Cancelar voucher
 
-    icon: 
-      image/icon-css-classes: fa-file-o
-
     layout: 
       sequence: 60
+      parent-entry: Vouchers # 68819531847236631
 
     is-current: 
       type: Pages
@@ -688,9 +681,6 @@
     id: 53018262583034266
     label: 
       label: E-mails
-
-    icon: 
-      image/icon-css-classes: fa-table-pointer
 
     layout: 
       sequence: 230
@@ -728,11 +718,9 @@
     label: 
       label: Conteúdos
 
-    icon: 
-      image/icon-css-classes: fa-table-pointer
-
     layout: 
       sequence: 90
+      parent-entry: Conteúdo # 68819049124226464
 
     is-current: 
       type: Pages
@@ -814,6 +802,108 @@
       type: Function Body
       language: PL/SQL
       pl/sql-function-body: return has_permission('access_menu', 'list-entry-admin');
+
+  - # ====== Entry: Marketing ====================================
+    id: 68818056301212906
+    label: 
+      label: Marketing
+
+    icon: 
+      image/icon-css-classes: fa-bullhorn
+
+    layout: 
+      sequence: 250
+
+    is-current: 
+      type: Target Page
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: RETURN has_permission('view_menu', 'list-entry-marketing');
+
+  - # ====== Entry: Conteúdo =====================================
+    id: 68819049124226464
+    label: 
+      label: Conteúdo
+
+    icon: 
+      image/icon-css-classes: fa-newspaper-o
+
+    layout: 
+      sequence: 260
+
+    is-current: 
+      type: Target Page
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: RETURN has_permission('view_menu', 'list-entry-content');
+
+  - # ====== Entry: Vouchers =====================================
+    id: 68819531847236631
+    label: 
+      label: Vouchers
+
+    icon: 
+      image/icon-css-classes: fa-ticket
+
+    layout: 
+      sequence: 270
+
+    is-current: 
+      type: Target Page
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: RETURN has_permission('view_menu', 'list-entry-vouchers');
+
+  - # ====== Entry: Jurídico =====================================
+    id: 68845655236589576
+    label: 
+      label: Jurídico
+
+    layout: 
+      sequence: 280
+      parent-entry: Cadastros &G_TENANT_CODE. # 11898823060270196
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::P6ETH:3626564121:'
+        page: 6 # Membros
+        values: 
+          p6eth: 3626564121
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        return has_permission(
+             p_action_code => 'access_page'
+            ,p_page_alias => 'members-page'
+            ,p_target_etype_code => 'juridico'
+        );
+        
 
 - # ====== List: Navigation Bar ================================
   id: 7889730659527882

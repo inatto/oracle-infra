@@ -37,6 +37,45 @@ server-cache:
   caching: Disabled
 
 regions: 
+- # ====== Region: Buttons =====================================
+  id: 68729458983497251
+  identification: 
+    name: Buttons
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region-orderBy--end
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
 - # ====== Region: ENTITY Hidden ===============================
   id: 83007655946721792
   identification: 
@@ -44,7 +83,7 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 10
+    sequence: 100
     parent-region: ENTITY Form # 91441688352055715
     slot: BODY
     start-new-layout: false
@@ -81,6 +120,7 @@ regions:
   id: 83403707766263117
   identification: 
     name: MEMBER Form
+    title: Member Form
     type: Form
 
   source: 
@@ -101,10 +141,11 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Standard
+    template: Collapsible
     template-options: 
     - '#DEFAULT#'
-    - t-Region--removeHeader js-removeLandmark
+    - js-useLocalStorage
+    - is-expanded
     - t-Region--scrollBody
     render-components: Above Content
 
@@ -130,7 +171,7 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 10
+    sequence: 70
     parent-region: MEMBER Form # 83403707766263117
     slot: BODY
     start-new-layout: false
@@ -168,6 +209,7 @@ regions:
   id: 91441688352055715
   identification: 
     name: ENTITY Form
+    title: Entity Form
     type: Form
 
   source: 
@@ -180,7 +222,7 @@ regions:
     - P26_ENTITY_ID
 
   layout: 
-    sequence: 40
+    sequence: 20
     parent-region: No Parent
     slot: BODY
     start-new-layout: false
@@ -190,10 +232,11 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Standard
+    template: Collapsible
     template-options: 
     - '#DEFAULT#'
-    - t-Region--removeHeader js-removeLandmark
+    - js-useLocalStorage
+    - is-expanded
     - t-Region--scrollBody
     render-components: Above Content
 
@@ -226,7 +269,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Member Tenant Code
+    label: Tenant (Org)
     alignment: Left
 
   settings: 
@@ -244,7 +287,7 @@ page-items:
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 2
     label-column-span: Page Template Default
 
   appearance: 
@@ -259,7 +302,7 @@ page-items:
   list-of-values: 
     type: SQL Query
     sql-query: |
-      SELECT code, code display
+      SELECT upper(code), code display
       FROM tenant
       WHERE 1 = 1
         and active = 1
@@ -283,6 +326,61 @@ page-items:
 
   quick-picks: 
     show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_MEMBER_ACTIVE ========================
+  id: 68730707126497263
+  identification: 
+    name: P26_MEMBER_ACTIVE
+    type: Switch
+
+  label: 
+    label: Ativo
+    alignment: Left
+
+  settings: 
+    use-defaults: false
+    on-value: 1
+    on-label: Ativo
+    off-value: 0
+    off-label: Inativo
+
+  layout: 
+    sequence: 50
+    region: MEMBER Form # 83403707766263117
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: MEMBER Form # 83403707766263117
+    column: ACTIVE
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
 
   security: 
     session-state-protection: Unrestricted
@@ -578,12 +676,12 @@ page-items:
     send-on-page-submit: true
 
   layout: 
-    sequence: 40
+    sequence: 20
     region: MEMBER Hidden # 83602805898306095
     slot: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -617,34 +715,56 @@ page-items:
   id: 83416369651263162
   identification: 
     name: P26_MEMBER_ETYPE_CODE
-    type: Display Only
+    type: Select List
 
   label: 
-    label: P26_MEMBER_ETYPE_CODE
+    label: Tipo
     alignment: Left
 
   settings: 
-    format: Plain Text
-    based-on: Item Value
-    show-line-breaks: true
-    send-on-page-submit: true
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
 
   layout: 
-    sequence: 20
-    region: MEMBER Hidden # 83602805898306095
+    sequence: 40
+    region: MEMBER Form # 83403707766263117
     slot: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: false
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 2
     label-column-span: Page Template Default
 
   appearance: 
     template: Optional - Floating
     template-options: 
     - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT name, code
+      FROM vw_raw_etype
+      WHERE  tenant_code = :P26_MEMBER_TENANT_CODE
+      ORDER BY name
+      ;
+    display-extra-values: true
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P26_MEMBER_TENANT_CODE
+    items-to-submit: 
+    - P26_MEMBER_TENANT_CODE
+    parent-required: true
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -657,8 +777,10 @@ page-items:
     primary-key: false
 
   session-state: 
-    data-type: VARCHAR2
     storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
@@ -672,7 +794,7 @@ page-items:
     type: Popup LOV
 
   label: 
-    label: P26_MEMBER_ENTITY_ID
+    label: Entidade
     alignment: Left
 
   settings: 
@@ -690,12 +812,12 @@ page-items:
     type: No
 
   layout: 
-    sequence: 30
-    region: MEMBER Hidden # 83602805898306095
+    sequence: 60
+    region: MEMBER Form # 83403707766263117
     slot: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -713,12 +835,22 @@ page-items:
   list-of-values: 
     type: SQL Query
     sql-query: |
-      SELECT '[' || id || '] ' || name || ' (' || br_cpf || ') - ' || email AS info, id
+      SELECT '[' || id || '] ' || name || ' (' || br_cpf || ') - ' || email AS info,
+             id
       FROM entity
       WHERE 1 = 1
-      
+        AND :P26_MEMBER_TENANT_CODE IS NOT NULL
+        AND lower(tenant_code) = lower(:P26_MEMBER_TENANT_CODE)
+      ORDER BY name
     display-extra-values: true
     display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P26_MEMBER_TENANT_CODE
+    items-to-submit: 
+    - P26_MEMBER_TENANT_CODE
+    parent-required: true
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -758,7 +890,7 @@ page-items:
     send-on-page-submit: true
 
   layout: 
-    sequence: 50
+    sequence: 30
     region: MEMBER Hidden # 83602805898306095
     slot: BODY
     alignment: Left
@@ -810,7 +942,7 @@ page-items:
     send-on-page-submit: true
 
   layout: 
-    sequence: 60
+    sequence: 40
     region: MEMBER Hidden # 83602805898306095
     slot: BODY
     alignment: Left
@@ -912,7 +1044,7 @@ page-items:
     type: Display Only
 
   label: 
-    label: New
+    label: P26_ENTITY_ID
     alignment: Left
 
   settings: 
@@ -1275,20 +1407,22 @@ buttons:
     label: Salvar
 
   layout: 
-    sequence: 20
-    region: ENTITY Form # 91441688352055715
-    slot: CHANGE
+    sequence: 10
+    region: Buttons # 68729458983497251
+    slot: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 2
+    alignment: Left center
 
   appearance: 
     button-template: Text
     hot: true
     template-options: 
     - '#DEFAULT#'
+    - t-Button--stretch
 
   behavior: 
     action: Submit Page
@@ -1309,19 +1443,21 @@ buttons:
 
   layout: 
     sequence: 10
-    region: ENTITY Form # 91441688352055715
-    slot: CHANGE
+    region: Buttons # 68729458983497251
+    slot: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 2
+    alignment: Left center
 
   appearance: 
     button-template: Text
     hot: true
     template-options: 
     - '#DEFAULT#'
+    - t-Button--stretch
 
   behavior: 
     action: Submit Page
@@ -1367,20 +1503,22 @@ buttons:
     label: Excluir
 
   layout: 
-    sequence: 20
-    region: ENTITY Form # 91441688352055715
-    slot: DELETE
+    sequence: 10
+    region: Buttons # 68729458983497251
+    slot: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 2
+    alignment: Left center
 
   appearance: 
     button-template: Text
     hot: false
     template-options: 
     - '#DEFAULT#'
+    - t-Button--stretch
 
   behavior: 
     action: Submit Page
@@ -1451,6 +1589,141 @@ dynamic-actions:
       event: CANCEL # 67748915853810146
       fire-when-event-result-is: True
       fire-on-initialization: false
+
+- # ====== Dynamic Action: P26_MEMBER_TENANT_CODE ==============
+  id: 68729580654497252
+  identification: 
+    name: P26_MEMBER_TENANT_CODE
+
+  execution: 
+    sequence: 40
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P26_MEMBER_TENANT_CODE
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 68729680831497253
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P26_MEMBER_ETYPE_CODE
+
+    execution: 
+      sequence: 10
+      event: P26_MEMBER_TENANT_CODE # 68729580654497252
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: P26_MEMBER_ENTITY_ID Change =========
+  id: 68730772523497264
+  identification: 
+    name: P26_MEMBER_ENTITY_ID Change
+
+  execution: 
+    sequence: 50
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P26_MEMBER_ENTITY_ID
+
+  actions: 
+  - # ====== Action: Set Value ===================================
+    id: 68730823627497265
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: SQL Statement
+      sql-statement: |
+        SELECT
+            e.id,
+            e.name,
+            e.br_cpf,
+            e.br_mobile,
+            e.email,
+            e.home_uf,
+            to_char(e.birth_date, 'DD/MM/YYYY'),
+            e.id_pessoa_old,
+            e.id_pessoa_old
+            
+        FROM entity e
+        WHERE e.id = :P26_MEMBER_ENTITY_ID
+      items-to-submit: 
+      - P26_MEMBER_ENTITY_ID
+      escape-special-characters: true
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P26_ENTITY_ID
+      - ' P26_ENTITY_NAME'
+      - ' P26_ENTITY_CPF'
+      - ' P26_ENTITY_BR_MOBILE_PHONE'
+      - ' P26_ENTITY_EMAIL'
+      - ' P26_ENTITY_UF_RESIDENCIAL'
+      - ' P26_ENTITY_BIRTH_DATE'
+      - ' P26_ENTITY_ID_PESSOA_OLD'
+      - ' P26_MEMBER_ID_PESSOA_OLD'
+
+    execution: 
+      sequence: 20
+      event: P26_MEMBER_ENTITY_ID Change # 68730772523497264
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 68730936163497266
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        [
+          'P26_ENTITY_ID',
+          'P26_ENTITY_NAME',
+          'P26_ENTITY_CPF',
+          'P26_ENTITY_BR_MOBILE_PHONE',
+          'P26_ENTITY_EMAIL',
+          'P26_ENTITY_UF_RESIDENCIAL',
+          'P26_ENTITY_BIRTH_DATE',
+          'P26_ENTITY_ID_PESSOA_OLD',
+          'P26_MEMBER_ID_PESSOA_OLD',
+          'P26_MEMBER_ID_PESSOA_EMPRESA_OLD'
+        ].forEach(function(item) {
+          apex.item(item).setValue('');
+        });
+
+    execution: 
+      sequence: 30
+      event: P26_MEMBER_ENTITY_ID Change # 68730772523497264
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+    client-side-condition: 
+      type: Item is null
+      item: P26_MEMBER_ENTITY_ID
+
+    configuration: 
+      build-option: Commented Out # 7887430499527870
 
 validations: 
 - # ====== Validation: P26_ENTITY_EMAIL ========================
@@ -1602,10 +1875,10 @@ processes:
     point: Before Header
     run-process: Once Per Page Visit (default)
 
-- # ====== Process: Member =====================================
+- # ====== Process: Member Persist =============================
   id: 67746854521810139
   identification: 
-    name: Member
+    name: Member Persist
     type: Execute Code
     execution-chain: None
 
@@ -1620,6 +1893,12 @@ processes:
       
       BEGIN
       
+          --
+          apex_debug.message('P26_MEMBER_TENANT_CODE = %s', :P26_MEMBER_TENANT_CODE);
+          apex_debug.message('P26_MEMBER_ETYPE_CODE = %s', :P26_MEMBER_ETYPE_CODE);
+          apex_debug.message('P26_MEMBER_ENTITY_ID = %s', :P26_MEMBER_ENTITY_ID);
+          apex_debug.message('P26_ENTITY_ID = %s', :P26_ENTITY_ID);
+      
           --  DELETE
           IF :REQUEST = 'DELETE' AND :P26_MEMBER_ID IS NOT NULL THEN
               -- apaga http antes
@@ -1633,8 +1912,18 @@ processes:
           ELSIF :P26_MEMBER_ID IS NULL THEN
       
               -- insere membro antes
-              INSERT INTO member (etype_code, entity_id)
-              VALUES (:P26_MEMBER_ETYPE_CODE, :P26_ENTITY_ID)
+              INSERT INTO member (
+                  tenant_code,
+                  etype_code,
+                  entity_id,
+                  active
+              )
+              VALUES (
+                  lower(trim(:P26_MEMBER_TENANT_CODE)),
+                  lower(trim(:P26_MEMBER_ETYPE_CODE)),
+                  :P26_MEMBER_ENTITY_ID,
+                  :P26_MEMBER_ACTIVE
+              )
               RETURNING id INTO :P26_MEMBER_ID;
       
               -- atualiza http
@@ -1646,7 +1935,10 @@ processes:
       
               --
               UPDATE member
-              SET tenant_code = :P26_MEMBER_TENANT_CODE, entity_id = :P26_MEMBER_ENTITY_ID
+              SET tenant_code = lower(trim(:P26_MEMBER_TENANT_CODE)),
+                  etype_code   = lower(trim(:P26_MEMBER_ETYPE_CODE)),
+                  entity_id    = :P26_MEMBER_ENTITY_ID,
+                  active       = :P26_MEMBER_ACTIVE
               WHERE id = :P26_MEMBER_ID;
       
               -- atualiza http
