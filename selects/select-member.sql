@@ -1,16 +1,14 @@
 SELECT *
 FROM member
 WHERE 1 = 1
---     AND tenant_code = 'SINDICATTO'
+    AND tenant_code = 'ASACLUB'
 --     AND internal_tag = 'pyimport'
 --     AND nvl(internal_tag, '') <> 'pyimport'
 --      AND etype_code = 'director'
-    AND etype_code = 'admin'
+--         AND etype_code = 'financial'
 ORDER BY id DESC
 ;
 
--- 20260625-2346
-DELETE FROM member WHERE id >= 25764 AND internal_tag = 'pyimport';
 
 
 SELECT 1
