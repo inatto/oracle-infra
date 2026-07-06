@@ -1,0 +1,1876 @@
+---
+# ====== Page: Cadastro de Membro (Admin) ====================
+id: 26
+identification: 
+  name: Cadastro de Membro (Admin)
+  alias: CADASTRO-DE-MEMBRO-ADMIN
+  title: Cadastro de Membro (Admin)
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Buttons =====================================
+  id: 68729458983497251
+  identification: 
+    name: Buttons
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region-orderBy--end
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: ENTITY Hidden ===============================
+  id: 83007655946721792
+  identification: 
+    name: ENTITY Hidden
+    type: Static Content
+
+  layout: 
+    sequence: 100
+    parent-region: ENTITY Form # 91441688352055715
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-expanded
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: MEMBER Form =================================
+  id: 83403707766263117
+  identification: 
+    name: MEMBER Form
+    title: Member Form
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: MEMBER
+    include-rowid-column: false
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - js-useLocalStorage
+    - is-expanded
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: false
+
+- # ====== Region: MEMBER Hidden ===============================
+  id: 83602805898306095
+  identification: 
+    name: MEMBER Hidden
+    type: Static Content
+
+  layout: 
+    sequence: 70
+    parent-region: MEMBER Form # 83403707766263117
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - js-useLocalStorage
+    - is-expanded
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: ENTITY Form =================================
+  id: 91441688352055715
+  identification: 
+    name: ENTITY Form
+    title: Entity Form
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: ENTITY
+    include-rowid-column: false
+    page-items-to-submit: 
+    - P26_ENTITY_ID
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - js-useLocalStorage
+    - is-expanded
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: entity_form
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+
+page-items: 
+- # ====== Page Item: P26_MEMBER_TENANT_CODE ===================
+  id: 43805811200580568
+  identification: 
+    name: P26_MEMBER_TENANT_CODE
+    type: Select List
+
+  label: 
+    label: Tenant (Org)
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 20
+    region: MEMBER Form # 83403707766263117
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT upper(code), code display
+      FROM tenant
+      WHERE 1 = 1
+        and active = 1
+      ;
+      
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: MEMBER Form # 83403707766263117
+    column: TENANT_CODE
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_MEMBER_ACTIVE ========================
+  id: 68730707126497263
+  identification: 
+    name: P26_MEMBER_ACTIVE
+    type: Switch
+
+  label: 
+    label: Ativo
+    alignment: Left
+
+  settings: 
+    use-defaults: false
+    on-value: 1
+    on-label: Ativo
+    off-value: 0
+    off-label: Inativo
+
+  layout: 
+    sequence: 50
+    region: MEMBER Form # 83403707766263117
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: MEMBER Form # 83403707766263117
+    column: ACTIVE
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_ID_PESSOA_OLD =================
+  id: 82994575425306316
+  identification: 
+    name: P26_ENTITY_ID_PESSOA_OLD
+    type: Display Only
+
+  label: 
+    label: P26_ENTITY_ID_PESSOA_OLD
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 20
+    region: ENTITY Hidden # 83007655946721792
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: ID_PESSOA_OLD
+    data-type: NUMBER
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_ID_ENDERECO_RESIDENCIAL_OLD ===
+  id: 83015299459721816
+  identification: 
+    name: P26_ENTITY_ID_ENDERECO_RESIDENCIAL_OLD
+    type: Display Only
+
+  label: 
+    label: P26_ENTITY_ID_ENDERECO_RESIDENCIAL_OLD
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 30
+    region: ENTITY Hidden # 83007655946721792
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: ID_ENDERECO_RESIDENCIAL_OLD
+    data-type: NUMBER
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_ID_ENDERECO_COMERCIAL_OLD =====
+  id: 83015370619721817
+  identification: 
+    name: P26_ENTITY_ID_ENDERECO_COMERCIAL_OLD
+    type: Display Only
+
+  label: 
+    label: P26_ENTITY_ID_ENDERECO_COMERCIAL_OLD
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 40
+    region: ENTITY Hidden # 83007655946721792
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: ID_ENDERECO_COMERCIAL_OLD
+    data-type: NUMBER
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_CPF_MASK ======================
+  id: 83408325802263148
+  identification: 
+    name: P26_ENTITY_CPF_MASK
+    type: Text Field
+
+  label: 
+    label: CPF
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: true
+    send-on-page-submit: false
+
+  layout: 
+    sequence: 40
+    region: ENTITY Form # 91441688352055715
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: BR_CPF_MASK
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P26_ENTITY_CPF
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_MEMBER_ID ============================
+  id: 83415110445263150
+  identification: 
+    name: P26_MEMBER_ID
+    type: Display Only
+
+  label: 
+    label: P26_MEMBER_ID
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 10
+    region: MEMBER Hidden # 83602805898306095
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: MEMBER Form # 83403707766263117
+    column: ID
+    data-type: NUMBER
+    query-only: true
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_MEMBER_ID_MEMBRO_OLD =================
+  id: 83415253426263151
+  identification: 
+    name: P26_MEMBER_ID_MEMBRO_OLD
+    type: Display Only
+
+  label: 
+    label: P26_MEMBER_ID_MEMBRO_OLD
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 20
+    region: MEMBER Hidden # 83602805898306095
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: MEMBER Form # 83403707766263117
+    column: ID_MEMBRO_OLD
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_MEMBER_ETYPE_CODE ====================
+  id: 83416369651263162
+  identification: 
+    name: P26_MEMBER_ETYPE_CODE
+    type: Select List
+
+  label: 
+    label: Tipo
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 40
+    region: MEMBER Form # 83403707766263117
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT name, code
+      FROM vw_raw_etype
+      WHERE  tenant_code = :P26_MEMBER_TENANT_CODE
+      ORDER BY name
+      ;
+    display-extra-values: true
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P26_MEMBER_TENANT_CODE
+    items-to-submit: 
+    - P26_MEMBER_TENANT_CODE
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: MEMBER Form # 83403707766263117
+    column: ETYPE_CODE
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_MEMBER_ENTITY_ID =====================
+  id: 83416489676263164
+  identification: 
+    name: P26_MEMBER_ENTITY_ID
+    type: Popup LOV
+
+  label: 
+    label: Entidade
+    alignment: Left
+
+  settings: 
+    display-as: Inline Popup
+    initial-fetch: Automatic
+    manual-entry: false
+    fetch-on-search: false
+
+  search: 
+    match-type: Contains
+    case-sensitive: false
+    minimum-characters: 0
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 60
+    region: MEMBER Form # 83403707766263117
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT '[' || id || '] ' || name || ' (' || br_cpf || ') - ' || email AS info, id
+      FROM entity
+      WHERE 1 = 1
+      
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: MEMBER Form # 83403707766263117
+    column: ENTITY_ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_MEMBER_ID_PESSOA_OLD =================
+  id: 83613736737306123
+  identification: 
+    name: P26_MEMBER_ID_PESSOA_OLD
+    type: Display Only
+
+  label: 
+    label: P26_MEMBER_ID_PESSOA_OLD
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 30
+    region: MEMBER Hidden # 83602805898306095
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: MEMBER Form # 83403707766263117
+    column: ID_PESSOA_OLD
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_MEMBER_ID_PESSOA_EMPRESA_OLD =========
+  id: 83613863698306124
+  identification: 
+    name: P26_MEMBER_ID_PESSOA_EMPRESA_OLD
+    type: Display Only
+
+  label: 
+    label: P26_MEMBER_ID_PESSOA_EMPRESA_OLD
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 40
+    region: MEMBER Hidden # 83602805898306095
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: MEMBER Form # 83403707766263117
+    column: ID_PESSOA_EMPRESA_OLD
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_NAME ==========================
+  id: 91444652772055730
+  identification: 
+    name: P26_ENTITY_NAME
+    type: Text Field
+
+  label: 
+    label: Nome
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 80
+    region: ENTITY Form # 91441688352055715
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 32
+
+  validation: 
+    value-required: true
+    maximum-length: 100
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: NAME
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_ID ============================
+  id: 91449582664055740
+  identification: 
+    name: P26_ENTITY_ID
+    type: Display Only
+
+  label: 
+    label: New
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 10
+    region: ENTITY Hidden # 83007655946721792
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_CPF ===========================
+  id: 91843009941244355
+  identification: 
+    name: P26_ENTITY_CPF
+    type: Text Field
+
+  label: 
+    label: CPF
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 30
+    region: ENTITY Form # 91441688352055715
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: true
+    maximum-length: 20
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: BR_CPF
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P26_ENTITY_CPF
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_BR_MOBILE_PHONE ===============
+  id: 91843533843244360
+  identification: 
+    name: P26_ENTITY_BR_MOBILE_PHONE
+    type: Text Field
+
+  label: 
+    label: Celular
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 60
+    region: ENTITY Form # 91441688352055715
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 32
+
+  validation: 
+    value-required: false
+    maximum-length: 20
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: BR_MOBILE
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_EMAIL =========================
+  id: 91845896142244384
+  identification: 
+    name: P26_ENTITY_EMAIL
+    type: Text Field
+
+  label: 
+    label: E-mail
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 90
+    region: ENTITY Form # 91441688352055715
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 32
+
+  validation: 
+    value-required: false
+    maximum-length: 100
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: EMAIL
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_UF_RESIDENCIAL ================
+  id: 91845975586244385
+  identification: 
+    name: P26_ENTITY_UF_RESIDENCIAL
+    type: Select List
+
+  label: 
+    label: UF Residencial
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 70
+    region: ENTITY Form # 91441688352055715
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: SELECT code name, code FROM country_uf;
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: HOME_UF
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P26_ENTITY_BIRTH_DATE ====================
+  id: 91846115919244386
+  identification: 
+    name: P26_ENTITY_BIRTH_DATE
+    type: Date Picker
+
+  label: 
+    label: Nascimento
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 50
+    region: ENTITY Form # 91441688352055715
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: DD/MM/YYYY
+    width: 32
+
+  validation: 
+    value-required: false
+    maximum-length: 10
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: ENTITY Form # 91441688352055715
+    column: BIRTH_DATE
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: UPDATE ======================================
+  id: 67730555580810095
+  identification: 
+    button-name: UPDATE
+    label: Salvar
+
+  layout: 
+    sequence: 10
+    region: Buttons # 68729458983497251
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--stretch
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P26_ENTITY_ID
+
+- # ====== Button: INSERT ======================================
+  id: 67730970559810096
+  identification: 
+    button-name: INSERT
+    label: Confirmar
+
+  layout: 
+    sequence: 10
+    region: Buttons # 68729458983497251
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--stretch
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P26_ENTITY_ID
+
+- # ====== Button: CANCEL ======================================
+  id: 67731359349810097
+  identification: 
+    button-name: CANCEL
+    label: Cancelar
+
+  layout: 
+    sequence: 10
+    region: ENTITY Form # 91441688352055715
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+- # ====== Button: DELETE ======================================
+  id: 67731754468810097
+  identification: 
+    button-name: DELETE
+    label: Excluir
+
+  layout: 
+    sequence: 10
+    region: Buttons # 68729458983497251
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--stretch
+
+  behavior: 
+    action: Submit Page
+    execute-validations: false
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL DELETE action
+
+  confirmation: 
+    message: '&APP_TEXT$DELETE_MSG!RAW.'
+    style: Danger
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P26_MEMBER_ID
+
+dynamic-actions: 
+- # ====== Dynamic Action: page_load ===========================
+  id: 67748014143810144
+  identification: 
+    name: page_load
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 67748580138810145
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: applyMasks();
+
+    execution: 
+      sequence: 10
+      event: page_load # 67748014143810144
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: CANCEL ==============================
+  id: 67748915853810146
+  identification: 
+    name: CANCEL
+
+  execution: 
+    sequence: 30
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: CANCEL # 67731359349810097
+
+  actions: 
+  - # ====== Action: Close Dialog ================================
+    id: 67749463296810147
+    identification: 
+      action: Close Dialog
+
+    execution: 
+      sequence: 10
+      event: CANCEL # 67748915853810146
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: P26_MEMBER_TENANT_CODE ==============
+  id: 68729580654497252
+  identification: 
+    name: P26_MEMBER_TENANT_CODE
+
+  execution: 
+    sequence: 40
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P26_MEMBER_TENANT_CODE
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 68729680831497253
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P26_MEMBER_ETYPE_CODE
+
+    execution: 
+      sequence: 10
+      event: P26_MEMBER_TENANT_CODE # 68729580654497252
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+validations: 
+- # ====== Validation: P26_ENTITY_EMAIL ========================
+  id: 67745737485810137
+  identification: 
+    name: P26_ENTITY_EMAIL
+
+  execution: 
+    sequence: 20
+
+  validation: 
+    type: Function Body (returning Boolean)
+    language: PL/SQL
+    pl/sql-function-body: "RETURN REGEXP_LIKE(:P26_ENTITY_EMAIL, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');"
+    always-execute: false
+
+  error: 
+    error-message: E-mail inválido.
+    display-location: Inline with Field and in Notification
+    associated-item: P26_ENTITY_EMAIL # 91845896142244384
+
+- # ====== Validation: P26_CPF =================================
+  id: 67746176918810138
+  identification: 
+    name: P26_CPF
+
+  execution: 
+    sequence: 30
+
+  validation: 
+    type: Function Body (returning Boolean)
+    language: PL/SQL
+    pl/sql-function-body: 'RETURN is_cpf_valid(:P26_CPF);'
+    always-execute: false
+
+  error: 
+    error-message: CPF inválido.
+    display-location: Inline with Field and in Notification
+    associated-item: P26_ENTITY_CPF # 91843009941244355
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+
+- # ====== Validation: P26_ENTITY_BIRTH_DATE ===================
+  id: 67746537806810138
+  identification: 
+    name: P26_ENTITY_BIRTH_DATE
+
+  execution: 
+    sequence: 10
+
+  validation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: "TO_DATE(:P26_ENTITY_BIRTH_DATE, 'DD/MM/YYYY') <= TRUNC(SYSDATE)"
+    always-execute: false
+
+  error: 
+    error-message: Data de nascimento inválida. Não pode ser maior que a atual.
+    display-location: Inline with Field and in Notification
+    associated-item: P26_ENTITY_BIRTH_DATE # 91846115919244386
+
+processes: 
+- # ====== Process: P26_ENTITY_ID  =============================
+  id: 36009893557569552
+  identification: 
+    name: 'P26_ENTITY_ID '
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+      
+          :P26_ENTITY_ID := :P26_MEMBER_ENTITY_ID;
+      
+      end;
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: ENTITY Form ================================
+  id: 67736429589810111
+  identification: 
+    name: ENTITY Form
+    type: Form - Initialization
+    execution-chain: None
+    form-region: ENTITY Form # 91441688352055715
+
+  execution: 
+    sequence: 30
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Entity DML (insert/update) if not Delete ===
+  id: 67736888263810111
+  identification: 
+    name: Entity DML (insert/update) if not Delete
+    type: Form - Automatic Row Processing (DML)
+    execution-chain: None
+    form-region: ENTITY Form # 91441688352055715
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: Yes
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: |
+      begin
+      
+          --  se estiver DELETE ignora o DML
+          IF :REQUEST = 'DELETE' THEN
+             return false;
+          END IF;
+      
+          return true;
+      
+      end;
+
+  comments: 
+    comments: Nao apaga fisicamente do banco, fica orfã de membro
+
+- # ====== Process: MEMBER Form ================================
+  id: 67740454962810121
+  identification: 
+    name: MEMBER Form
+    type: Form - Initialization
+    execution-chain: None
+    form-region: MEMBER Form # 83403707766263117
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Member Persist =============================
+  id: 67746854521810139
+  identification: 
+    name: Member Persist
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      -- noinspection SqlInsertValuesForFile
+      
+      DECLARE
+          --     ljson CLOB;
+      
+      BEGIN
+      
+          --
+          apex_debug.message('P26_MEMBER_TENANT_CODE = %s', :P26_MEMBER_TENANT_CODE);
+          apex_debug.message('P26_MEMBER_ETYPE_CODE = %s', :P26_MEMBER_ETYPE_CODE);
+          apex_debug.message('P26_MEMBER_ENTITY_ID = %s', :P26_MEMBER_ENTITY_ID);
+          apex_debug.message('P26_ENTITY_ID = %s', :P26_ENTITY_ID);
+      
+          --  DELETE
+          IF :REQUEST = 'DELETE' AND :P26_MEMBER_ID IS NOT NULL THEN
+              -- apaga http antes
+              --         ljson := json_member(:P26_MEMBER_ID, NULL, 1);
+              --         prc_http_member(ljson);
+      
+              -- apaga banco
+              DELETE FROM member WHERE id = :P26_MEMBER_ID;
+      
+              -- INSERT
+          ELSIF :P26_MEMBER_ID IS NULL THEN
+      
+              -- insere membro antes
+              INSERT INTO member (
+                  tenant_code,
+                  etype_code,
+                  entity_id,
+                  active
+              )
+              VALUES (
+                  lower(trim(:P26_MEMBER_TENANT_CODE)),
+                  lower(trim(:P26_MEMBER_ETYPE_CODE)),
+                  :P26_MEMBER_ENTITY_ID,
+                  :P26_MEMBER_ACTIVE
+              )
+              RETURNING id INTO :P26_MEMBER_ID;
+      
+              -- atualiza http
+              --         ljson := json_member(:P26_MEMBER_ID);
+              --         prc_http_member(ljson);
+      
+              -- UPDATE
+          ELSIF :P26_MEMBER_ID IS NOT NULL THEN
+      
+              --
+              UPDATE member
+              SET tenant_code = lower(trim(:P26_MEMBER_TENANT_CODE)),
+                  etype_code   = lower(trim(:P26_MEMBER_ETYPE_CODE)),
+                  entity_id    = :P26_MEMBER_ENTITY_ID,
+                  active       = :P26_MEMBER_ACTIVE
+              WHERE id = :P26_MEMBER_ID;
+      
+              -- atualiza http
+              --         ljson := json_member(:P26_MEMBER_ID);
+              --         prc_http_member(ljson);
+      
+          END IF;
+      
+      END;
+
+  execution: 
+    sequence: 50
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: Enviar email ===============================
+  id: 67747707394810143
+  identification: 
+    name: Enviar email
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      BEGIN
+          --prc_http_mail('Novo cadastro (Dia-a-Dia): ' || TO_CHAR(:P26_NAME), TO_CHAR(:P26_NAME));
+      END;
+
+  execution: 
+    sequence: 60
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  configuration: 
+    build-option: Commented Out # 7887430499527870
+
