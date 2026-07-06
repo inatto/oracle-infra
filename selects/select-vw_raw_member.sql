@@ -1,7 +1,7 @@
 SELECT *
 FROM vw_raw_member
 WHERE 1 = 1
-    AND lower(tenant_code) = 'asaclub'
+--     AND lower(tenant_code) = 'asaclub'
 --     AND lower(nvl(email, '#SEM_EMAIL#')) <> 'marketingasaclub26@gmail.com'
 --     AND lower(etype_code) = 'marketing'
 --     AND entity_id = :G_ENTITY_ID

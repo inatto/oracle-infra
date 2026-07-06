@@ -1,7 +1,8 @@
 SELECT *
 FROM member
 WHERE 1 = 1
-    AND tenant_code = 'ASACLUB'
+    AND id = 10360
+--     AND tenant_code = 'ASACLUB'
 --     AND internal_tag = 'pyimport'
 --     AND nvl(internal_tag, '') <> 'pyimport'
 --      AND etype_code = 'director'
@@ -9,6 +10,7 @@ WHERE 1 = 1
 ORDER BY id DESC
 ;
 
+UPDATE member SET tenant_code = lower(tenant_code) WHERE 1 = 1;
 
 
 SELECT 1

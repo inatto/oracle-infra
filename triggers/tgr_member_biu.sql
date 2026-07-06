@@ -15,16 +15,17 @@ BEGIN
 
     -- normaliza tenant e etype
     IF :new.tenant_code IS NOT NULL THEN
-        :new.tenant_code := lower(:new.tenant_code);
+        :new.tenant_code := lower(trim(:new.tenant_code));
     END IF;
 
     IF :new.etype_code IS NOT NULL THEN
-        :new.etype_code := lower(:new.etype_code);
+        :new.etype_code := lower(trim(:new.etype_code));
     END IF;
 
-    -- define tenant via APEX
-    IF v('G_TENANT_CODE') IS NOT NULL THEN
-        :new.tenant_code := lower(v('G_TENANT_CODE'));
+    -- define tenant via APEX somente se não veio valor explícito
+    IF :new.tenant_code IS NULL
+       AND v('G_TENANT_CODE') IS NOT NULL THEN
+        :new.tenant_code := lower(trim(v('G_TENANT_CODE')));
     END IF;
 
     -- pega id_pessoa_old da entity relacionada
