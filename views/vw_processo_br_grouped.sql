@@ -1,5 +1,4 @@
 -- noinspection SqlShadowingAliasForFile
-
 -- noinspection SqlSignatureForFile
 -- noinspection SqlShouldBeInGroupByForFile
 
@@ -36,8 +35,8 @@ LEFT JOIN tenant t ON p.tenant_code = t.code
 WHERE 1 = 1
 GROUP BY p.id, t.name, t.code, nr_processo
 ORDER BY nr_processo
-/
+;
 
 SELECT * FROM vw_processo_br_grouped
-/
+;
 

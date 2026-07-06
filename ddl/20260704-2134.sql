@@ -83,7 +83,7 @@ create table EMP
     ENAME    VARCHAR2(10),
     JOB      VARCHAR2(9),
     MGR      NUMBER(4)
-        references EMP,
+        references "--EMP",
     HIREDATE DATE,
     SAL      NUMBER(7, 2),
     COMM     NUMBER(7, 2),
