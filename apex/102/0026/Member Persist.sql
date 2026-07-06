@@ -18,8 +18,8 @@ BEGIN
     ELSIF :P26_MEMBER_ID IS NULL THEN
 
         -- insere membro antes
-        INSERT INTO member (etype_code, entity_id)
-        VALUES (:P26_MEMBER_ETYPE_CODE, :P26_ENTITY_ID)
+        INSERT INTO member (tenant_code, etype_code, entity_id)
+        VALUES (:P26_MEMBER_TENANT_CODE, :P26_MEMBER_ETYPE_CODE, :P26_ENTITY_ID)
         RETURNING id INTO :P26_MEMBER_ID;
 
         -- atualiza http
@@ -31,7 +31,7 @@ BEGIN
 
         --
         UPDATE member
-        SET tenant_code = :P26_MEMBER_TENANT_CODE
+        SET tenant_code = :P26_MEMBER_TENANT_CODE, etype_code = :P26_MEMBER_ETYPE_CODE, entity_id = :P26_MEMBER_ENTITY_ID
         WHERE id = :P26_MEMBER_ID;
 
         -- atualiza http

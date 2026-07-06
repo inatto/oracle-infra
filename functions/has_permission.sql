@@ -19,9 +19,7 @@ BEGIN
 
     --
     l_tenant_code := lower(coalesce(p_tenant_code, v('G_TENANT_CODE')));
-    IF l_tenant_code = 'sindicatto' THEN
-        RETURN TRUE;
-    END IF;
+--     IF l_tenant_code = 'sindicatto' THEN RETURN TRUE; END IF;
 
     --
     l_actor_etype_code := lower(coalesce(p_actor_etype_code, v('G_ETYPE_CODE')));
