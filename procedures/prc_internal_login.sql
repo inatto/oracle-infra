@@ -3,7 +3,7 @@ CREATE OR REPLACE PROCEDURE prc_internal_login (
 , p_user IN varchar2
 , p_pass IN varchar2
 , p_etype_code IN varchar2 DEFAULT NULL
-, p_entity_id OUT number
+, p_entity_id OUT number -- OUT Retorna pro :G_ENTITY_ID
 ) IS
 
     v_member_id number;

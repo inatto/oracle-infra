@@ -3,15 +3,16 @@
 SELECT *
 FROM entity
 WHERE 1 = 1
---      AND id = 7082
+      AND id = 11739
+--     AND email = 'asa.convenios@asaclub.org.br'
 -- dev anpprev
 --     AND id = 10351
 ;
 
 --
-SELECT LOWER(standard_hash('Aviao?!', 'MD5')) FROM dual;
+SELECT lower(standard_hash('Aviao?!', 'MD5')) FROM dual;
 
-SELECT entity.id, entity.name, entity.md5_password, LOWER(standard_hash('12345678', 'MD5'))
+SELECT entity.id, entity.name, entity.md5_password, lower(standard_hash('12345678', 'MD5'))
 FROM entity
 WHERE 1 = 1
     AND id = 10351
