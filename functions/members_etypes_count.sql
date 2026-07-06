@@ -1,5 +1,7 @@
 CREATE OR REPLACE FUNCTION members_etypes_count (
-    p_tenant_code IN varchar2, p_user IN varchar2, p_pass IN varchar2
+    p_tenant_code IN varchar2
+, p_user IN varchar2
+, p_pass IN varchar2
 ) RETURN varchar2 IS
 
     v_etype_code varchar2(100);
@@ -28,4 +30,4 @@ BEGIN
 END;
 
 
--- SELECT members_etypes_count('sinproprev', 'dev@inatto.com', 'Aviao?!1sinp');
+-- SELECT members_etypes_count('sinproprev', 'dev@inatto.com', 'Aviao?!1');

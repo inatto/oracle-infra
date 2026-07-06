@@ -1,9 +1,11 @@
 SELECT *
 FROM member
 WHERE 1 = 1
-    AND tenant_code = 'SINDICATTO'
+--     AND tenant_code = 'SINDICATTO'
 --     AND internal_tag = 'pyimport'
---     AND etype_code = 'director'
+--     AND nvl(internal_tag, '') <> 'pyimport'
+--      AND etype_code = 'director'
+    AND etype_code = 'admin'
 ORDER BY id DESC
 ;
 

@@ -1,14 +1,14 @@
 CREATE OR REPLACE PROCEDURE prc_internal_login (
-    p_tenant_code IN VARCHAR2,
-    p_user IN VARCHAR2,
-    p_pass IN VARCHAR2,
-    p_etype_code IN VARCHAR2 DEFAULT NULL,
-    p_entity_id OUT NUMBER
+    p_tenant_code IN varchar2
+, p_user IN varchar2
+, p_pass IN varchar2
+, p_etype_code IN varchar2 DEFAULT NULL
+, p_entity_id OUT number
 ) IS
 
-    v_member_id NUMBER;
-    v_entity_name VARCHAR2(200);
-    v_etype_name VARCHAR2(100);
+    v_member_id number;
+    v_entity_name varchar2(200);
+    v_etype_name varchar2(100);
 
 BEGIN
 
@@ -21,13 +21,13 @@ BEGIN
     WHERE 1 = 1
         AND m.active = 1
         AND e.active = 1
-        AND (LOWER(e.br_cpf) = LOWER(p_user) OR LOWER(e.email) = LOWER(p_user))
-        AND (p_etype_code IS NULL OR LOWER(m.etype_code) = LOWER(p_etype_code))
-        AND (LOWER(e.md5_password) = LOWER(standard_hash(p_pass, 'MD5')))
-        AND LOWER(m.tenant_code) = LOWER(p_tenant_code)
+        AND (lower(e.br_cpf) = lower(p_user) OR lower(e.email) = lower(p_user))
+        AND (p_etype_code IS NULL OR lower(m.etype_code) = lower(p_etype_code))
+        AND (lower(e.md5_password) = lower(standard_hash(p_pass, 'MD5')))
+        AND lower(m.tenant_code) = lower(p_tenant_code)
     ORDER BY m.id DESC FETCH FIRST 1 ROW ONLY;
 
-    -- so define sessao se passou o login completo com etype
+    -- so define sessao se passou o login completo com etype_code
     IF (p_etype_code IS NOT NULL) THEN
         --
         apex_util.set_session_state('G_MEMBER_ID', v_member_id);
@@ -48,12 +48,12 @@ BEGIN
 
 EXCEPTION
     WHEN no_data_found THEN
-        prc_log_login(p_user, p_tenant_code, NULL, p_etype_code, NULL, 0, 'no_data_found', SQLERRM);
-        RAISE_APPLICATION_ERROR(-20002, 'Login inválido [NDF0].');
+        prc_log_login(p_user, p_tenant_code, NULL, p_etype_code, NULL, 0, 'no_data_found', sqlerrm);
+        raise_application_error(-20002, 'Login inválido [NDF0].');
 
     WHEN too_many_rows THEN
-        prc_log_login(p_user, p_tenant_code, NULL, p_etype_code, NULL, 0, 'too_many_rows', SQLERRM);
-        RAISE_APPLICATION_ERROR(-20003, 'Login inválido [TMR+].');
+        prc_log_login(p_user, p_tenant_code, NULL, p_etype_code, NULL, 0, 'too_many_rows', sqlerrm);
+        raise_application_error(-20003, 'Login inválido [TMR+].');
 
     --     WHEN OTHERS THEN
     --         prc_log_login(p_user, p_tenant_code, NULL, p_etype_code, NULL, 0, 'others', SQLERRM);
@@ -64,14 +64,14 @@ END;
 
 
 DECLARE
-    v_entity_id NUMBER;
+    v_entity_id number;
 BEGIN
-    WKSP_SINDICATTO.prc_internal_login(
-        p_tenant_code => 'ASACLUB',
-        p_user        => 'dev@inatto.com',
-        p_pass        => 'Aviao?!1',
-        p_etype_code  => NULL,
-        p_entity_id   => v_entity_id
+    wksp_sindicatto.prc_internal_login(
+            p_tenant_code => 'ASACLUB',
+            p_user => 'dev@inatto.com',
+            p_pass => 'Aviao?!1',
+            p_etype_code => NULL,
+            p_entity_id => v_entity_id
     );
 
     dbms_output.put_line('ENTITY_ID = ' || v_entity_id);

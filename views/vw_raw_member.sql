@@ -1,11 +1,5 @@
 CREATE OR REPLACE VIEW vw_raw_member AS
-SELECT m.id
-    , m.entity_id
-    , m.tenant_id
-    , m.tenant_code
-    , m.etype_code
-    , m.active
-    , m.id_membro_old
+SELECT m.*
     --
     , et.name etype_name
     , et.hash etype_hash

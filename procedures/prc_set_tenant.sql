@@ -1,14 +1,14 @@
-CREATE OR REPLACE PROCEDURE prc_set_tenant (p_tenant_code IN VARCHAR2, p_cpf_hash IN VARCHAR2 DEFAULT NULL) AS
-    v_tid         NUMBER;
-    v_cookie      owa_cookie.cookie;
-    v_tenant_code VARCHAR2(100);
-    v_tenant_name VARCHAR2(100);
+CREATE OR REPLACE PROCEDURE prc_set_tenant (p_tenant_code IN varchar2, p_cpf_hash IN varchar2 DEFAULT NULL) AS
+    v_tid number;
+    v_cookie owa_cookie.COOKIE;
+    v_tenant_code varchar2(100);
+    v_tenant_name varchar2(100);
 BEGIN
 
     -- 1) ID Tenant por parametro? Prioritario
     IF (p_tenant_code IS NOT NULL) THEN
         owa_cookie.remove('COOKIE_TENANT_ID', v_tid, '/ords');
-        SELECT id INTO v_tid FROM tenant WHERE LOWER(code) = LOWER(p_tenant_code);
+        SELECT id INTO v_tid FROM tenant WHERE lower(code) = lower(p_tenant_code);
     END IF;
 
     -- 2) ID Tenant por cookie?
@@ -20,7 +20,7 @@ BEGIN
 
     -- 3) Nao tem cookie nem param, pega default
     IF v_tid IS NULL THEN
-        SELECT id INTO v_tid FROM tenant WHERE LOWER(code) = 'sindicatto';
+        SELECT id INTO v_tid FROM tenant WHERE lower(code) = 'sindicatto';
     END IF;
 
     -- seta v_cookie com o v_tid atual - path /ords é parte da chave do cookie (Ver F12 - 20250626)
@@ -40,12 +40,12 @@ BEGIN
         --
         apex_util.set_session_state('G_TENANT_ID', v_tid);
         apex_util.set_session_state('G_TENANT_CODE', v_tenant_code);
-        apex_util.set_session_state('G_TENANT_CODE_LOWER', LOWER(v_tenant_code));
+        apex_util.set_session_state('G_TENANT_CODE_LOWER', lower(v_tenant_code));
         apex_util.set_session_state('G_TENANT_NAME', v_tenant_name);
 
     EXCEPTION
         WHEN no_data_found THEN
-            RAISE_APPLICATION_ERROR(-20001, 'Invalid tenant.');
+            raise_application_error(-20001, 'Invalid tenant.');
     END;
 
 END;
