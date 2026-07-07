@@ -26,7 +26,7 @@ BEGIN
     -- se inserindo nao pode existir outro cpf igual
     IF INSERTING AND :new.br_cpf IS NOT NULL THEN
         SELECT 1 INTO temp FROM entity WHERE br_cpf = :new.br_cpf AND tenant_id = :new.tenant_id FETCH FIRST 1 ROW ONLY;
-        RAISE_APPLICATION_ERROR(-20001, 'CPF já cadastrado.');
+        RAISE_APPLICATION_ERROR(-20001, 'CPF já cadastrado [E65382920.');
     END IF;
 
 EXCEPTION

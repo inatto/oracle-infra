@@ -17,6 +17,8 @@ BEGIN
     LEFT JOIN entity e ON m.entity_id = e.id
     LEFT JOIN etype t ON t.code = m.etype_code
     WHERE 1 = 1
+        AND m.active = 1
+        AND e.active = 1
         AND lower(m.tenant_code) = lower(p_tenant_code)
         -- TODO 20250713 criar indice
         AND lower(standard_hash(lower(m.tenant_code) || lower(nvl(t.tag_perfil_old, '')) || nvl(e.br_cpf, dbms_random.string('X', 40)), 'SHA1')) = lower(p_cpf_hash)

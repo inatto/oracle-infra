@@ -1,7 +1,7 @@
 SELECT *
 FROM member
 WHERE 1 = 1
-    AND id = 10360
+--     AND id = 10360
 --     AND tenant_code = 'ASACLUB'
 --     AND internal_tag = 'pyimport'
 --     AND nvl(internal_tag, '') <> 'pyimport'

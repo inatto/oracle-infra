@@ -3,10 +3,11 @@
 SELECT *
 FROM entity
 WHERE 1 = 1
-      AND id = 11739
+--       AND id = 11739
 --     AND email = 'asa.convenios@asaclub.org.br'
 -- dev anpprev
 --     AND id = 10351
+ORDER BY id DESC
 ;
 
 --
@@ -30,3 +31,15 @@ ORDER BY id DESC
 SELECT '[' || id || '] ' || name || ' (' || br_cpf || ') - ' || email AS info, id
 FROM entity
 WHERE 1 = 1
+
+
+
+SELECT e.br_cpf,
+    e.name,
+    e.br_mobile,
+    e.email,
+    e.home_uf,
+    to_char(e.birth_date, 'DD/MM/YYYY') AS birth_date,
+    e.id_pessoa_old
+FROM entity e
+WHERE e.id = :P26_MEMBER_ENTITY_ID

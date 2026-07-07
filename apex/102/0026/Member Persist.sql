@@ -31,7 +31,9 @@ BEGIN
 
         --
         UPDATE member
-        SET tenant_code = :P26_MEMBER_TENANT_CODE, etype_code = :P26_MEMBER_ETYPE_CODE, entity_id = :P26_MEMBER_ENTITY_ID
+        SET tenant_code = :P26_MEMBER_TENANT_CODE
+            , etype_code = :P26_MEMBER_ETYPE_CODE
+            , entity_id = :P26_MEMBER_ENTITY_ID
         WHERE id = :P26_MEMBER_ID;
 
         -- atualiza http
@@ -41,3 +43,4 @@ BEGIN
     END IF;
 
 END;
+
