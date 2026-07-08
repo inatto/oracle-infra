@@ -1,7 +1,6 @@
 -- noinspection SqlConstantExpressionForFile
 
 
-
 SELECT *
 FROM content
 WHERE 1 = 1
@@ -9,6 +8,7 @@ WHERE 1 = 1
 --     AND ctype = 'diretoria'
 --     AND ctype = 'diretoria'
 --     AND ctype = 'estatuto'
+ORDER BY id DESC
 ;
 
 
@@ -50,11 +50,3 @@ SELECT dbtimezone
     , current_timestamp
     , systimestamp AT TIME ZONE 'America/Sao_Paulo' AS brasilia_time
 FROM dual;
-
-ALTER SESSION SET TIME_ZONE = 'America/Sao_Paulo';
-
-alter table WKSP_SINDICATTO.CONTENT add (
-    SLUG varchar2(150),
-    SORT_ORDER number,
-    STATUS varchar2(30) default 'published'
-);
