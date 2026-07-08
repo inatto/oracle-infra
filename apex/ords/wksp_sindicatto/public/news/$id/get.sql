@@ -27,7 +27,6 @@ FROM content c
 LEFT JOIN ctype ct
        ON lower(ct.tenant_code) = lower(c.tenant_code)
       AND lower(ct.code) = lower(c.ctype_code)
-WHERE lower(c.ctype_code) = 'news'
+WHERE c.id = :id
   AND (:tenant_code IS NULL OR lower(c.tenant_code) = lower(:tenant_code))
   AND nvl(c.status, 'published') = 'published'
-ORDER BY c.published_at DESC, c.id DESC
