@@ -4,7 +4,8 @@
 SELECT *
 FROM content
 WHERE 1 = 1
---     AND ctype = 'news'
+--     AND ctype_code = 'news'
+--     AND subtype = 'latest-reports'
 --     AND ctype = 'diretoria'
 --     AND ctype = 'diretoria'
 --     AND ctype = 'estatuto'

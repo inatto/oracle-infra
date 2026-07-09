@@ -15,6 +15,7 @@ SELECT c.id
      , c.published_at
      , c.image_alt
      , c.image_filename
+     , c.subtype
      , CASE
            WHEN c.image_url IS NOT NULL THEN
                c.image_url

@@ -16,6 +16,7 @@ SELECT c.id
     , c.published_at
     , c.image_alt
     , c.image_filename
+    , c.subtype
     , CASE
     WHEN c.image_url IS NOT NULL THEN c.image_url
     WHEN c.image_blob IS NOT NULL THEN
@@ -23,10 +24,10 @@ SELECT c.id
         '?v=' || to_char(nvl(c.image_updated_at, c.updated_at), 'YYYYMMDDHH24MISS')
     END AS image_url
     , ct.name AS ctype_name
+
 FROM content c
-LEFT JOIN ctype ct
-          ON lower(ct.tenant_code) = lower(c.tenant_code)
-              AND lower(ct.code) = lower(c.ctype_code)
-WHERE c.id = :id
+LEFT JOIN ctype ct ON lower(ct.tenant_code) = lower(c.tenant_code) AND lower(ct.code) = lower(c.ctype_code)
+WHERE 1 = 1
+    AND c.id = :id
     AND (:tenant_code IS NULL OR lower(c.tenant_code) = lower(:tenant_code))
     AND nvl(c.status, 'published') = 'published'
