@@ -2,6 +2,7 @@ SELECT c.id
     , c.tenant_code
     , c.ctype_code
     , c.slug
+    , c.block_code
     , c.sort_order
     , c.status
     , c.title
