@@ -1,6 +1,3 @@
-SELECT nvl(image_mime_type, 'image/jpeg') AS content_type
-    , image_blob AS content
-FROM content
+SELECT content_type, image
+FROM vw_public_content_image_id
 WHERE id = :id
-    AND image_blob IS NOT NULL
-    AND nvl(status, 'published') = 'published'
