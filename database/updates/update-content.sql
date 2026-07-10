@@ -1,4 +1,39 @@
+--  20260710-0114
+
+UPDATE content_attachment
+   SET file_url        = '/tenants/anpprev/files/articles/a-advocacia-publica-e-as-atividades-exclusivas-de-estado-1ed73f019c.pdf',
+       file_name       = 'a-advocacia-publica-e-as-atividades-exclusivas-de-estado-1ed73f019c.pdf',
+       mime_type       = 'application/pdf',
+       file_size_bytes = 0,
+       is_external     = 'N',
+       updated_at      = SYSTIMESTAMP
+ WHERE id = 1
+   AND content_id = 233;
+
+UPDATE content_attachment
+   SET file_url        = '/tenants/anpprev/files/articles/os-trabalhadores-e-a-fiscalizacao-dos-fundos-de-pensao-eb4cddd894.pdf',
+       file_name       = 'os-trabalhadores-e-a-fiscalizacao-dos-fundos-de-pensao-eb4cddd894.pdf',
+       mime_type       = 'application/pdf',
+       file_size_bytes = 1178545,
+       is_external     = 'N',
+       updated_at      = SYSTIMESTAMP
+ WHERE id = 2
+   AND content_id = 239;
+
 UPDATE content
+   SET image_mime_type  = 'image/jpeg',
+       image_filename   = 'a-advocacia-publica-e-as-atividades-exclusivas-de-estado-16d0e5edac.jpg',
+       image_alt        = 'Artigo: A Advocacia Pública e as atividades exclusivas de Estado',
+       image_url        = '/tenants/anpprev/images/articles/a-advocacia-publica-e-as-atividades-exclusivas-de-estado-16d0e5edac.jpg',
+       image_updated_at = SYSTIMESTAMP,
+       updated_at       = SYSTIMESTAMP
+ WHERE id = 233
+   AND tenant_code = 'anpprev';
+
+
+
+
+/*UPDATE content
    SET image_url = '/tenants/anpprev/images/notes/27-anos-de-anpprev-vera-sarmet.webp',
        image_filename = '27-anos-de-anpprev-vera-sarmet.webp',
        image_mime_type = 'image/webp',
@@ -32,7 +67,7 @@ UPDATE content
    AND slug = 'reforma-da-previdencia-majoracao-das-aliquotas-ordinarias';
 
 COMMIT;
-
+*/
 
 
 /*
