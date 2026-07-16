@@ -4,7 +4,7 @@
 SELECT *
 FROM content
 WHERE 1 = 1
-    AND ctype_code = 'article'
+--     AND ctype_code = 'article'
     AND tenant_code = 'anpprev'
 --     AND subtype = 'latest-reports'
 --     AND ctype = 'diretoria'
