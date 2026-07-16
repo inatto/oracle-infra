@@ -1,4 +1,4 @@
--- Tickets simples das alterações revisadas no site-sindicatto-admin.
+-- Tickets simples das alterações revisadas no station-app.
 -- Revisão realizada em 13/07/2026 com base no código do ZIP fornecido.
 -- Os INSERTs abaixo evitam duplicidade pelo tenant + título.
 
