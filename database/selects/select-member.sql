@@ -3,6 +3,7 @@ FROM member
 WHERE 1 = 1
 --     AND id = 10360
 --     AND tenant_code = 'ASACLUB'
+    AND lower(lower(tenant_code)) = 'anpprev'
 --     AND internal_tag = 'pyimport'
 --     AND nvl(internal_tag, '') <> 'pyimport'
 --      AND etype_code = 'director'
