@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW wksp_sindicatto.vw_email_queue_to_send AS
+CREATE OR REPLACE VIEW vw_email_queue_to_send AS
 SELECT 1 AS flag_send
     , q.id
     , q.email_campaign_id
