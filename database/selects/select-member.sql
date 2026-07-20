@@ -8,22 +8,20 @@ WHERE 1 = 1
 --     AND nvl(internal_tag, '') <> 'pyimport'
 --      AND etype_code = 'director'
 --         AND etype_code = 'financial'
-ORDER BY id DESC
+order by etype_code
 ;
 
 UPDATE member SET tenant_code = lower(tenant_code) WHERE 1 = 1;
 
 
-SELECT 1
-    , listagg(id_membro_old, ',')
-    , listagg(e.br_cpf, ',')
-    , max(id_membro_old)
+SELECT *
 FROM member m
 LEFT JOIN entity e ON e.id = m.entity_id
 WHERE 1 = 1
-    AND m.tenant_code = 'ADPF'
+    AND m.tenant_code = 'sindicatto'
     AND m.active = 1
-    AND m.etype_code = 'associate'
+--     AND m.etype_code = 'associate'
+order by etype_code
 ;
 
 
