@@ -1,8 +1,5 @@
-SELECT
-    LOWER(TRIM(a.type)) AS address_type,
-    COUNT(*) AS quantidade,
-    COUNT(a.uf) AS com_uf
-FROM WKSP_SINDICATTO.ADDRESS a
-WHERE LOWER(a.tenant_code) = 'anpprev'
-GROUP BY LOWER(TRIM(a.type))
-ORDER BY quantidade DESC;
+ALTER TABLE WKSP_SINDICATTO.MEMBER_RELATIONSHIP ADD
+    (
+    RELATED_PHONE VARCHAR2(20),
+    RELATED_EMAIL VARCHAR2(150)
+    );
