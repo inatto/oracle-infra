@@ -1,5 +1,2 @@
-SELECT
-    id,
-    tenant_code
+SELECT *
 FROM entity
-WHERE id = 7082;

@@ -18,7 +18,8 @@ SELECT *
 FROM member m
 LEFT JOIN entity e ON e.id = m.entity_id
 WHERE 1 = 1
-    AND e.email = 'dev@inatto.com'
+--      AND e.email = 'dev@inatto.com'
+    AND e.email = 'beth@anpprev.org.br'
 --     AND m.tenant_code = 'sindicatto'
 --     AND m.active = 1
 --     AND m.etype_code = 'associate'
