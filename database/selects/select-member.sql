@@ -3,6 +3,7 @@ FROM member
 WHERE 1 = 1
     --     AND id = 10360
     --     AND tenant_code = 'ASACLUB'
+    AND id = 90567
     AND LOWER(LOWER(tenant_code)) = 'anpprev'
 --     AND internal_tag = 'pyimport'
 --     AND nvl(internal_tag, '') <> 'pyimport'
@@ -18,8 +19,9 @@ SELECT *
 FROM member m
 LEFT JOIN entity e ON e.id = m.entity_id
 WHERE 1 = 1
---      AND e.email = 'dev@inatto.com'
-    AND e.email = 'beth@anpprev.org.br'
+    and m.id = 90567
+    --      AND e.email = 'dev@inatto.com'
+--     AND e.email = 'beth@anpprev.org.br'
 --     AND m.tenant_code = 'sindicatto'
 --     AND m.active = 1
 --     AND m.etype_code = 'associate'
