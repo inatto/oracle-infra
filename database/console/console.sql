@@ -1,7 +1,1 @@
-BEGIN
-    DBMS_STATS.GATHER_SCHEMA_STATS(
-            ownname => USER,
-            cascade => TRUE
-    );
-END;
-/
+sql/tenant-runtime-config-setup.sql
