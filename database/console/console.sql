@@ -1,9 +1,24 @@
 SELECT tenant_code,
-    menu_group,
-    item_key,
-    display_order,
+    area_code,
+    item_code,
+    sort_order,
     active
 FROM tenant_navigation
 WHERE tenant_code = 'anpprev'
-    AND menu_group = 'institutional'
-ORDER BY display_order;
+    AND area_code = 'institutional'
+ORDER BY sort_order;
+
+INSERT INTO tenant_navigation (
+    tenant_code,
+    area_code,
+    item_code,
+    sort_order,
+    active
+)
+VALUES (
+    'anpprev',
+    'institutional',
+    'estatuto',
+    12,
+    1
+);
