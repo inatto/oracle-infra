@@ -1,8 +1,13 @@
-SELECT COUNT(*) AS total_apagar
-FROM entity e
-WHERE e.tenant_code <> 'asaclub'
-    AND NOT EXISTS (
-    SELECT 1
-    FROM member m
-    WHERE m.entity_id = e.id
-);
+CREATE UNIQUE INDEX uk_entity_tenant_cnpj_except_asaclub
+    ON entity (
+               CASE
+                   WHEN tenant_code <> 'asaclub'
+                           AND br_cnpj IS NOT NULL
+                       THEN tenant_code
+                   END,
+               CASE
+                   WHEN tenant_code <> 'asaclub'
+                           AND br_cnpj IS NOT NULL
+                       THEN br_cnpj
+                   END
+        );
