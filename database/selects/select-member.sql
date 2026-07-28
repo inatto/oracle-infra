@@ -1,15 +1,17 @@
 SELECT *
 FROM member
 WHERE 1 = 1
-    --     AND id = 10360
-    --     AND tenant_code = 'ASACLUB'
-    AND id = 90567
-    AND LOWER(LOWER(tenant_code)) = 'anpprev'
+     AND id = 94923
+--     AND tenant_code = 'ASACLUB'
+--      AND id = 90567
+--      AND LOWER(LOWER(tenant_code)) = 'anpprev'
 --     AND internal_tag = 'pyimport'
 --     AND nvl(internal_tag, '') <> 'pyimport'
 --      AND etype_code = 'director'
 --         AND etype_code = 'financial'
-ORDER BY etype_code
+ORDER BY 1
+    , id DESC
+    , etype_code
 ;
 
 UPDATE member SET tenant_code = LOWER(tenant_code) WHERE 1 = 1;
@@ -19,8 +21,8 @@ SELECT *
 FROM member m
 LEFT JOIN entity e ON e.id = m.entity_id
 WHERE 1 = 1
-    and m.id = 90567
-    --      AND e.email = 'dev@inatto.com'
+    AND m.id = 90567
+--      AND e.email = 'dev@inatto.com'
 --     AND e.email = 'beth@anpprev.org.br'
 --     AND m.tenant_code = 'sindicatto'
 --     AND m.active = 1
