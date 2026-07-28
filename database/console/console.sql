@@ -1,14 +1,8 @@
-SELECT
-    tenant_code,
-    br_cpf,
-    COUNT(*) AS total
-FROM entity
-WHERE tenant_code <> 'asaclub'
-    AND br_cpf IS NOT NULL
-GROUP BY
-    tenant_code,
-    br_cpf
-HAVING COUNT(*) > 1
-ORDER BY
-    tenant_code,
-    br_cpf;
+SELECT COUNT(*) AS total_apagar
+FROM entity e
+WHERE e.tenant_code <> 'asaclub'
+    AND NOT EXISTS (
+    SELECT 1
+    FROM member m
+    WHERE m.entity_id = e.id
+);
