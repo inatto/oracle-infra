@@ -1,24 +1,14 @@
-SELECT tenant_code,
-    area_code,
-    item_code,
-    sort_order,
-    active
-FROM tenant_navigation
-WHERE tenant_code = 'anpprev'
-    AND area_code = 'institutional'
-ORDER BY sort_order;
-
-INSERT INTO tenant_navigation (
+SELECT
     tenant_code,
-    area_code,
-    item_code,
-    sort_order,
-    active
-)
-VALUES (
-    'anpprev',
-    'institutional',
-    'estatuto',
-    12,
-    1
-);
+    br_cpf,
+    COUNT(*) AS total
+FROM entity
+WHERE tenant_code <> 'asaclub'
+    AND br_cpf IS NOT NULL
+GROUP BY
+    tenant_code,
+    br_cpf
+HAVING COUNT(*) > 1
+ORDER BY
+    tenant_code,
+    br_cpf;
