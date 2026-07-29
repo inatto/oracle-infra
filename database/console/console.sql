@@ -1,13 +1,6 @@
-CREATE UNIQUE INDEX uk_entity_tenant_cnpj_except_asaclub
-    ON entity (
-               CASE
-                   WHEN tenant_code <> 'asaclub'
-                           AND br_cnpj IS NOT NULL
-                       THEN tenant_code
-                   END,
-               CASE
-                   WHEN tenant_code <> 'asaclub'
-                           AND br_cnpj IS NOT NULL
-                       THEN br_cnpj
-                   END
-        );
+SELECT
+    constraint_name,
+    search_condition_vc
+FROM user_constraints
+WHERE table_name = 'ADDRESS'
+    AND constraint_name = 'CK_ADDRESS_TYPE';

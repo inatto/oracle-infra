@@ -3,7 +3,8 @@
 SELECT *
 FROM entity
 WHERE 1 = 1
-    AND id IN (10351, 7082, 19250)
+    AND tenant_code = 'asaclub'
+--      AND id IN (10351, 7082, 19250)
 --     AND email = 'asa.convenios@asaclub.org.br'
 -- dev anpprev
 --     AND id = 10351
@@ -11,9 +12,9 @@ ORDER BY id DESC
 ;
 
 --
-SELECT LOWER(STANDARD_HASH('Aviao?!', 'MD5')) FROM dual;
+SELECT LOWER(standard_hash('Aviao?!', 'MD5')) FROM dual;
 
-SELECT entity.id, entity.name, entity.md5_password, LOWER(STANDARD_HASH('12345678', 'MD5'))
+SELECT entity.id, entity.name, entity.md5_password, LOWER(standard_hash('12345678', 'MD5'))
 FROM entity
 WHERE 1 = 1
     AND id = 10351
@@ -36,4 +37,9 @@ WHERE 1 = 1
 
 SELECT e.br_cpf, e.name, e.br_mobile, e.email, e.home_uf, TO_CHAR(e.birth_date, 'DD/MM/YYYY') AS birth_date, e.id_pessoa_old
 FROM entity e
-WHERE e.id = :P26_MEMBER_ENTITY_ID
+WHERE e.id = :P26_MEMBER_ENTITY_ID;
+
+SELECT COUNT(*) AS total
+FROM entity
+WHERE tenant_code = 'asaclub'
+    AND id_pessoa_old BETWEEN 1 AND 11166;

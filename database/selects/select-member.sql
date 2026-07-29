@@ -2,7 +2,7 @@ SELECT *
 FROM member
 WHERE 1 = 1
 --      AND id = 94923
---     AND tenant_code = 'ASACLUB'
+     AND tenant_code = 'ASACLUB'
 --      AND id = 90567
 --      AND LOWER(LOWER(tenant_code)) = 'anpprev'
 --     AND internal_tag = 'pyimport'
