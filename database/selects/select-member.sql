@@ -2,14 +2,14 @@ SELECT *
 FROM member
 WHERE 1 = 1
 --      AND id = 94923
-     AND tenant_code = 'ASACLUB'
+     AND tenant_code = 'asaclub'
 --      AND id = 90567
 --      AND LOWER(LOWER(tenant_code)) = 'anpprev'
 --     AND internal_tag = 'pyimport'
 --     AND nvl(internal_tag, '') <> 'pyimport'
 --       AND etype_code = 'director'
 --         AND etype_code = 'financial'
-ORDER BY  created_at DESC NULLS LAST
+ORDER BY  id DESC
 ;
 
 UPDATE member SET tenant_code = LOWER(tenant_code) WHERE 1 = 1;
