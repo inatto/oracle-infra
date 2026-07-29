@@ -1,3 +1,5 @@
+
+
 SELECT *
 FROM member
 WHERE 1 = 1
@@ -7,7 +9,7 @@ WHERE 1 = 1
 --      AND LOWER(LOWER(tenant_code)) = 'anpprev'
 --     AND internal_tag = 'pyimport'
 --     AND nvl(internal_tag, '') <> 'pyimport'
---       AND etype_code = 'director'
+       AND etype_code = 'admin'
 --         AND etype_code = 'financial'
 ORDER BY  id DESC
 ;
