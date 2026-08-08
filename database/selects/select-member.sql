@@ -1,20 +1,19 @@
-
-
 SELECT *
 FROM member
 WHERE 1 = 1
 --      AND id = 94923
-     AND tenant_code = 'asaclub'
+--      AND tenant_code = 'asaclub'
+    AND is_dev = 1
 --      AND id = 90567
 --      AND LOWER(LOWER(tenant_code)) = 'anpprev'
 --     AND internal_tag = 'pyimport'
 --     AND nvl(internal_tag, '') <> 'pyimport'
-       AND etype_code = 'admin'
+--     AND etype_code = 'admin'
 --         AND etype_code = 'financial'
-ORDER BY  id DESC
+ORDER BY id DESC
 ;
 
-UPDATE member SET tenant_code = LOWER(tenant_code) WHERE 1 = 1;
+UPDATE member SET tenant_code = lower(tenant_code) WHERE 1 = 1;
 
 
 SELECT *
@@ -31,12 +30,12 @@ ORDER BY etype_code
 ;
 
 
-SELECT DISTINCT LISTAGG(id_membro_old, ','), COUNT(id_membro_old)
+SELECT DISTINCT listagg(id_membro_old, ','), count(id_membro_old)
 FROM member m
 WHERE 1 = 1
     --     AND id = 25141 -- dev anpprev
     AND tenant_code = 'ADPF'
-    AND NVL(id_membro_old, 0) <> 0
+    AND nvl(id_membro_old, 0) <> 0
 ;
 
 
@@ -71,8 +70,8 @@ SELECT *
 FROM vw_raw_member m
 JOIN partnership p
      ON p.tenant_code = m.tenant_code
-             AND p.role = 'partner'
-             AND p.parent_code = 'ASACLUB'
+         AND p.role = 'partner'
+         AND p.parent_code = 'ASACLUB'
 ORDER BY m.tenant_code, m.etype_code;
 
 --
