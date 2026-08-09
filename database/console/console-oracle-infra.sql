@@ -1,6 +1,27 @@
-UPDATE entity
-SET md5_password = 'a31c3bb7fbe0d25ee3d36796b4dd23fd'
-WHERE id = 10351
-    AND LOWER(TRIM(email)) = 'dev@inatto.com';
+-- 1. Ver exatamente como a UK_MEMBER_TENANT_SIAPE foi definida
+SELECT c.CONSTRAINT_NAME,
+    c.INDEX_NAME,
+    e.COLUMN_POSITION,
+    e.COLUMN_EXPRESSION
+FROM USER_CONSTRAINTS c
+LEFT JOIN USER_IND_EXPRESSIONS e
+          ON e.INDEX_NAME = c.INDEX_NAME
+WHERE c.TABLE_NAME = 'MEMBER'
+    AND c.CONSTRAINT_NAME = 'UK_MEMBER_TENANT_SIAPE'
+ORDER BY e.COLUMN_POSITION;
 
-COMMIT;
+-- 2. Ver o registro que já possui o SIAPE que derrubou a importação
+SELECT *
+FROM MEMBER
+WHERE TENANT_CODE = 'asaclub'
+    AND BR_SIAPE = '0754286';
+
+-- 3. Ver todos os SIAPEs duplicados atualmente no ASAclub
+SELECT BR_SIAPE,
+    COUNT(*) AS QTD
+FROM MEMBER
+WHERE TENANT_CODE = 'asaclub'
+    AND BR_SIAPE IS NOT NULL
+GROUP BY BR_SIAPE
+HAVING COUNT(*) > 1
+ORDER BY QTD DESC, BR_SIAPE;
