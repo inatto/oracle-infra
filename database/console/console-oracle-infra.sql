@@ -1,19 +1,5 @@
-INSERT INTO ETYPE (
-    TENANT_CODE,
-    CODE,
-    NAME,
-    PLURAL_NAME,
-    DESCRIPTION,
-    READ_ONLY,
-    IS_ADMIN,
-    ACTIVE
-) VALUES (
-    'asaclub',
-    'unknown',
-    'Desconhecido',
-    'Desconhecidos',
-    'Perfil legado não informado',
-    1,
-    0,
-    1
-);
+CREATE UNIQUE INDEX UK_MEMBER_TENANT_MEMBRO_OLD
+    ON MEMBER (
+               CASE WHEN ID_MEMBRO_OLD IS NOT NULL THEN TENANT_CODE END,
+               CASE WHEN ID_MEMBRO_OLD IS NOT NULL THEN ID_MEMBRO_OLD END
+        );
